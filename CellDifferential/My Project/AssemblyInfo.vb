@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("WBC Differential 3.1.0.2")> 
+<Assembly: AssemblyTitle("WBC Differential")>
 <Assembly: AssemblyDescription("For Free Use")> 
 <Assembly: AssemblyCompany("Brian's Codes")> 
-<Assembly: AssemblyProduct("WBC_Differential3.0")> 
-<Assembly: AssemblyCopyright("Copyright © Brian A Lee 2015")> 
+<Assembly: AssemblyProduct("WBC_Differential3.0")>
+<Assembly: AssemblyCopyright("Copyright © Brian A Lee 2017")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("b167690a-40d6-4e46-87d4-4c9a25331e0c")> 
+<Assembly: Guid("b167690a-40d6-4e46-87d4-4c9a25331e0c")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")> 
+<Assembly: AssemblyVersion("3.1.0.3")>
 <Assembly: AssemblyFileVersion("1.0.0.0")> 

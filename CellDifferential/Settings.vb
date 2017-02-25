@@ -3,6 +3,19 @@ Imports Microsoft.Win32
 
 Public Class Settings
 
+    Public Structure RegistryKeyName
+        Public Shared PeriheralKeys As String = "KeyMappings1"
+        Public Shared BoneMarrowKeys As String = "KeyMappings2"
+        Public Shared PeripheralChannels As String = "ChannelNames1"
+        ' Public Shared BoneMarrowChannels As String = "ChannelNames2"
+    End Structure
+
+
+
+
+
+
+    'get key values  (variables used by both forms)
     Public Shared Key1 As String
     Public Shared Key2 As String
     Public Shared Key3 As String
@@ -20,11 +33,22 @@ Public Class Settings
     Public Shared Key15 As String
     Public Shared Key16 As String
 
-
-
-
-
-
+    Public Shared Cell1 As String
+    Public Shared Cell2 As String
+    Public Shared Cell3 As String
+    Public Shared Cell4 As String
+    Public Shared Cell5 As String
+    Public Shared Cell6 As String
+    Public Shared Cell7 As String
+    Public Shared Cell8 As String
+    Public Shared Cell9 As String
+    Public Shared Cell10 As String
+    Public Shared Cell11 As String
+    Public Shared Cell12 As String
+    Public Shared Cell13 As String
+    Public Shared Cell14 As String
+    Public Shared Cell15 As String
+    Public Shared Cell16 As String
 
 
 
@@ -34,7 +58,7 @@ Public Class Settings
       Registry.CurrentUser.CreateSubKey("WBCDifferentialCounter3.1")
 
 
-    Public Sub SaveSettings1()
+    Public Sub SavePeripheralKeyBindings()
 
         Registry.CurrentUser.OpenSubKey("WBCDifferentialCounter3.1")
 
@@ -51,28 +75,8 @@ Public Class Settings
         End If
 
 
-
-        Dim KeyMappings As RegistryKey = _
+        Dim KeyMappings As RegistryKey =
         WBCDifferential.CreateSubKey("KeyMappings1")
-
-
-
-        '' Create data for the TestSettings subkey.
-        'KeyMappings.SetValue("Cell1", ChrW(47)) 'seg
-        ''KeyMappings.SetValue("Cell1", "//") 'seg
-        'KeyMappings.SetValue("Cell2", ChrW(46)) 'lym
-        'KeyMappings.SetValue("Cell3", ChrW(44)) 'mono
-        'KeyMappings.SetValue("Cell4", ChrW(109)) 'eos
-        'KeyMappings.SetValue("Cell5", ChrW(110)) 'baso
-        'KeyMappings.SetValue("Cell6", ChrW(98)) 'band
-        'KeyMappings.SetValue("Cell7", ChrW(59)) 'meta
-        'KeyMappings.SetValue("Cell8", ChrW(108)) 'myelo
-        'KeyMappings.SetValue("Cell9", ChrW(107)) 'ProMyelo
-        'KeyMappings.SetValue("Cell10", ChrW(106)) 'Blast
-        'KeyMappings.SetValue("Cell11", ChrW(104)) 'NRBC
-        '' KeyMappings.SetValue("Cell12", ChrW(47)) 'User1
-        '' KeyMappings.SetValue("Cell13", ChrW(47)) 'User2
-
 
         KeyMappings.SetValue("Cell1", AllCells.PeripheralCells(0).getKeyMapChar()) 'seg
         KeyMappings.SetValue("Cell2", AllCells.PeripheralCells(1).getKeyMapChar()) 'lym
@@ -85,20 +89,49 @@ Public Class Settings
         KeyMappings.SetValue("Cell9", AllCells.PeripheralCells(8).getKeyMapChar()) 'ProMyelo
         KeyMappings.SetValue("Cell10", AllCells.PeripheralCells(9).getKeyMapChar()) 'Blast
         KeyMappings.SetValue("Cell11", AllCells.PeripheralCells(10).getKeyMapChar()) 'NRBC
-        ' KeyMappings.SetValue("Cell12", ChrW(47)) 'User1
-        ' KeyMappings.SetValue("Cell13", ChrW(47)) 'User2
-
-
-
 
         KeyMappings.Close()
         ' WBCDifferential.Close()
 
+    End Sub
+    Public Sub SavePeripheralCountChannels()
+
+        Registry.CurrentUser.OpenSubKey("WBCDifferentialCounter3.1")
+
+        Dim Key As String
+
+        Key = "KeyMappings1"
+
+        Dim passed As Boolean = False
+
+        passed = exists(Key)
+
+        If passed Then
+            WBCDifferential.DeleteSubKeyTree("ChannelNames1")
+        End If
 
 
+        Dim KeyMappings As RegistryKey =
+        WBCDifferential.CreateSubKey("ChannelNames1")
+
+        KeyMappings.SetValue("Cell1", AllCells.PeripheralCells(0).getCellType()) 'seg
+        KeyMappings.SetValue("Cell2", AllCells.PeripheralCells(1).getCellType()) 'lym
+        KeyMappings.SetValue("Cell3", AllCells.PeripheralCells(2).getCellType()) 'mono
+        KeyMappings.SetValue("Cell4", AllCells.PeripheralCells(3).getCellType()) 'eos
+        KeyMappings.SetValue("Cell5", AllCells.PeripheralCells(4).getCellType()) 'baso
+        KeyMappings.SetValue("Cell6", AllCells.PeripheralCells(5).getCellType()) 'band
+        KeyMappings.SetValue("Cell7", AllCells.PeripheralCells(6).getCellType()) 'meta
+        KeyMappings.SetValue("Cell8", AllCells.PeripheralCells(7).getCellType()) 'myelo
+        KeyMappings.SetValue("Cell9", AllCells.PeripheralCells(8).getCellType()) 'ProMyelo
+        KeyMappings.SetValue("Cell10", AllCells.PeripheralCells(9).getCellType()) 'Blast
+        KeyMappings.SetValue("Cell11", AllCells.PeripheralCells(10).getCellType()) 'NRBC
+
+        KeyMappings.Close()
+        ' WBCDifferential.Close()
 
     End Sub
-    Public Sub SaveSettings2()
+
+    Public Sub SaveBoneMarrowKeyBindings()
 
 
 
@@ -115,27 +148,9 @@ Public Class Settings
         End If
 
 
-
-        Dim KeyMappings As RegistryKey = _
+        Dim KeyMappings As RegistryKey =
         WBCDifferential.CreateSubKey("KeyMappings2")
 
-
-
-        '' Create data for the TestSettings subkey.
-        'KeyMappings.SetValue("Cell1", ChrW(47)) 'seg
-        ''KeyMappings.SetValue("Cell1", "//") 'seg
-        'KeyMappings.SetValue("Cell2", ChrW(46)) 'lym
-        'KeyMappings.SetValue("Cell3", ChrW(44)) 'mono
-        'KeyMappings.SetValue("Cell4", ChrW(109)) 'eos
-        'KeyMappings.SetValue("Cell5", ChrW(110)) 'baso
-        'KeyMappings.SetValue("Cell6", ChrW(98)) 'band
-        'KeyMappings.SetValue("Cell7", ChrW(59)) 'meta
-        'KeyMappings.SetValue("Cell8", ChrW(108)) 'myelo
-        'KeyMappings.SetValue("Cell9", ChrW(107)) 'ProMyelo
-        'KeyMappings.SetValue("Cell10", ChrW(106)) 'Blast
-        'KeyMappings.SetValue("Cell11", ChrW(104)) 'NRBC
-        '' KeyMappings.SetValue("Cell12", ChrW(47)) 'User1
-        '' KeyMappings.SetValue("Cell13", ChrW(47)) 'User2
 
         'keymap settings
 
@@ -157,15 +172,13 @@ Public Class Settings
         KeyMappings.SetValue("Cell16", AllCells.BoneMarrowCells(15).getKeyMapChar()) 'User3
 
 
-
-
-
         KeyMappings.Close()
         'WBCDifferential.Close()
 
 
 
     End Sub
+
 
     Public Sub LoadSettings1()
 
@@ -188,7 +201,7 @@ Public Class Settings
     End Sub
 
 
-    Public Sub LoadSettings2()
+    Public Sub LoadBoneMarrowKeyBindings()
 
 
         Dim KeyMappings As RegistryKey = WBCDifferential.OpenSubKey("KeyMappings2")

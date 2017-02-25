@@ -90,7 +90,7 @@
         AllCells.PeripheralCells(9).changeKeyMap(TextBox10.Text)
         AllCells.PeripheralCells(10).changeKeyMap(TextBox11.Text)
 
-        savedSettings.SaveSettings1()
+        savedSettings.SavePeripheralKeyBindings()
 
         'MessageBox.Show(TextBox1.Text)
 

@@ -77,34 +77,24 @@ Public Class PeripheralForm
 
 
 
-
-
-
     Public Sub GetKeyMapping()
 
         settings = New Settings()
-        ' settings.SaveSettings()
 
-
-
-
-
-
-        If settings.exists("KeyMappings1") Then
+        If settings.exists(Settings.RegistryKeyName.PeriheralKeys) Then
             settings.LoadSettings1()
 
-            Seg.changeKeyMap(settings.Key1)
-            ' MessageBox.Show("MainForm Settings Loading: Cell1: " & settings.Key1)
-            Lym.changeKeyMap(settings.Key2)
-            Mono.changeKeyMap(settings.Key3)
-            Eos.changeKeyMap(settings.Key4)
-            Baso.changeKeyMap(settings.Key5)
-            Band.changeKeyMap(settings.Key6)
-            Meta.changeKeyMap(settings.Key7)
-            Myelo.changeKeyMap(settings.Key8)
-            ProMyelo.changeKeyMap(settings.Key9)
-            Blast.changeKeyMap(settings.Key10)
-            NRBC.changeKeyMap(settings.Key11)
+            Seg.changeKeyMap(Settings.Key1)
+            Lym.changeKeyMap(Settings.Key2)
+            Mono.changeKeyMap(Settings.Key3)
+            Eos.changeKeyMap(Settings.Key4)
+            Baso.changeKeyMap(Settings.Key5)
+            Band.changeKeyMap(Settings.Key6)
+            Meta.changeKeyMap(Settings.Key7)
+            Myelo.changeKeyMap(Settings.Key8)
+            ProMyelo.changeKeyMap(Settings.Key9)
+            Blast.changeKeyMap(Settings.Key10)
+            NRBC.changeKeyMap(Settings.Key11)
 
 
 
@@ -121,7 +111,7 @@ Public Class PeripheralForm
             Blast.changeKeyMap(106)
             NRBC.changeKeyMap(104)
 
-            settings.SaveSettings1()
+            settings.SavePeripheralKeyBindings()
 
         End If
 

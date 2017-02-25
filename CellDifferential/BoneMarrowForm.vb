@@ -10,20 +10,6 @@ Public Class BoneMarrowForm
 
     Dim Count As Integer = 100
 
-    ' Dim Seg As Integer = 0
-
-    'Dim Seg As New Cell("Seg1", 47, "File", 0)
-    'Dim Lym As New Cell("Lym1", 46, "File", 0)
-    'Dim Mono As New Cell("Mono1", 44, "File", 0)
-    'Dim Eos As New Cell("Eos1", 109, "File", 0)
-    'Dim Baso As New Cell("Baso1", 110, "File", 0)
-    'Dim Band As New Cell("Band1", 98, "File", 0)
-    'Dim Meta As New Cell("Meta1", 59, "File", 0)
-    'Dim Myelo As New Cell("Myelo1", 108, "File", 0)
-    'Dim ProMyelo As New Cell("ProMyelo1", 107, "File", 0)
-    'Dim Blast As New Cell("Blast1", 106, "File", 0)
-    'Dim NRBC As New Cell("NRBC1", 104, "File", 0)
-
 
     Dim Seg As New Cell("Seg", "/", "File", 0)
     Dim Lym As New Cell("Lym", ".", "File", 0)
@@ -87,65 +73,34 @@ Public Class BoneMarrowForm
         AllCells.BoneMarrowCells.Add(User2)
         AllCells.BoneMarrowCells.Add(User3)
 
-
-
-
-
-
     End Sub
-
-
-
-
 
 
     Public Sub GetKeyMapping()
 
         settings = New Settings()
-        ' settings.SaveSettings()
 
+        If settings.exists(Settings.RegistryKeyName.BoneMarrowKeys) Then
+            settings.LoadBoneMarrowKeyBindings()
 
-
-
-
-
-        If settings.exists("KeyMappings2") Then
-            settings.LoadSettings2()
-
-            Seg.changeKeyMap(settings.Key1)
-            ' MessageBox.Show("MainForm Settings Loading: Cell1: " & settings.Key1)
-            Lym.changeKeyMap(settings.Key2)
-            Plasma.changeKeyMap(settings.Key3)
-            Mono.changeKeyMap(settings.Key4)
-            Eos.changeKeyMap(settings.Key5)
-            Baso.changeKeyMap(settings.Key6)
-            Band.changeKeyMap(settings.Key7)
-            User1.changeKeyMap(settings.Key8)
-            Meta.changeKeyMap(settings.Key9)
-            Myelo.changeKeyMap(settings.Key10)
-            ProMyelo.changeKeyMap(settings.Key11)
-            Blast.changeKeyMap(settings.Key12)
-            ProNormo.changeKeyMap(settings.Key13)
-            NormoBlast.changeKeyMap(settings.Key14)
-            User2.changeKeyMap(settings.Key15)
-            User3.changeKeyMap(settings.Key16)
-
-
-
-
+            Seg.changeKeyMap(Settings.Key1)
+            Lym.changeKeyMap(Settings.Key2)
+            Plasma.changeKeyMap(Settings.Key3)
+            Mono.changeKeyMap(Settings.Key4)
+            Eos.changeKeyMap(Settings.Key5)
+            Baso.changeKeyMap(Settings.Key6)
+            Band.changeKeyMap(Settings.Key7)
+            User1.changeKeyMap(Settings.Key8)
+            Meta.changeKeyMap(Settings.Key9)
+            Myelo.changeKeyMap(Settings.Key10)
+            ProMyelo.changeKeyMap(Settings.Key11)
+            Blast.changeKeyMap(Settings.Key12)
+            ProNormo.changeKeyMap(Settings.Key13)
+            NormoBlast.changeKeyMap(Settings.Key14)
+            User2.changeKeyMap(Settings.Key15)
+            User3.changeKeyMap(Settings.Key16)
 
         Else
-            'Seg.changeKeyMap(47)
-            'Lym.changeKeyMap(46)
-            'Mono.changeKeyMap(44)
-            'Eos.changeKeyMap(109)
-            'Baso.changeKeyMap(110)
-            'Band.changeKeyMap(98)
-            'Meta.changeKeyMap(59)
-            'Myelo.changeKeyMap(108)
-            'ProMyelo.changeKeyMap(107)
-            'Blast.changeKeyMap(106)
-
             Seg.changeKeyMap("/")
             Lym.changeKeyMap(".")
             Plasma.changeKeyMap("p")
@@ -163,16 +118,11 @@ Public Class BoneMarrowForm
             User2.changeKeyMap("2")
             User3.changeKeyMap("3")
 
-
-            settings.SaveSettings2()
+            settings.SaveBoneMarrowKeyBindings()
 
         End If
 
-
     End Sub
-
-
-
 
 
     'Sub Control_KeyPress(ByVal sender As System.Object, ByVal e As KeyPressEventArgs) Handles Me.KeyPress
@@ -197,27 +147,23 @@ Public Class BoneMarrowForm
         End If
 
         If e.KeyChar = ChrW(Lym.getKeyMap) Then
-            My.Computer.Audio.Play(My.Resources.click3, _
+            My.Computer.Audio.Play(My.Resources.click3,
            AudioPlayMode.Background)
-            'MessageBox.Show("You pressed '.' = lym ")
             Total = Total + 1
             TxtTotal.Text = CStr(Total)
             Lym.addToCount()
             TxtLym.Text = CStr(Lym.getCount())
             UndoList.Push(Lym.getCellType)
-            'TxtInput.Text = ""
         End If
 
         If e.KeyChar = ChrW(Plasma.getKeyMap) Then
-            My.Computer.Audio.Play(My.Resources.click3, _
+            My.Computer.Audio.Play(My.Resources.click3,
            AudioPlayMode.Background)
-            'MessageBox.Show("You pressed ',' = mono ")
             Total = Total + 1
             TxtTotal.Text = CStr(Total)
             Plasma.addToCount()
             TxtPlasma.Text = CStr(Plasma.getCount())
             UndoList.Push(Plasma.getCellType)
-            'TxtInput.Text = ""
         End If
 
 
@@ -335,17 +281,13 @@ Public Class BoneMarrowForm
         End If
 
         If e.KeyChar = ChrW(ProNormo.getKeyMap) Then
-            My.Computer.Audio.Play(My.Resources.click3, _
+            My.Computer.Audio.Play(My.Resources.click3,
             AudioPlayMode.Background)
-            'MessageBox.Show("You pressed '/'  = seg ")
             Total = Total + 1
             TxtTotal.Text = CStr(Total)
-            'Seg = Seg + 1
             ProNormo.addToCount()
-            'TxtSeg.Text = CStr(Seg)
             TxtProNormo.Text = CStr(ProNormo.getCount())
             UndoList.Push(ProNormo.getCellType)
-            'TxtInput.Text = ""
         End If
 
         If e.KeyChar = ChrW(NormoBlast.getKeyMap) Then

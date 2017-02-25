@@ -111,7 +111,7 @@
         AllCells.BoneMarrowCells(15).changeKeyMap(TextBox16.Text)
 
 
-        savedSettings.SaveSettings2() 'save to settings 2 for boneMarrow
+        savedSettings.SaveBoneMarrowKeyBindings() 'save to settings 2 for boneMarrow
 
         'MessageBox.Show(TextBox1.Text)
 
