@@ -143,6 +143,12 @@
     <Compile Include="KeyBind2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ModularPeripheralCounterForm.Designer.vb">
+      <DependentUpon>ModularPeripheralCounterForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ModularPeripheralCounterForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PeripheralForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -191,6 +197,24 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Settings.vb" />
+    <Compile Include="UserControls\CellControlModule.Designer.vb">
+      <DependentUpon>CellControlModule.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CellControlModule.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\LeftSideModule.Designer.vb">
+      <DependentUpon>LeftSideModule.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\LeftSideModule.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\RightSideModule.Designer.vb">
+      <DependentUpon>RightSideModule.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\RightSideModule.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BoneMarrowForm.resx">
@@ -198,6 +222,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="KeyBind2.resx">
       <DependentUpon>KeyBind2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModularPeripheralCounterForm.resx">
+      <DependentUpon>ModularPeripheralCounterForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PeripheralForm.resx">
       <DependentUpon>PeripheralForm.vb</DependentUpon>
@@ -219,6 +246,15 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\CellControlModule.resx">
+      <DependentUpon>CellControlModule.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\LeftSideModule.resx">
+      <DependentUpon>LeftSideModule.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\RightSideModule.resx">
+      <DependentUpon>RightSideModule.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +289,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Background.jpg" />
+    <Content Include="Resources\LeftEnd.jpg" />
+    <Content Include="Resources\RightEnd.jpg" />
     <None Include="Resources\DiffCounter4.png" />
     <None Include="Resources\DiffCounter3.png" />
     <None Include="Resources\DiffCounter2.png" />

@@ -5,12 +5,6 @@ Imports WBCDifferential
 
 Public Class Settings : Implements ISettings
 
-    Public Structure RegistryKeyName
-        Public Shared PeriheralKeys As String = "KeyMappings1"
-        Public Shared BoneMarrowKeys As String = "KeyMappings2"
-        Public Shared PeripheralChannels As String = "ChannelNames1"
-        Public Shared BoneMarrowChannels As String = "ChannelNames2"
-    End Structure
 
     Public Sub New(Cells As List(Of Cell))
         cellList = Cells

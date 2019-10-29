@@ -23,8 +23,8 @@ Public Class Cell
         Me._ImageFile = ImageFile
         Me._Position = Position 'sets position of the Cell on the counter
         Me._CellFormLabel = CellFormLabel
-        Me._CellFormLabel.Name = CellType
-        Me._CellFormTextBox = CellFormTextBox
+        'Me._CellFormLabel.Name = CellType
+        'Me._CellFormTextBox = CellFormTextBox
         Me._UniqueID = New Guid()
     End Sub
 

@@ -18,11 +18,11 @@ Public Class MainForm
 
 
     Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
-        PeripheralForm.Show()
-        ' Me.Hide()
+
+        ModularPeripheralCounterForm.Show()
+        'PeripheralForm.Show()
         BoneMarrowForm.Hide()
         ActiveCounters()
-        '  Me.Refresh()
 
     End Sub
 
