@@ -135,9 +135,8 @@
     <Compile Include="BoneMarrowForm.Designer.vb">
       <DependentUpon>BoneMarrowForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="BoneMarrowForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="BoneMarrowForm.vb" />
+    <Compile Include="ISettings.vb" />
     <Compile Include="KeyBind2.Designer.vb">
       <DependentUpon>KeyBind2.vb</DependentUpon>
     </Compile>

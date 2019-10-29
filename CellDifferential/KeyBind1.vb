@@ -1,7 +1,10 @@
 ﻿Partial Public Class KeyBind1
 
     Dim Keys As List(Of String)
-    Dim savedSettings As Settings
+    Public Settings As ISettings
+    Public Cells As List(Of Cell)
+
+
 
     Private Sub KeyBind_Load_1(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -40,9 +43,6 @@
         End If
         Me.Refresh()
 
-        savedSettings = New Settings()
-
-
 
         ' MessageBox.Show(Settings.Key1)
         ' MessageBox.Show(savedSettings.exists.ToString)
@@ -51,20 +51,11 @@
     End Sub
 
 
-
-
-
-
-
-
     Private Sub BtnDone_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnDone.Click
 
-        savedSettings.CloseRegistry()
         Me.Close()
 
     End Sub
-
-
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -90,7 +81,7 @@
         AllCells.PeripheralCells(9).changeKeyMap(TextBox10.Text)
         AllCells.PeripheralCells(10).changeKeyMap(TextBox11.Text)
 
-        savedSettings.SavePeripheralKeyBindings()
+        Settings.SavePeripheralKeyBindings()
 
         'MessageBox.Show(TextBox1.Text)
 
