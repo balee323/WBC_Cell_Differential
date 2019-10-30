@@ -5,8 +5,9 @@
     Dim _LeftSideModule As LeftSideModule
     Dim _RightSideModule As RightSideModule
     Dim _CountingControlModule As CountingControlModule
-    Private _total As Integer = 0
+    Dim _countingObject As CountingObject
     Dim _ControlList As New List(Of CellControlModule)
+
 
     Private Sub ModularPeripheralCounterForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -14,20 +15,21 @@
         Me.KeyPreview = True  'important
 
         Me.AutoSize = True
+        Me._countingObject = New CountingObject()
 
         _FlowLayoutPanel = New FlowLayoutPanel()
-            _FlowLayoutPanel.AutoSize = True
-            _FlowLayoutPanel.WrapContents = False
-            _FlowLayoutPanel.Padding = New Padding(0)
-            _FlowLayoutPanel.Margin = New Padding(0)
-            _LeftSideModule = New LeftSideModule()
-            _LeftSideModule.Margin = New Padding(0)
-            _CountingControlModule = New CountingControlModule()
-            _CountingControlModule.Margin = New Padding(0)
-            _RightSideModule = New RightSideModule()
-            _RightSideModule.Margin = New Padding(0)
+        _FlowLayoutPanel.AutoSize = True
+        _FlowLayoutPanel.WrapContents = False
+        _FlowLayoutPanel.Padding = New Padding(0)
+        _FlowLayoutPanel.Margin = New Padding(0)
+        _LeftSideModule = New LeftSideModule()
+        _LeftSideModule.Margin = New Padding(0)
+        _CountingControlModule = New CountingControlModule(_countingObject)
+        _CountingControlModule.Margin = New Padding(0)
+        _RightSideModule = New RightSideModule()
+        _RightSideModule.Margin = New Padding(0)
 
-            Me.Controls.Add(Me._FlowLayoutPanel)
+        Me.Controls.Add(Me._FlowLayoutPanel)
 
             Me._FlowLayoutPanel.Controls.Add(_LeftSideModule)
 
@@ -65,8 +67,7 @@
             Next
 
             Me._FlowLayoutPanel.Controls.Add(_CountingControlModule)
-            Me._FlowLayoutPanel.Controls.Add(_RightSideModule)
-
+        Me._FlowLayoutPanel.Controls.Add(_RightSideModule)
 
     End Sub
 
@@ -79,33 +80,34 @@
                 AudioPlayMode.Background)
 
                 If Not Cell.getCellType.ToLower().Contains("nrbc") Or _CountingControlModule.ChkBoxIncludeNRBC.Checked Then
-                    _CountingControlModule.TxtTotal.Text = (_total + 1).ToString()
+                    _countingObject.Total = _countingObject.Total + 1
+                    _CountingControlModule.TxtTotal.Text = (_countingObject.Total).ToString()
                 End If
 
-
                 Cell.addToCount()
-                'Cell..Text = CStr(Cell.getCount())
-                '_undoList.Push(Cell.getCellType)
+                _countingObject.UndoList.Push(Cell.getCellType)
             End If
         Next
 
+        'Lock Controls
+        If _countingObject.Total > 0 Then
+            _CountingControlModule.ChkBoxIncludeNRBC.Enabled = False
+            _CountingControlModule.BtnChangeCount.Enabled = False
+        End If
+
+        If _countingObject.Total = _countingObject.Limit Then
+            'PlaySound()
+            MessageBox.Show("Complete", "Total Count", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        End If
 
 
-        'If _total = _count Then
-        '    PlaySound()
-        '    MessageBox.Show("Complete", "Total Count", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-        'End If
 
-
-        'If _total > 0 Then
-        '    CheckBox1.Enabled = False
-        '    BtnChangeCount.Enabled = False
-        'End If
 
 
         For Each control In _ControlList
             control.ResetState()
         Next
+        _CountingControlModule.ResetText()
 
     End Sub
 
