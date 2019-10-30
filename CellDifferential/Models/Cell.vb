@@ -109,7 +109,7 @@ Public Class Cell
     End Sub
 
     Public Sub SetTextBoxValue()
-        _CellFormTextBox.Text = getCount().ToString()
+        ' _CellFormTextBox.Text = getCount().ToString()
     End Sub
 
 End Class

@@ -24,7 +24,8 @@
         _FlowLayoutPanel.Margin = New Padding(0)
         _LeftSideModule = New LeftSideModule()
         _LeftSideModule.Margin = New Padding(0)
-        _CountingControlModule = New CountingControlModule(_countingObject)
+        Dim _resetAllUserControls As New Action(AddressOf ResetAllUserControls)
+        _CountingControlModule = New CountingControlModule(_countingObject, _resetAllUserControls)
         _CountingControlModule.Margin = New Padding(0)
         _RightSideModule = New RightSideModule()
         _RightSideModule.Margin = New Padding(0)
@@ -85,7 +86,8 @@
                 End If
 
                 Cell.addToCount()
-                _countingObject.UndoList.Push(Cell.getCellType)
+                _countingObject.UndoList.Push(Cell)
+                Exit For
             End If
         Next
 
@@ -100,19 +102,20 @@
             MessageBox.Show("Complete", "Total Count", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
 
-
-
-
-
-        For Each control In _ControlList
-            control.ResetState()
-        Next
-        _CountingControlModule.ResetText()
+        ResetAllUserControls()
 
     End Sub
 
     Private Sub ModularPeripheralCoubterForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         AllCells.PeripheralCells.Clear()
     End Sub
+
+    Public Sub ResetAllUserControls()
+        For Each control In _ControlList
+            control.ResetState()
+        Next
+        _CountingControlModule.ResetState()
+    End Sub
+
 
 End Class
