@@ -26,6 +26,7 @@ Partial Class CellControlModule
         Me.LblSeg = New System.Windows.Forms.Label()
         Me.ButtonPicture = New System.Windows.Forms.PictureBox()
         Me.CellPicture = New System.Windows.Forms.PictureBox()
+        Me.LblBindingKey = New System.Windows.Forms.Label()
         CType(Me.ButtonPicture, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CellPicture, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -76,11 +77,26 @@ Partial Class CellControlModule
         Me.CellPicture.TabIndex = 15
         Me.CellPicture.TabStop = False
         '
+        'LblBindingKey
+        '
+        Me.LblBindingKey.AutoSize = True
+        Me.LblBindingKey.BackColor = System.Drawing.Color.Transparent
+        Me.LblBindingKey.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblBindingKey.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.LblBindingKey.Location = New System.Drawing.Point(24, 193)
+        Me.LblBindingKey.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.LblBindingKey.Name = "LblBindingKey"
+        Me.LblBindingKey.Size = New System.Drawing.Size(33, 17)
+        Me.LblBindingKey.TabIndex = 17
+        Me.LblBindingKey.Text = "key"
+        Me.LblBindingKey.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'CellControlModule
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(140, Byte), Integer), CType(CType(143, Byte), Integer), CType(CType(148, Byte), Integer))
+        Me.Controls.Add(Me.LblBindingKey)
         Me.Controls.Add(Me.ButtonPicture)
         Me.Controls.Add(Me.CellPicture)
         Me.Controls.Add(Me.TxtCellTotal)
@@ -98,4 +114,5 @@ Partial Class CellControlModule
     Friend WithEvents LblSeg As Label
     Friend WithEvents CellPicture As PictureBox
     Friend WithEvents ButtonPicture As PictureBox
+    Friend WithEvents LblBindingKey As Label
 End Class

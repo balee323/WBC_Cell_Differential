@@ -12,6 +12,7 @@
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
+        Me.LblBindingKey.Text = cell.getKeyMapChar()
 
     End Sub
     Private Sub LblSeg_Click(sender As Object, e As EventArgs) Handles LblSeg.Click

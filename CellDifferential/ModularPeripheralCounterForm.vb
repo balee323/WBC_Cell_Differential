@@ -16,56 +16,56 @@
         Me.AutoSize = True
 
         _FlowLayoutPanel = New FlowLayoutPanel()
-        _FlowLayoutPanel.AutoSize = True
-        _FlowLayoutPanel.WrapContents = False
-        _FlowLayoutPanel.Padding = New Padding(0)
-        _FlowLayoutPanel.Margin = New Padding(0)
-        _LeftSideModule = New LeftSideModule()
-        _LeftSideModule.Margin = New Padding(0)
-        _CountingControlModule = New CountingControlModule()
-        _CountingControlModule.Margin = New Padding(0)
-        _RightSideModule = New RightSideModule()
-        _RightSideModule.Margin = New Padding(0)
+            _FlowLayoutPanel.AutoSize = True
+            _FlowLayoutPanel.WrapContents = False
+            _FlowLayoutPanel.Padding = New Padding(0)
+            _FlowLayoutPanel.Margin = New Padding(0)
+            _LeftSideModule = New LeftSideModule()
+            _LeftSideModule.Margin = New Padding(0)
+            _CountingControlModule = New CountingControlModule()
+            _CountingControlModule.Margin = New Padding(0)
+            _RightSideModule = New RightSideModule()
+            _RightSideModule.Margin = New Padding(0)
 
-        Me.Controls.Add(Me._FlowLayoutPanel)
+            Me.Controls.Add(Me._FlowLayoutPanel)
 
-        Me._FlowLayoutPanel.Controls.Add(_LeftSideModule)
-
-
-        AllCells.PeripheralCells.Add(New Cell("Seg", 47, "File", 0))
-        AllCells.PeripheralCells.Add(New Cell("Lym", 46, "File", 0))
-        AllCells.PeripheralCells.Add(New Cell("Mono", 44, "File", 0))
-        AllCells.PeripheralCells.Add(New Cell("Eos", 109, "File", 0))
-        AllCells.PeripheralCells.Add(New Cell("Baso", 110, "File", 0))
-        AllCells.PeripheralCells.Add(New Cell("Band", 98, "File", 0))
-        AllCells.PeripheralCells.Add(New Cell("Meta", 59, "File", 0))
-        AllCells.PeripheralCells.Add(New Cell("Myelo", 108, "File", 0))
-        AllCells.PeripheralCells.Add(New Cell("ProMyelo", 107, "File", 0))
-        AllCells.PeripheralCells.Add(New Cell("Blast", 106, "File", 0))
-        AllCells.PeripheralCells.Add(New Cell("NRBC", 104, "File", 0))
+            Me._FlowLayoutPanel.Controls.Add(_LeftSideModule)
 
 
-        Dim toggleRed As Boolean = True
-        For Each cell In AllCells.PeripheralCells
-            'create a new cell module passing in cell object.
-            Dim cellControlModule As New CellControlModule(cell)
-            cellControlModule.Margin = New Padding(0)
+            AllCells.PeripheralCells.Add(New Cell("Seg", 47, "File", 0))
+            AllCells.PeripheralCells.Add(New Cell("Lym", 46, "File", 0))
+            AllCells.PeripheralCells.Add(New Cell("Mono", 44, "File", 0))
+            AllCells.PeripheralCells.Add(New Cell("Eos", 109, "File", 0))
+            AllCells.PeripheralCells.Add(New Cell("Baso", 110, "File", 0))
+            AllCells.PeripheralCells.Add(New Cell("Band", 98, "File", 0))
+            AllCells.PeripheralCells.Add(New Cell("Meta", 59, "File", 0))
+            AllCells.PeripheralCells.Add(New Cell("Myelo", 108, "File", 0))
+            AllCells.PeripheralCells.Add(New Cell("ProMyelo", 107, "File", 0))
+            AllCells.PeripheralCells.Add(New Cell("Blast", 106, "File", 0))
+            AllCells.PeripheralCells.Add(New Cell("NRBC", 104, "File", 0))
 
-            If (toggleRed) Then
-                toggleRed = False
-                cellControlModule.ButtonPicture.Image = CType(My.Resources.ResourceManager.GetObject("RedButton"), Image)
-            Else
-                cellControlModule.ButtonPicture.Image = CType(My.Resources.ResourceManager.GetObject("WhiteButton"), Image)
-                toggleRed = True
-            End If
 
-            _ControlList.Add(cellControlModule)
-            Me._FlowLayoutPanel.Controls.Add(cellControlModule)
+            Dim toggleRed As Boolean = True
+            For Each cell In AllCells.PeripheralCells
+                'create a new cell module passing in cell object.
+                Dim cellControlModule As New CellControlModule(cell)
+                cellControlModule.Margin = New Padding(0)
 
-        Next
+                If (toggleRed) Then
+                    toggleRed = False
+                    cellControlModule.ButtonPicture.Image = CType(My.Resources.ResourceManager.GetObject("RedButton"), Image)
+                Else
+                    cellControlModule.ButtonPicture.Image = CType(My.Resources.ResourceManager.GetObject("WhiteButton"), Image)
+                    toggleRed = True
+                End If
 
-        Me._FlowLayoutPanel.Controls.Add(_CountingControlModule)
-        Me._FlowLayoutPanel.Controls.Add(_RightSideModule)
+                _ControlList.Add(cellControlModule)
+                Me._FlowLayoutPanel.Controls.Add(cellControlModule)
+
+            Next
+
+            Me._FlowLayoutPanel.Controls.Add(_CountingControlModule)
+            Me._FlowLayoutPanel.Controls.Add(_RightSideModule)
 
 
     End Sub
@@ -109,5 +109,8 @@
 
     End Sub
 
+    Private Sub ModularPeripheralCoubterForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        AllCells.PeripheralCells.Clear()
+    End Sub
 
 End Class
