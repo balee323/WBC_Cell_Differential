@@ -43,7 +43,7 @@ Partial Class RightSideModule
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.PictureBox1)
         Me.Name = "RightSideModule"
-        Me.Size = New System.Drawing.Size(76, 333)
+        Me.Size = New System.Drawing.Size(75, 300)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

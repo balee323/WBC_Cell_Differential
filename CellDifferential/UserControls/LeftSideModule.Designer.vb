@@ -52,7 +52,7 @@ Partial Class LeftSideModule
         Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.Controls.Add(Me.PictureBox1)
         Me.Name = "LeftSideModule"
-        Me.Size = New System.Drawing.Size(78, 330)
+        Me.Size = New System.Drawing.Size(75, 300)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

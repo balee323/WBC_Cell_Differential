@@ -145,6 +145,7 @@
     </Compile>
     <Compile Include="ModularPeripheralCounterForm.Designer.vb">
       <DependentUpon>ModularPeripheralCounterForm.vb</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="ModularPeripheralCounterForm.vb">
       <SubType>Form</SubType>
@@ -197,6 +198,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Settings.vb" />
+    <Compile Include="UserControls\CountingControlModule.Designer.vb">
+      <DependentUpon>CountingControlModule.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CountingControlModule.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserControls\CellControlModule.Designer.vb">
       <DependentUpon>CellControlModule.vb</DependentUpon>
     </Compile>
@@ -247,6 +254,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\CountingControlModule.resx">
+      <DependentUpon>CountingControlModule.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\CellControlModule.resx">
       <DependentUpon>CellControlModule.vb</DependentUpon>
     </EmbeddedResource>
@@ -290,7 +300,10 @@
   <ItemGroup>
     <Content Include="Resources\Background.jpg" />
     <Content Include="Resources\LeftEnd.jpg" />
+    <Content Include="Resources\RedButton.jpg" />
+    <Content Include="Resources\RedButton.png" />
     <Content Include="Resources\RightEnd.jpg" />
+    <Content Include="Resources\WhiteButton.png" />
     <None Include="Resources\DiffCounter4.png" />
     <None Include="Resources\DiffCounter3.png" />
     <None Include="Resources\DiffCounter2.png" />

@@ -13,10 +13,13 @@ Public Class Cell
 
     Private _CellFormLabel As System.Windows.Forms.Label
     Private _CellFormTextBox As System.Windows.Forms.TextBox
-    Private _UniqueID As Guid
 
-
-    'constuctor
+    Public Sub New(CellType As String, KeyMap As Integer, ImageFile As String, Position As Integer)
+        Me._CellType = CellType 'Seg, Lym, etc..
+        Me._KeyMap = KeyMap
+        Me._ImageFile = ImageFile
+        Me._Position = Position 'sets position of the Cell on the counter
+    End Sub
     Public Sub New(CellType As String, KeyMap As Integer, ImageFile As String, Position As Integer, CellFormLabel As System.Windows.Forms.Label, CellFormTextBox As System.Windows.Forms.TextBox)
         Me._CellType = CellType 'Seg, Lym, etc..
         Me._KeyMap = KeyMap
@@ -25,7 +28,6 @@ Public Class Cell
         Me._CellFormLabel = CellFormLabel
         'Me._CellFormLabel.Name = CellType
         'Me._CellFormTextBox = CellFormTextBox
-        Me._UniqueID = New Guid()
     End Sub
 
     'constuctor
@@ -61,7 +63,7 @@ Public Class Cell
 
     Public Sub addToCount()
         _Count = _Count + 1
-        _CellFormTextBox.Text = _Count.ToString()
+        '_CellFormTextBox.Text = _Count.ToString()
 
     End Sub
 
