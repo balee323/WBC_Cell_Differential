@@ -29,7 +29,7 @@ Partial Class CountingControlModule
         Me.ChkBoxIncludeNRBC = New System.Windows.Forms.CheckBox()
         Me.BtnClear = New System.Windows.Forms.Button()
         Me.BtnChangeCount = New System.Windows.Forms.Button()
-        Me.TxtChangeCount = New System.Windows.Forms.TextBox()
+        Me.TxtCountLimit = New System.Windows.Forms.TextBox()
         Me.TxtTotal = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox2.SuspendLayout()
@@ -70,7 +70,7 @@ Partial Class CountingControlModule
         Me.GroupBox2.Controls.Add(Me.ChkBoxIncludeNRBC)
         Me.GroupBox2.Controls.Add(Me.BtnClear)
         Me.GroupBox2.Controls.Add(Me.BtnChangeCount)
-        Me.GroupBox2.Controls.Add(Me.TxtChangeCount)
+        Me.GroupBox2.Controls.Add(Me.TxtCountLimit)
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox2.Location = New System.Drawing.Point(11, 82)
         Me.GroupBox2.Name = "GroupBox2"
@@ -131,21 +131,21 @@ Partial Class CountingControlModule
         Me.BtnChangeCount.Text = "Change Count"
         Me.BtnChangeCount.UseVisualStyleBackColor = False
         '
-        'TxtChangeCount
+        'TxtCountLimit
         '
-        Me.TxtChangeCount.BackColor = System.Drawing.Color.White
-        Me.TxtChangeCount.Cursor = System.Windows.Forms.Cursors.No
-        Me.TxtChangeCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.18868!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtChangeCount.ForeColor = System.Drawing.Color.Black
-        Me.TxtChangeCount.Location = New System.Drawing.Point(6, 42)
-        Me.TxtChangeCount.Margin = New System.Windows.Forms.Padding(6, 5, 6, 5)
-        Me.TxtChangeCount.Name = "TxtChangeCount"
-        Me.TxtChangeCount.ReadOnly = True
-        Me.TxtChangeCount.Size = New System.Drawing.Size(43, 23)
-        Me.TxtChangeCount.TabIndex = 30
-        Me.TxtChangeCount.TabStop = False
-        Me.TxtChangeCount.Text = "100"
-        Me.TxtChangeCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.TxtCountLimit.BackColor = System.Drawing.Color.White
+        Me.TxtCountLimit.Cursor = System.Windows.Forms.Cursors.No
+        Me.TxtCountLimit.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.18868!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtCountLimit.ForeColor = System.Drawing.Color.Black
+        Me.TxtCountLimit.Location = New System.Drawing.Point(6, 42)
+        Me.TxtCountLimit.Margin = New System.Windows.Forms.Padding(6, 5, 6, 5)
+        Me.TxtCountLimit.Name = "TxtCountLimit"
+        Me.TxtCountLimit.ReadOnly = True
+        Me.TxtCountLimit.Size = New System.Drawing.Size(43, 23)
+        Me.TxtCountLimit.TabIndex = 30
+        Me.TxtCountLimit.TabStop = False
+        Me.TxtCountLimit.Text = "100"
+        Me.TxtCountLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TxtTotal
         '
@@ -199,7 +199,7 @@ Partial Class CountingControlModule
     Friend WithEvents ChkBoxIncludeNRBC As CheckBox
     Friend WithEvents BtnClear As Button
     Friend WithEvents BtnChangeCount As Button
-    Friend WithEvents TxtChangeCount As TextBox
+    Friend WithEvents TxtCountLimit As TextBox
     Friend WithEvents TxtTotal As TextBox
     Friend WithEvents Label1 As Label
 End Class

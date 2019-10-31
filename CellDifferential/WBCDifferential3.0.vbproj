@@ -144,11 +144,11 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Models\CountingObject.vb" />
-    <Compile Include="ModularPeripheralCounterForm.Designer.vb">
-      <DependentUpon>ModularPeripheralCounterForm.vb</DependentUpon>
+    <Compile Include="ModularCounterForm.Designer.vb">
+      <DependentUpon>ModularCounterForm.vb</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="ModularPeripheralCounterForm.vb">
+    <Compile Include="ModularCounterForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PeripheralForm.vb">
@@ -231,8 +231,8 @@
     <EmbeddedResource Include="KeyBind2.resx">
       <DependentUpon>KeyBind2.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModularPeripheralCounterForm.resx">
-      <DependentUpon>ModularPeripheralCounterForm.vb</DependentUpon>
+    <EmbeddedResource Include="ModularCounterForm.resx">
+      <DependentUpon>ModularCounterForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PeripheralForm.resx">
       <DependentUpon>PeripheralForm.vb</DependentUpon>

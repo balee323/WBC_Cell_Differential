@@ -23,7 +23,7 @@ Partial Class CellControlModule
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.TxtCellTotal = New System.Windows.Forms.TextBox()
-        Me.LblSeg = New System.Windows.Forms.Label()
+        Me.LblCellType = New System.Windows.Forms.Label()
         Me.ButtonPicture = New System.Windows.Forms.PictureBox()
         Me.CellPicture = New System.Windows.Forms.PictureBox()
         Me.LblBindingKey = New System.Windows.Forms.Label()
@@ -46,17 +46,17 @@ Partial Class CellControlModule
         Me.TxtCellTotal.TabStop = False
         Me.TxtCellTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'LblSeg
+        'LblCellType
         '
-        Me.LblSeg.AutoSize = True
-        Me.LblSeg.BackColor = System.Drawing.Color.Transparent
-        Me.LblSeg.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.830189!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblSeg.Location = New System.Drawing.Point(10, 95)
-        Me.LblSeg.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
-        Me.LblSeg.Name = "LblSeg"
-        Me.LblSeg.Size = New System.Drawing.Size(62, 15)
-        Me.LblSeg.TabIndex = 14
-        Me.LblSeg.Text = "CellType"
+        Me.LblCellType.AutoSize = True
+        Me.LblCellType.BackColor = System.Drawing.Color.Transparent
+        Me.LblCellType.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.830189!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblCellType.Location = New System.Drawing.Point(10, 95)
+        Me.LblCellType.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
+        Me.LblCellType.Name = "LblCellType"
+        Me.LblCellType.Size = New System.Drawing.Size(62, 15)
+        Me.LblCellType.TabIndex = 14
+        Me.LblCellType.Text = "CellType"
         '
         'ButtonPicture
         '
@@ -100,7 +100,7 @@ Partial Class CellControlModule
         Me.Controls.Add(Me.ButtonPicture)
         Me.Controls.Add(Me.CellPicture)
         Me.Controls.Add(Me.TxtCellTotal)
-        Me.Controls.Add(Me.LblSeg)
+        Me.Controls.Add(Me.LblCellType)
         Me.Name = "CellControlModule"
         Me.Size = New System.Drawing.Size(80, 300)
         CType(Me.ButtonPicture, System.ComponentModel.ISupportInitialize).EndInit()
@@ -111,7 +111,7 @@ Partial Class CellControlModule
     End Sub
 
     Friend WithEvents TxtCellTotal As TextBox
-    Friend WithEvents LblSeg As Label
+    Friend WithEvents LblCellType As Label
     Friend WithEvents CellPicture As PictureBox
     Friend WithEvents ButtonPicture As PictureBox
     Friend WithEvents LblBindingKey As Label

@@ -19,9 +19,24 @@ Public Class MainForm
 
     Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
 
-        ModularPeripheralCounterForm.Show()
-        'PeripheralForm.Show()
-        BoneMarrowForm.Hide()
+        Dim cells As New List(Of Cell)
+
+        cells.Add(New Cell("NRBC", 104, "File"))
+        cells.Add(New Cell("Blast", 106, "File"))
+        cells.Add(New Cell("ProMyelo", 107, "File"))
+        cells.Add(New Cell("Myelo", 108, "File"))
+        cells.Add(New Cell("Meta", 59, "File"))
+        cells.Add(New Cell("Band", 98, "File"))
+        cells.Add(New Cell("Baso", 110, "File"))
+        cells.Add(New Cell("Eos", 109, "File"))
+        cells.Add(New Cell("Mono", 44, "File"))
+        cells.Add(New Cell("Lym", 46, "File"))
+        cells.Add(New Cell("Seg", 47, "File"))
+
+
+        Dim modularPeripheralCounterForm As New ModularCounterForm(cells)
+        modularPeripheralCounterForm.Show()
+        'BoneMarrowForm.Hide()
         ActiveCounters()
 
     End Sub
@@ -42,8 +57,40 @@ Public Class MainForm
     End Sub
 
     Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
-        BoneMarrowForm.Show()
-        PeripheralForm.Hide()
+
+        Dim cells As New List(Of Cell)
+
+        cells.Add(New Cell("NRBC", 104, "File"))
+        cells.Add(New Cell("Blast", 106, "File"))
+        cells.Add(New Cell("ProMyelo", 107, "File"))
+        cells.Add(New Cell("Myelo", 108, "File"))
+        cells.Add(New Cell("Meta", 59, "File"))
+        cells.Add(New Cell("Band", 98, "File"))
+        cells.Add(New Cell("Baso", 110, "File"))
+        cells.Add(New Cell("Eos", 109, "File"))
+        cells.Add(New Cell("Mono", 44, "File"))
+        cells.Add(New Cell("Plasma", "p", "File"))
+        cells.Add(New Cell("Lym", 46, "File"))
+        cells.Add(New Cell("Seg", 47, "File"))
+
+
+
+
+        '    Dim User1 As New Cell("User1", "1", "File", 0)
+        '    Dim Meta As New Cell("Meta", "'", "File", 0)
+
+        '    Dim Blast As New Cell("Blast", "k", "File", 0)
+        '    Dim ProNormo As New Cell("ProNormo", "h", "File", 0)
+        '    Dim NormoBlast As New Cell("NormoBlast", "g", "File", 0)
+        '    Dim User2 As New Cell("User2", "2", "File", 0)
+        '    Dim User3 As New Cell("User3", "3", "File", 0)
+
+
+        Dim modularBoneMarrowCounterForm As New ModularCounterForm(cells)
+        modularBoneMarrowCounterForm.Show()
+
+        ' BoneMarrowForm.Show()
+        ' PeripheralForm.Hide()
         ActiveCounters()
         '  Me.Refresh()
         ' Me.Hide()

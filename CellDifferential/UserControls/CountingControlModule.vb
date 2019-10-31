@@ -1,10 +1,12 @@
 ﻿Public Class CountingControlModule
 
     Private _countingObject As CountingObject
+    Private _refreshCellCounts As Action
     Private _resetCellCounts As Action
-    Public Sub New(countingObject As CountingObject, resetCellCounts As Action)
+    Public Sub New(countingObject As CountingObject, refreshCellCounts As Action, resetCellCounts As Action)
 
         Me._countingObject = countingObject
+        Me._refreshCellCounts = refreshCellCounts
         Me._resetCellCounts = resetCellCounts
 
         ' This call is required by the designer.
@@ -39,11 +41,9 @@
             'need to lock out button
         End Try
 
-
-
-
-        _resetCellCounts()
+        _refreshCellCounts()
         Me.Refresh()
+
     End Sub
 
     Private Sub UndoCount(cell As Cell)
@@ -63,10 +63,69 @@
             End If
         End If
 
+        If _countingObject.Total < 1 Then
+            ChkBoxIncludeNRBC.Enabled = True
+            BtnChangeCount.Enabled = True
+        End If
+
     End Sub
 
-    Public Sub ResetState()
+    Public Sub RefreshCountingModuleState()
+        'Lock Controls
+        If _countingObject.Total > 0 Then
+            ChkBoxIncludeNRBC.Enabled = False
+            BtnChangeCount.Enabled = False
+        End If
         TxtTotal.Text = _countingObject.Total.ToString()
     End Sub
 
+    Private Sub BtnChangeCount_Click(sender As Object, e As EventArgs) Handles BtnChangeCount.Click
+        TxtCountLimit.ReadOnly = False
+
+        TxtCountLimit.Focus()
+
+        Dim Message As String = "Please enter a count between 20 and 500."
+        Dim Title As String = "Change Cell Count"
+        Dim DefaultValue As String = "100"
+
+
+        'checks the value of the input
+        CheckCountInput(InputBox(Message, Title, DefaultValue))
+        TxtCountLimit.Refresh()
+
+    End Sub
+
+    Private Sub CheckCountInput(inputValue As String)
+
+        'TxtCountLimit.ReadOnly = True
+
+        If String.IsNullOrEmpty(inputValue) Then
+            Return
+        End If
+
+        If IsNumeric(inputValue) Then
+            Dim newLimit = CInt(inputValue)
+            If (newLimit) <= 500 And (newLimit) >= 20 Then
+                _countingObject.Limit = newLimit
+                TxtCountLimit.Text = newLimit.ToString()
+            Else
+                MessageBox.Show("please enter an Integer Between 20 and 500")
+                TxtCountLimit.Text = ("100")
+
+            End If
+        Else
+            MessageBox.Show("You entered a non-number, please enter an Integer")
+            TxtCountLimit.Text = ("100")
+        End If
+
+    End Sub
+
+    Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
+        _resetCellCounts()
+        _refreshCellCounts()
+        _countingObject.Total = 0
+        ChkBoxIncludeNRBC.Enabled = True
+        BtnChangeCount.Enabled = True
+        RefreshCountingModuleState()
+    End Sub
 End Class

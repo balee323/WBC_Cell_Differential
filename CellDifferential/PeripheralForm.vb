@@ -14,7 +14,7 @@ Public Class PeripheralForm
 
         AddCells()
         GetKeyMapping()
-        SetCountChannelLabels()
+
 
         Me.Focus()
         Me.KeyPreview = True  'important
@@ -22,17 +22,7 @@ Public Class PeripheralForm
     End Sub
 
     Public Sub AddCells()
-        AllCells.PeripheralCells.Add(New Cell("Seg", 47, "File", 0, LblSeg, TxtSeg))
-        AllCells.PeripheralCells.Add(New Cell("Lym", 46, "File", 0, LblLym, TxtLym))
-        AllCells.PeripheralCells.Add(New Cell("Mono", 44, "File", 0, LblMono, TxtMono))
-        AllCells.PeripheralCells.Add(New Cell("Eos", 109, "File", 0, LblEos, TxtEos))
-        AllCells.PeripheralCells.Add(New Cell("Baso", 110, "File", 0, LblBaso, TxtBaso))
-        AllCells.PeripheralCells.Add(New Cell("Band", 98, "File", 0, LblBand, TxtBand))
-        AllCells.PeripheralCells.Add(New Cell("Meta", 59, "File", 0, LblMeta, TxtMeta))
-        AllCells.PeripheralCells.Add(New Cell("Myelo", 108, "File", 0, LblMyelo, Txtmyelo))
-        AllCells.PeripheralCells.Add(New Cell("ProMyelo", 107, "File", 0, LblPro, TxtPromyelo))
-        AllCells.PeripheralCells.Add(New Cell("Blast", 106, "File", 0, LblBlast, TxtBlast))
-        AllCells.PeripheralCells.Add(New Cell("NRBC", 104, "File", 0, LblNRBC, TxtNRBC))
+
 
     End Sub
 
@@ -53,15 +43,7 @@ Public Class PeripheralForm
 
     End Sub
 
-    Private Sub SetCountChannelLabels()
 
-        For Each cell In AllCells.PeripheralCells
-            cell.SetLabelText()
-        Next
-
-        Me.Refresh()
-
-    End Sub
 
 
     'Sub Control_KeyPress(ByVal sender As System.Object, ByVal e As KeyPressEventArgs) Handles Me.KeyPress
@@ -186,8 +168,8 @@ Public Class PeripheralForm
 
     Private Sub BtnEditKeys_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnEditKeys.Click
 
-        KeyBind1.Settings = _settings
-        KeyBind1.Cells = AllCells.PeripheralCells
+        'KeyBind1.Settings = _settings
+        'KeyBind1.Cells = AllCells.PeripheralCells
 
         KeyBind1.Show()
         KeyBind1.Focus()
@@ -320,229 +302,226 @@ Public Class PeripheralForm
         FrmDeveloper.Show()
     End Sub
 
-    Private Sub BtnUndo_Click(sender As Object, e As EventArgs) Handles BtnUndo.Click
+    'Private Sub BtnUndo_Click(sender As Object, e As EventArgs) Handles BtnUndo.Click
 
-        Dim LastCountedCell As String
+    '    Dim LastCountedCell As String
 
-        Dim NRBC As Cell = Nothing
-
-
-        'find NRBC
-
-        For Each Cell In AllCells.PeripheralCells
-            If Cell.getCellType.Contains("NRBC") Then
-                NRBC = Cell
-            End If
-        Next
-
-        For Each Cell In AllCells.PeripheralCells
-            If _total > 0 Or NRBC.getCount > 0 Then
-                LastCountedCell = _undoList.Pop
-                If Cell.getCellType() = LastCountedCell Then
-                    UndoCount(Cell)
-                    Cell.SetTextBoxValue()
-                End If
-            End If
-
-        Next
+    '    Dim NRBC As Cell = Nothing
 
 
-        Me.Refresh()
+    '    'find NRBC
 
+    '    For Each Cell In AllCells.PeripheralCells
+    '        If Cell.getCellType.Contains("NRBC") Then
+    '            NRBC = Cell
+    '        End If
+    '    Next
+
+    '    For Each Cell In AllCells.PeripheralCells
+    '        If _total > 0 Or NRBC.getCount > 0 Then
+    '            LastCountedCell = _undoList.Pop
+    '            If Cell.getCellType() = LastCountedCell Then
+    '                UndoCount(Cell)
+    '            End If
+    '        End If
+
+    '    Next
+
+
+    '    Me.Refresh()
 
 
 
 
-    End Sub
 
-    Private Sub UndoCount(cell As Cell)
+    'End Sub
 
-        'NRBC are part of count and will be removed
-        If CheckBox1.Checked Then
-            _total = _total - 1
-            TxtTotal.Text = CStr(_total)
-            cell.UndoCount()
-        Else
-            If cell.getCellType() <> "NRBC" Then
-                _total = _total - 1
-                TxtTotal.Text = CStr(_total)
-                cell.UndoCount()
-            ElseIf cell.getCellType() = "NRBC" Then
-                cell.UndoCount() 'removes 1 from NRBC count
-            End If
-        End If
+    'Private Sub UndoCount(cell As Cell)
 
-    End Sub
+    '    'NRBC are part of count and will be removed
+    '    If CheckBox1.Checked Then
+    '        _total = _total - 1
+    '        TxtTotal.Text = CStr(_total)
+    '        cell.UndoCount()
+    '    Else
+    '        If cell.getCellType() <> "NRBC" Then
+    '            _total = _total - 1
+    '            TxtTotal.Text = CStr(_total)
+    '            cell.UndoCount()
+    '        ElseIf cell.getCellType() = "NRBC" Then
+    '            cell.UndoCount() 'removes 1 from NRBC count
+    '        End If
+    '    End If
 
-
-    Private Sub LblSeg_Click(sender As Object, e As EventArgs) Handles LblSeg.Click
-        'private Input As String = ""
-        Dim Message As String = "Please enter cell type."
-        Dim Title As String = "Change cell type"
-        Dim DefaultValue As String = "Seg"
-
-        For Each cell In AllCells.PeripheralCells
-            If cell.getCellType().ToLower().Contains(LblSeg.Name.ToLower()) Then 'label.Name is the only mapping
-                cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
-                SetCountChannelLabels()
-                Exit For
-            End If
-        Next
+    'End Sub
 
 
-    End Sub
+    'Private Sub LblSeg_Click(sender As Object, e As EventArgs) Handles LblSeg.Click
+    '    'private Input As String = ""
+    '    Dim Message As String = "Please enter cell type."
+    '    Dim Title As String = "Change cell type"
+    '    Dim DefaultValue As String = "Seg"
 
-    Private Sub LblLym_Click(sender As Object, e As EventArgs) Handles LblLym.Click
-        'Dim Input As String = ""
-        Dim Message As String = "Please enter cell type."
-        Dim Title As String = "Change cell type"
-        Dim DefaultValue As String = "Lym"
+    '    For Each cell In AllCells.PeripheralCells
+    '        If cell.getCellType().ToLower().Contains(LblSeg.Name.ToLower()) Then 'label.Name is the only mapping
+    '            cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
+    '            Exit For
+    '        End If
+    '    Next
 
-        For Each cell In AllCells.PeripheralCells
-            If cell.getCellType().ToLower().Contains(LblLym.Name.ToLower()) Then 'label.Name is the only mapping
-                cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
-                SetCountChannelLabels()
-                Exit For
-            End If
-        Next
-    End Sub
 
-    Private Sub LblMono_Click(sender As Object, e As EventArgs) Handles LblMono.Click
+    'End Sub
 
-        'Dim Input As String = ""
-        Dim Message As String = "Please enter cell type."
-        Dim Title As String = "Change cell type"
-        Dim DefaultValue As String = "Mono"
+    'Private Sub LblLym_Click(sender As Object, e As EventArgs) Handles LblLym.Click
+    '    'Dim Input As String = ""
+    '    Dim Message As String = "Please enter cell type."
+    '    Dim Title As String = "Change cell type"
+    '    Dim DefaultValue As String = "Lym"
 
-        For Each cell In AllCells.PeripheralCells
-            If cell.getCellType().ToLower().Contains(LblMono.Name.ToLower()) Then 'label.Name is the only mapping
-                cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
-                SetCountChannelLabels()
-                Exit For
-            End If
-        Next
+    '    For Each cell In AllCells.PeripheralCells
+    '        If cell.getCellType().ToLower().Contains(LblLym.Name.ToLower()) Then 'label.Name is the only mapping
+    '            cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
 
-    End Sub
+    '            Exit For
+    '        End If
+    '    Next
+    'End Sub
 
-    Private Sub LblBand_Click(sender As Object, e As EventArgs) Handles LblBand.Click
-        'Dim Input As String = ""
-        Dim Message As String = "Please enter cell type."
-        Dim Title As String = "Change cell type"
-        Dim DefaultValue As String = "Band"
+    'Private Sub LblMono_Click(sender As Object, e As EventArgs) Handles LblMono.Click
 
-        For Each cell In AllCells.PeripheralCells
-            If cell.getCellType().ToLower().Contains(LblBand.Name.ToLower()) Then 'label.Name is the only mapping
-                cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
-                SetCountChannelLabels()
-                Exit For
-            End If
-        Next
-    End Sub
+    '    'Dim Input As String = ""
+    '    Dim Message As String = "Please enter cell type."
+    '    Dim Title As String = "Change cell type"
+    '    Dim DefaultValue As String = "Mono"
 
-    Private Sub LblEos_Click(sender As Object, e As EventArgs) Handles LblEos.Click
-        'Dim Input As String = ""
-        Dim Message As String = "Please enter cell type."
-        Dim Title As String = "Change cell type"
-        Dim DefaultValue As String = "Eos"
+    '    For Each cell In AllCells.PeripheralCells
+    '        If cell.getCellType().ToLower().Contains(LblMono.Name.ToLower()) Then 'label.Name is the only mapping
+    '            cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
+    '            Exit For
+    '        End If
+    '    Next
 
-        For Each cell In AllCells.PeripheralCells
-            If cell.getCellType().ToLower().Contains(LblEos.Name.ToLower()) Then 'label.Name is the only mapping
-                cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
-                SetCountChannelLabels()
-                Exit For
-            End If
-        Next
-    End Sub
+    'End Sub
 
-    Private Sub LblBaso_Click(sender As Object, e As EventArgs) Handles LblBaso.Click
-        'Dim Input As String = ""
-        Dim Message As String = "Please enter cell type."
-        Dim Title As String = "Change cell type"
-        Dim DefaultValue As String = "Baso"
+    'Private Sub LblBand_Click(sender As Object, e As EventArgs) Handles LblBand.Click
+    '    'Dim Input As String = ""
+    '    Dim Message As String = "Please enter cell type."
+    '    Dim Title As String = "Change cell type"
+    '    Dim DefaultValue As String = "Band"
 
-        For Each cell In AllCells.PeripheralCells
-            If cell.getCellType().ToLower().Contains(LblBaso.Name.ToLower()) Then 'label.Name is the only mapping
-                cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
-                SetCountChannelLabels()
-                Exit For
-            End If
-        Next
-    End Sub
+    '    For Each cell In AllCells.PeripheralCells
+    '        If cell.getCellType().ToLower().Contains(LblBand.Name.ToLower()) Then 'label.Name is the only mapping
+    '            cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
 
-    Private Sub LblMeta_Click(sender As Object, e As EventArgs) Handles LblMeta.Click
-        'Dim Input As String = ""
-        Dim Message As String = "Please enter cell type."
-        Dim Title As String = "Change cell type"
-        Dim DefaultValue As String = "Meta"
+    '            Exit For
+    '        End If
+    '    Next
+    'End Sub
 
-        For Each cell In AllCells.PeripheralCells
-            If cell.getCellType().ToLower().Contains(LblMeta.Name.ToLower()) Then 'label.Name is the only mapping
-                cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
-                SetCountChannelLabels()
-                Exit For
-            End If
-        Next
-    End Sub
+    'Private Sub LblEos_Click(sender As Object, e As EventArgs) Handles LblEos.Click
+    '    'Dim Input As String = ""
+    '    Dim Message As String = "Please enter cell type."
+    '    Dim Title As String = "Change cell type"
+    '    Dim DefaultValue As String = "Eos"
 
-    Private Sub LblMyelo_Click(sender As Object, e As EventArgs) Handles LblMyelo.Click
-        'Dim Input As String = ""
-        Dim Message As String = "Please enter cell type."
-        Dim Title As String = "Change cell type"
-        Dim DefaultValue As String = "Myelo"
+    '    For Each cell In AllCells.PeripheralCells
+    '        If cell.getCellType().ToLower().Contains(LblEos.Name.ToLower()) Then 'label.Name is the only mapping
+    '            cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
 
-        For Each cell In AllCells.PeripheralCells
-            If cell.getCellType().ToLower().Contains(LblMyelo.Name.ToLower()) Then 'label.Name is the only mapping
-                cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
-                SetCountChannelLabels()
-                Exit For
-            End If
-        Next
-    End Sub
+    '            Exit For
+    '        End If
+    '    Next
+    'End Sub
 
-    Private Sub LblPro_Click(sender As Object, e As EventArgs) Handles LblPro.Click
-        'Dim Input As String = ""
-        Dim Message As String = "Please enter cell type."
-        Dim Title As String = "Change cell type"
-        Dim DefaultValue As String = "Pro"
+    'Private Sub LblBaso_Click(sender As Object, e As EventArgs) Handles LblBaso.Click
+    '    'Dim Input As String = ""
+    '    Dim Message As String = "Please enter cell type."
+    '    Dim Title As String = "Change cell type"
+    '    Dim DefaultValue As String = "Baso"
 
-        For Each cell In AllCells.PeripheralCells
-            If cell.getCellType().ToLower().Contains(LblPro.Name.ToLower()) Then 'label.Name is the only mapping
-                cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
-                SetCountChannelLabels()
-                Exit For
-            End If
-        Next
-    End Sub
+    '    For Each cell In AllCells.PeripheralCells
+    '        If cell.getCellType().ToLower().Contains(LblBaso.Name.ToLower()) Then 'label.Name is the only mapping
+    '            cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
 
-    Private Sub LblBlast_Click(sender As Object, e As EventArgs) Handles LblBlast.Click
-        'Dim Input As String = ""
-        Dim Message As String = "Please enter cell type."
-        Dim Title As String = "Change cell type"
-        Dim DefaultValue As String = "Blast"
+    '            Exit For
+    '        End If
+    '    Next
+    'End Sub
 
-        For Each cell In AllCells.PeripheralCells
-            If cell.getCellType().ToLower().Contains(LblBlast.Name.ToLower()) Then 'label.Name is the only mapping
-                cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
-                SetCountChannelLabels()
-                Exit For
-            End If
-        Next
-    End Sub
+    'Private Sub LblMeta_Click(sender As Object, e As EventArgs) Handles LblMeta.Click
+    '    'Dim Input As String = ""
+    '    Dim Message As String = "Please enter cell type."
+    '    Dim Title As String = "Change cell type"
+    '    Dim DefaultValue As String = "Meta"
 
-    Private Sub LblNRBC_Click(sender As Object, e As EventArgs) Handles LblNRBC.Click
-        'Dim Input As String = ""
-        Dim Message As String = "Please enter cell type."
-        Dim Title As String = "Change cell type"
-        Dim DefaultValue As String = "NRBC"
+    '    For Each cell In AllCells.PeripheralCells
+    '        If cell.getCellType().ToLower().Contains(LblMeta.Name.ToLower()) Then 'label.Name is the only mapping
+    '            cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
 
-        For Each cell In AllCells.PeripheralCells
-            If cell.getCellType().ToLower().Contains(LblNRBC.Name.ToLower()) Then 'label.Name is the only mapping
-                cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
-                SetCountChannelLabels()
-                Exit For
-            End If
-        Next
-    End Sub
+    '            Exit For
+    '        End If
+    '    Next
+    'End Sub
+
+    'Private Sub LblMyelo_Click(sender As Object, e As EventArgs) Handles LblMyelo.Click
+    '    'Dim Input As String = ""
+    '    Dim Message As String = "Please enter cell type."
+    '    Dim Title As String = "Change cell type"
+    '    Dim DefaultValue As String = "Myelo"
+
+    '    For Each cell In AllCells.PeripheralCells
+    '        If cell.getCellType().ToLower().Contains(LblMyelo.Name.ToLower()) Then 'label.Name is the only mapping
+    '            cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
+
+    '            Exit For
+    '        End If
+    '    Next
+    'End Sub
+
+    'Private Sub LblPro_Click(sender As Object, e As EventArgs) Handles LblPro.Click
+    '    'Dim Input As String = ""
+    '    Dim Message As String = "Please enter cell type."
+    '    Dim Title As String = "Change cell type"
+    '    Dim DefaultValue As String = "Pro"
+
+    '    For Each cell In AllCells.PeripheralCells
+    '        If cell.getCellType().ToLower().Contains(LblPro.Name.ToLower()) Then 'label.Name is the only mapping
+    '            cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
+
+    '            Exit For
+    '        End If
+    '    Next
+    'End Sub
+
+    'Private Sub LblBlast_Click(sender As Object, e As EventArgs) Handles LblBlast.Click
+    '    'Dim Input As String = ""
+    '    Dim Message As String = "Please enter cell type."
+    '    Dim Title As String = "Change cell type"
+    '    Dim DefaultValue As String = "Blast"
+
+    '    For Each cell In AllCells.PeripheralCells
+    '        If cell.getCellType().ToLower().Contains(LblBlast.Name.ToLower()) Then 'label.Name is the only mapping
+    '            cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
+
+    '            Exit For
+    '        End If
+    '    Next
+    'End Sub
+
+    'Private Sub LblNRBC_Click(sender As Object, e As EventArgs) Handles LblNRBC.Click
+    '    'Dim Input As String = ""
+    '    Dim Message As String = "Please enter cell type."
+    '    Dim Title As String = "Change cell type"
+    '    Dim DefaultValue As String = "NRBC"
+
+    '    For Each cell In AllCells.PeripheralCells
+    '        If cell.getCellType().ToLower().Contains(LblNRBC.Name.ToLower()) Then 'label.Name is the only mapping
+    '            cell.ChangeCellType(InputBox(Message, Title, DefaultValue)) 'user input box.  File name and .txt is appended to string
+
+    '            Exit For
+    '        End If
+    '    Next
+    'End Sub
 
 
     Private Sub PeripheralForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
