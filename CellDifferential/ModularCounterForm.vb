@@ -7,7 +7,8 @@
     Dim _CountingControlModule As CountingControlModule
     Dim _countingObject As CountingObject
     Dim _ControlList As New List(Of CellControlModule)
-    Dim _cells As New List(Of Cell)
+    Private _cells As New List(Of Cell)
+    Private _settings As ISettings
 
 
     Public Sub New(cells As List(Of Cell))
@@ -69,8 +70,25 @@
         Me._FlowLayoutPanel.Controls.Add(_CountingControlModule)
         Me._FlowLayoutPanel.Controls.Add(_RightSideModule)
 
+        GetKeyMapping()
+
     End Sub
 
+
+    Public Sub GetKeyMapping()
+
+        _settings = New Settings(AllCells.PeripheralCells)
+
+        Try
+            _settings.LoadPeripheralKeyBindings()
+        Catch ex As Exception
+
+            'if error, keys use default bindings set at object instance creation
+        End Try
+
+
+
+    End Sub
 
     Sub Control_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Me.KeyPress
 

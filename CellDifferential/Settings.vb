@@ -8,6 +8,8 @@ Public Class Settings : Implements ISettings
 
     Public Sub New(Cells As List(Of Cell))
         cellList = Cells
+        Dim sqlLiteManager = New SqlLiteManager()
+        sqlLiteManager.create_sqlite_database()
     End Sub
 
 
