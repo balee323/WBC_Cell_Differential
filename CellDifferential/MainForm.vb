@@ -1,10 +1,10 @@
 ﻿Imports System
 Imports System.Drawing
-Imports System.Windows.Forms
+Imports System.Windows
 
 Public Class MainForm
 
-  
+
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ActiveCounters()
 
@@ -48,7 +48,7 @@ Public Class MainForm
 
         result = MessageBox.Show("Are you sure you wish to close the program?", "Close program?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
-        If result = Windows.Forms.DialogResult.Yes Then
+        If result = Forms.DialogResult.Yes Then
             e.Cancel = False
         Else
             e.Cancel = True
@@ -134,7 +134,7 @@ Public Class MainForm
 
 
 
-   
+
 
     Private Sub LblActiveCounter1_Click(sender As Object, e As EventArgs) Handles LblActiveCounter1.Click
         PeripheralForm.Show()

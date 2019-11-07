@@ -1,7 +1,7 @@
 ﻿
 Imports System
 Imports System.Drawing
-Imports System.Windows.Forms
+Imports System.Windows
 
 Public Class PeripheralForm
 
@@ -61,9 +61,9 @@ Public Class PeripheralForm
 
 
                 Cell.addToCount()
-                    'Cell..Text = CStr(Cell.getCount())
-                    _undoList.Push(Cell.getCellType)
-                End If
+                'Cell..Text = CStr(Cell.getCount())
+                _undoList.Push(Cell.getCellType)
+            End If
         Next
 
 
@@ -221,7 +221,7 @@ Public Class PeripheralForm
 
         result = MessageBox.Show("Are you sure you wish to close Periperhal Counter?", "Close?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
-        If result = Windows.Forms.DialogResult.Yes Then
+        If result = Forms.DialogResult.Yes Then
             e.Cancel = False
             ' Me.Close()
 
@@ -252,7 +252,7 @@ Public Class PeripheralForm
         result = MessageBox.Show("Are you sure you wish to close Periperhal Counter?", "Close?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
 
         'if no is selected then the program ends
-        If result = Windows.Forms.DialogResult.Yes Then
+        If result = Forms.DialogResult.Yes Then
             Me.Close()
 
             Dim frm As Form

@@ -25,7 +25,7 @@ Public Class SqlLiteManager
 
         End If
 
-        create_config_table()
+        CreateUserSettingsTable()
         insert_config_data()
         ViewData()
 
@@ -33,11 +33,11 @@ Public Class SqlLiteManager
     End Sub
 
 
-    Public Sub create_config_table()
+    Public Sub CreateUserSettingsTable()
         Dim create_table As String = String.Empty
 
         ' create table sql statement
-        create_table &= "CREATE TABLE MyTable(CustomerID INTEGER PRIMARY KEY ASC, FirstName VARCHAR(25));"
+        create_table &= "CREATE TABLE MyTable(UserID INTEGER PRIMARY KEY ASC, FirstName VARCHAR(25));"
 
 
         Try
