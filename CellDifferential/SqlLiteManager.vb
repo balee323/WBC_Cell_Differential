@@ -1,27 +1,28 @@
 ﻿
 Imports System.Data.SQLite
+Imports Newtonsoft.Json
+
+Public Class SqlLiteManager : Implements IDataRepo
 
 
+    Private configDb As String = "WBCDiffSettings.db"
+    Private connectionString As String = "Data Source={0};Version=3;"
+    Private _counterType As CounterType
 
 
+    Public Sub New(counterType As CounterType)
+        _counterType = counterType
+        CreateDatabase()
+    End Sub
 
-Public Class SqlLiteManager
-    Dim configDb As String = "WBCDiffSettings.db"
-    Dim connectionString As String = "Data Source={0};Version=3;"
-
-
-    Public Sub create_sqlite_database()
+    Private Sub CreateDatabase()
 
         If Not My.Computer.FileSystem.FileExists(configDb) Then
 
             Try
                 ' Create the SQLite database
-
                 SQLiteConnection.CreateFile(configDb)
-
                 MessageBox.Show("Database Created...")
-
-
 
             Catch ex As Exception
                 MessageBox.Show("Database Created Failed...")
@@ -29,19 +30,15 @@ Public Class SqlLiteManager
 
         End If
 
-        CreateUserSettingsTable()
-        InsertUser()
-        ViewData()
-
+        CreateUserTable()
 
     End Sub
 
 
-    Public Sub CreateUserSettingsTable()
+    Private Sub CreateUserTable()
         Dim create_table As String = String.Empty
 
-        ' create table sql statement
-        create_table &= "CREATE TABLE MyTable(UserID INTEGER PRIMARY KEY ASC, FirstName VARCHAR(25), LastName VARCHAR(25));"
+        create_table &= "CREATE TABLE UserInfo(UserName VarChar(50) NOT NULL PRIMARY KEY, GivenName VarChar(50), PeripheralSettingsJson VarChar(500), BoneMarrowSettingsJson VarChar(500), DateCreated DateTime2(3), DateModified DateTime2(3));"
 
 
         Try
@@ -52,31 +49,102 @@ Public Class SqlLiteManager
                     result.ToString()
                 End Using
             End Using
-            MessageBox.Show("Table created successfully")
+            'MessageBox.Show("Table created successfully")
         Catch ex As Exception
-            MessageBox.Show("create table failed")
+            ' MessageBox.Show("create table failed")
         End Try
 
     End Sub
 
-    Public Sub InsertUser()
-        Dim dt As New DataTable
-        Dim SQL As String = String.Empty
 
+    Public Sub SaveUserData(cellSettingsJson As String) Implements IDataRepo.SaveUserData
 
-
-        Dim userName As String = String.Empty
+        Dim userSettings As New UserInfo()
 
         Try
-            userName = Environment.UserName.ToString()
-        Catch ex As Exception
+            userSettings = ActiveDirectoryHelper.GetUserInfo()
 
+            If (UserExist(userSettings)) Then
+                UpdateExisitingUser(userSettings, cellSettingsJson)
+            Else
+                InsertNewUser(userSettings, cellSettingsJson)
+            End If
+
+        Catch ex As Exception
+            'log error
         End Try
 
+    End Sub
+
+    Public Function LoadUserSettings(userInfo As UserInfo) As Boolean Implements IDataRepo.LoadUserSettings
+
+        ' create table sql statement
+        Dim queryStr = $"Select * from UserInfo Where UserName = '{userInfo.UserName}'"
+
+        Dim isUserFound = False
 
         Try
+            Using con As New SQLiteConnection(connectionString)
+                con.Open()
+                Dim transaction As SQLiteTransaction = con.BeginTransaction()
+                Using transaction
+                    Using cmd As New SQLiteCommand(con)
+                        cmd.Transaction = transaction
+                        cmd.CommandText = queryStr
+                        Dim reader = cmd.ExecuteReader()
+                        isUserFound = reader.HasRows()
+                        reader.Close() 'close the reader
+                    End Using
+                    transaction.Commit()
+                End Using
+            End Using
 
-            'insert the records into the database table
+        Catch ex As Exception
+            MessageBox.Show("error finding user")
+        End Try
+
+        Return isUserFound
+    End Function
+
+
+    Private Sub InsertNewUser(userInfo As UserInfo, cellSettingsJson As String)
+
+        Try
+            Using con As New SQLiteConnection(connectionString)
+                con.Open()
+                Dim transaction As SQLiteTransaction = con.BeginTransaction()
+                Using transaction
+                    Using cmd As New SQLiteCommand(con)
+                        cmd.Transaction = transaction
+                        Dim Sql As String
+                        ' create the SQL statement
+
+                        If (_counterType = CounterType.Peripheral) Then
+                            Sql &= "INSERT INTO UserInfo (UserName, GivenName, PeripheralSettingsJson, DateCreated) VALUES "
+                            Sql &= $"('{userInfo.UserName}', '{userInfo.GivenName}', '{cellSettingsJson}','{DateTime.Now}') "
+                        ElseIf (_counterType = CounterType.BoneMarrow) Then
+                            Sql &= "INSERT INTO UserInfo (UserName, GivenName, BoneMarrowSettingsJson, DateCreated) VALUES "
+                            Sql &= $"('{userInfo.UserName}', '{userInfo.GivenName}', '{cellSettingsJson}','{DateTime.Now}') "
+                        End If
+
+                        cmd.CommandText = Sql
+                        cmd.ExecuteNonQuery()
+
+                    End Using
+                    transaction.Commit()
+                End Using
+            End Using
+            MessageBox.Show("Insert User Success")
+
+        Catch ex As Exception
+            MessageBox.Show("Insert User Failed")
+        End Try
+    End Sub
+
+
+    Private Sub UpdateExisitingUser(userInfo As UserInfo, cellSettingsJson As String)
+
+        Try
 
             Using con As New SQLiteConnection(connectionString)
                 con.Open()
@@ -84,12 +152,18 @@ Public Class SqlLiteManager
                 Using transaction
                     Using cmd As New SQLiteCommand(con)
                         cmd.Transaction = transaction
-
+                        Dim Sql As String
                         ' create the SQL statement
-                        SQL &= "INSERT INTO UserInfo (UserName, DateCreated) VALUES "
-                        SQL &= $"{userName}, {Date.Now.ToString()}"
+                        Sql &= "Update UserInfo "
+                        If (_counterType = CounterType.Peripheral) Then
+                            Sql &= $"Set PeripheralSettingsJson = '{cellSettingsJson}', DateModified = '{DateTime.Now}' "
+                        ElseIf (_counterType = CounterType.BoneMarrow) Then
+                            Sql &= $"Set BoneMarrowSettingsJson = '{cellSettingsJson}', DateModified = '{DateTime.Now}' "
+                        End If
 
-                        cmd.CommandText = SQL
+                        Sql &= $"where UserName = '{userInfo.UserName}'"
+
+                        cmd.CommandText = Sql
                         cmd.ExecuteNonQuery()
 
                     End Using
@@ -105,71 +179,44 @@ Public Class SqlLiteManager
     End Sub
 
 
-    'Public Sub insert_config_data()
-    '    Dim dt As New DataTable
-    '    Dim SQL As String = String.Empty
-
-    '    ' create datatable
-    '    dt.Columns.Add(New DataColumn("UserID"))
-    '    dt.Columns.Add(New DataColumn("FirstName"))
-
-    '    ' add default setting records
-    '    dt.Rows.Add({"1234", "Brian"})
-    '    dt.Rows.Add({"444444", "Connor"})
-
-
-    '    Try
-
-    '        'insert the records into the database table
-
-    '        Using con As New SQLiteConnection(connectionString)
-    '            con.Open()
-    '            Dim transaction As SQLiteTransaction = con.BeginTransaction()
-    '            Using transaction
-    '                Using cmd As New SQLiteCommand(con)
-    '                    cmd.Transaction = transaction
-    '                    For Each row As DataRow In dt.Rows
-    '                        ' create the SQL statement
-    '                        SQL = ""
-    '                        SQL &= "INSERT INTO MyTable (CustomerId, FirstName) VALUES "
-    '                        SQL &= String.Format("('{0}','{1}')", row("CustomerId"), row("FirstName"))
-
-    '                        cmd.CommandText = SQL
-    '                        cmd.ExecuteNonQuery()
-
-    '                    Next
-    '                End Using
-    '                transaction.Commit()
-    '            End Using
-    '        End Using
-    '        MessageBox.Show("Insert Default Setting Success")
-
-    '    Catch ex As Exception
-    '        MessageBox.Show("Insert Default Setting Failed")
-    '    End Try
-
-    'End Sub
-
-    Public Sub ViewData()
-
+    Private Function UserExist(userInfo As UserInfo) As Boolean
 
         ' create table sql statement
-        Dim queryStr = "Select * from UserInfo"
+        Dim queryStr = $"Select * from UserInfo Where UserName = '{userInfo.UserName}'"
 
+        Dim isUserFound = False
 
         Try
             Using con As New SQLiteConnection(connectionString)
                 con.Open()
-                Using cmd As New SQLiteCommand(queryStr, con)
-                    Dim result = cmd.ExecuteReader()
-                    result.ToString()
+                Dim transaction As SQLiteTransaction = con.BeginTransaction()
+                Using transaction
+                    Using cmd As New SQLiteCommand(con)
+                        cmd.Transaction = transaction
+                        cmd.CommandText = queryStr
+                        Dim reader = cmd.ExecuteReader()
+                        isUserFound = reader.HasRows()
+                        reader.Close() 'close the reader
+                    End Using
+                    transaction.Commit()
                 End Using
             End Using
-            MessageBox.Show("view data successful")
+
         Catch ex As Exception
-            MessageBox.Show("error viewing table data")
+            MessageBox.Show("error finding user")
         End Try
 
-    End Sub
+        Return isUserFound
+    End Function
+
+
+
+
+
+
+
+
+
+
 
 End Class

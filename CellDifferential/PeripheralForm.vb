@@ -30,16 +30,6 @@ Public Class PeripheralForm
 
     Public Sub GetKeyMapping()
 
-        _settings = New Settings(AllCells.PeripheralCells)
-
-        Try
-            _settings.LoadPeripheralKeyBindings()
-        Catch ex As Exception
-
-            'if error, keys use default bindings set at object instance creation
-        End Try
-
-
 
     End Sub
 

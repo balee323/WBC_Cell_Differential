@@ -70,17 +70,21 @@
         Me._FlowLayoutPanel.Controls.Add(_CountingControlModule)
         Me._FlowLayoutPanel.Controls.Add(_RightSideModule)
 
+        _settings = New Settings(AllCells.PeripheralCells, CounterType.Peripheral)
+
         GetKeyMapping()
+
+        'testing this
+        _settings.SaveKeyBindings()
+
 
     End Sub
 
 
     Public Sub GetKeyMapping()
 
-        _settings = New Settings(AllCells.PeripheralCells)
-
         Try
-            _settings.LoadPeripheralKeyBindings()
+            _settings.LoadKeyBindings()
         Catch ex As Exception
 
             'if error, keys use default bindings set at object instance creation

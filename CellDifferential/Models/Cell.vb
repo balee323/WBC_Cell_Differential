@@ -4,22 +4,25 @@
 Public Class Cell
     Private _CellType As String = ""
     Private _KeyMap As Integer = 0
-
+    Private _Position As Integer = 0
 
     Private _ImageFile As String = ""
     Private _Count As Integer = 0
 
-    Public Sub New(CellType As String, KeyMap As Integer, ImageFile As String)
+    Public Sub New(CellType As String, KeyMap As Integer, ImageFile As String, Position As Integer)
         Me._CellType = CellType 'Seg, Lym, etc..
         Me._KeyMap = KeyMap
         Me._ImageFile = ImageFile
+        Me._Position = Position
 
     End Sub
 
-    Public Sub New(CellType As String, KeyMap As String, ImageFile As String)
+    Public Sub New(CellType As String, KeyMap As String, ImageFile As String, Position As Integer)
         Me._CellType = CellType 'Seg, Lym, etc..
         Me._KeyMap = Asc(KeyMap) 'string to Ascii number
         Me._ImageFile = ImageFile
+        Me._Position = Position
+
     End Sub
 
     Public Function getCellType() As String

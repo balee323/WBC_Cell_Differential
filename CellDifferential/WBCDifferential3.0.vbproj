@@ -138,6 +138,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -174,12 +177,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveDirectoryHelper.vb" />
+    <Compile Include="Interfaces\IDataRepo.vb" />
     <Compile Include="Models\Cell.vb" />
     <Compile Include="BoneMarrowForm.Designer.vb">
       <DependentUpon>BoneMarrowForm.vb</DependentUpon>
     </Compile>
     <Compile Include="BoneMarrowForm.vb" />
-    <Compile Include="ISettings.vb" />
+    <Compile Include="Interfaces\ISettings.vb" />
     <Compile Include="KeyBind2.Designer.vb">
       <DependentUpon>KeyBind2.vb</DependentUpon>
     </Compile>
@@ -187,6 +191,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Models\CountingObject.vb" />
+    <Compile Include="Models\UserInfo.vb" />
     <Compile Include="ModularCounterForm.Designer.vb">
       <DependentUpon>ModularCounterForm.vb</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
