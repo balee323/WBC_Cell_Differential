@@ -51,7 +51,11 @@ Public Class Settings : Implements ISettings
     End Sub
 
     Public Sub LoadKeyBindings() Implements ISettings.LoadKeyBindings
-        Throw New NotImplementedException()
+        For Each cell In _cellList
+            cell.changeKeyMap("t")
+        Next
+
+
     End Sub
 
     Public Sub LoadCountingChannelNames() Implements ISettings.LoadCountingChannelNames

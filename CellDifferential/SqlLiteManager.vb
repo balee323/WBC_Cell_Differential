@@ -1,5 +1,6 @@
 ﻿
 Imports System.Data.SQLite
+Imports System.Threading.Tasks
 Imports Newtonsoft.Json
 
 Public Class SqlLiteManager : Implements IDataRepo
@@ -12,7 +13,10 @@ Public Class SqlLiteManager : Implements IDataRepo
 
     Public Sub New(counterType As CounterType)
         _counterType = counterType
-        CreateDatabase()
+
+        Task.Run(Sub() CreateDatabase())
+
+        'I need to install NLog
     End Sub
 
     Private Sub CreateDatabase()
@@ -20,7 +24,16 @@ Public Class SqlLiteManager : Implements IDataRepo
         If Not My.Computer.FileSystem.FileExists(configDb) Then
 
             Try
-                ' Create the SQLite database
+
+                'Task.Run(Sub()
+
+                '             ' Create the SQLite database
+                '             SQLiteConnection.CreateFile(configDb)
+                '             MessageBox.Show("Database Created...")
+                '         End Sub
+                ')
+
+                'Create the SQLite database
                 SQLiteConnection.CreateFile(configDb)
                 MessageBox.Show("Database Created...")
 
@@ -30,22 +43,24 @@ Public Class SqlLiteManager : Implements IDataRepo
 
         End If
 
+
         CreateUserTable()
 
     End Sub
 
+    Private Async Sub CreateUserTable()
 
-    Private Sub CreateUserTable()
+        Console.WriteLine("Starting CreateTable Sub")
+
         Dim create_table As String = String.Empty
 
         create_table &= "CREATE TABLE UserInfo(UserName VarChar(50) NOT NULL PRIMARY KEY, GivenName VarChar(50), PeripheralSettingsJson VarChar(500), BoneMarrowSettingsJson VarChar(500), DateCreated DateTime2(3), DateModified DateTime2(3));"
-
 
         Try
             Using con As New SQLiteConnection(connectionString)
                 con.Open()
                 Using cmd As New SQLiteCommand(create_table, con)
-                    Dim result = cmd.ExecuteNonQuery()
+                    Dim result = Await cmd.ExecuteNonQueryAsync()
                     result.ToString()
                 End Using
             End Using
@@ -53,6 +68,13 @@ Public Class SqlLiteManager : Implements IDataRepo
         Catch ex As Exception
             ' MessageBox.Show("create table failed")
         End Try
+
+        Console.WriteLine("Starting long pause in CreateTable sub")
+
+        'lets have a long pause
+        Await Task.Delay(1000 * 20)
+
+        Console.WriteLine("End of CreateTable Sub")
 
     End Sub
 
@@ -62,13 +84,18 @@ Public Class SqlLiteManager : Implements IDataRepo
         Dim userSettings As New UserInfo()
 
         Try
-            userSettings = ActiveDirectoryHelper.GetUserInfo()
 
-            If (UserExist(userSettings)) Then
-                UpdateExisitingUser(userSettings, cellSettingsJson)
-            Else
-                InsertNewUser(userSettings, cellSettingsJson)
-            End If
+            Task.Run(Sub()
+
+                         userSettings = ActiveDirectoryHelper.GetUserInfo()
+
+                         If (UserExist(userSettings)) Then
+                             UpdateExisitingUser(userSettings, cellSettingsJson)
+                         Else
+                             InsertNewUser(userSettings, cellSettingsJson)
+                         End If
+                     End Sub
+            )
 
         Catch ex As Exception
             'log error
@@ -84,20 +111,25 @@ Public Class SqlLiteManager : Implements IDataRepo
         Dim isUserFound = False
 
         Try
-            Using con As New SQLiteConnection(connectionString)
-                con.Open()
-                Dim transaction As SQLiteTransaction = con.BeginTransaction()
-                Using transaction
-                    Using cmd As New SQLiteCommand(con)
-                        cmd.Transaction = transaction
-                        cmd.CommandText = queryStr
-                        Dim reader = cmd.ExecuteReader()
-                        isUserFound = reader.HasRows()
-                        reader.Close() 'close the reader
-                    End Using
-                    transaction.Commit()
-                End Using
-            End Using
+            Task.Run(Sub()
+
+                         Using con As New SQLiteConnection(connectionString)
+                             con.Open()
+                             Dim transaction As SQLiteTransaction = con.BeginTransaction()
+                             Using transaction
+                                 Using cmd As New SQLiteCommand(con)
+                                     cmd.Transaction = transaction
+                                     cmd.CommandText = queryStr
+                                     Dim reader = cmd.ExecuteReader()
+                                     isUserFound = reader.HasRows()
+                                     reader.Close() 'close the reader
+                                 End Using
+                                 transaction.Commit()
+                             End Using
+                         End Using
+
+                     End Sub)
+
 
         Catch ex As Exception
             MessageBox.Show("error finding user")
@@ -134,10 +166,10 @@ Public Class SqlLiteManager : Implements IDataRepo
                     transaction.Commit()
                 End Using
             End Using
-            MessageBox.Show("Insert User Success")
+            'MessageBox.Show("Insert User Success")
 
         Catch ex As Exception
-            MessageBox.Show("Insert User Failed")
+            'MessageBox.Show("Insert User Failed")
         End Try
     End Sub
 
@@ -170,10 +202,10 @@ Public Class SqlLiteManager : Implements IDataRepo
                     transaction.Commit()
                 End Using
             End Using
-            MessageBox.Show("Insert User Success")
+            'MessageBox.Show("Insert User Success")
 
         Catch ex As Exception
-            MessageBox.Show("Insert User Failed")
+            'MessageBox.Show("Insert User Failed")
         End Try
 
     End Sub
@@ -203,7 +235,7 @@ Public Class SqlLiteManager : Implements IDataRepo
             End Using
 
         Catch ex As Exception
-            MessageBox.Show("error finding user")
+            '  MessageBox.Show("error finding user")
         End Try
 
         Return isUserFound

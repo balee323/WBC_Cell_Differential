@@ -30,6 +30,7 @@
 
     Public Sub ResetState()
         TxtCellTotal.Text = _cell.getCount().ToString()
+        LblBindingKey.Text = _cell.getKeyMapChar
         LblCellType.Refresh()
     End Sub
 

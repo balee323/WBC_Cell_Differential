@@ -14,9 +14,6 @@ Public Class MainForm
 
     End Sub
 
-
-
-
     Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
 
         Dim cells As New List(Of Cell)
@@ -34,9 +31,8 @@ Public Class MainForm
         cells.Add(New Cell("Seg", 47, "File", 10))
 
 
-        Dim modularPeripheralCounterForm As New ModularCounterForm(cells)
+        Dim modularPeripheralCounterForm As New ModularCounterForm(cells, CounterType.Peripheral)
         modularPeripheralCounterForm.Show()
-        'BoneMarrowForm.Hide()
         ActiveCounters()
 
     End Sub
@@ -86,14 +82,11 @@ Public Class MainForm
         '    Dim User3 As New Cell("User3", "3", "File", 0)
 
 
-        Dim modularBoneMarrowCounterForm As New ModularCounterForm(cells)
+        Dim modularBoneMarrowCounterForm As New ModularCounterForm(cells, CounterType.BoneMarrow)
         modularBoneMarrowCounterForm.Show()
 
-        ' BoneMarrowForm.Show()
-        ' PeripheralForm.Hide()
         ActiveCounters()
-        '  Me.Refresh()
-        ' Me.Hide()
+
     End Sub
 
     Private Sub ViewSavedReports_Click(sender As Object, e As EventArgs) Handles ViewSavedReports.Click
@@ -111,8 +104,7 @@ Public Class MainForm
 
     Private Sub ActiveCounters()
 
-        'ListView1.Items.Add("test")
-
+        'this will probably go away...
         Dim frm As Form
 
         For Each frm In My.Application.OpenForms
