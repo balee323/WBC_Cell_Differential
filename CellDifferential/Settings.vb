@@ -12,27 +12,22 @@ End Enum
 Public Class Settings : Implements ISettings
 
     Private _dataRepo As IDataRepo
-    Private _cellList As List(Of Cell)
     Private _counterType As CounterType
+    Private _cells As List(Of Cell)
+
+
+
 
     Public Sub New(cells As List(Of Cell), counterType As CounterType)
         _counterType = counterType
-        _cellList = cells
+        _cells = cells
         _dataRepo = New SqlLiteManager(_counterType)
 
     End Sub
 
-    Public Sub SaveKeyBindings() Implements ISettings.SaveKeyBindings
+    Public Sub SaveSettings() Implements ISettings.SaveSettings
 
-
-        'we need a convert to settings function() for the cells...
-
-        'then a modify cells funtion() once the cell settings load...
-
-        Dim cellSettings As New List(Of CellSetting)
-        cellSettings.Add(New CellSetting With {.CellType = "NRBC", .KeyMap = 104, .File = "File", .Position = 0})
-        cellSettings.Add(New CellSetting With {.CellType = "blast", .KeyMap = 106, .File = "File", .Position = 1})
-
+        Dim cellSettings As List(Of CellSetting) = CreateCellSettings()
 
         Dim jsonStr = JsonConvert.SerializeObject(cellSettings, Formatting.Indented)
 
@@ -40,31 +35,48 @@ Public Class Settings : Implements ISettings
 
         cellSettings = JsonConvert.DeserializeObject(Of List(Of CellSetting))(jsonStr)
 
-
         _dataRepo.SaveUserData(jsonStr)
 
 
     End Sub
 
-    Public Sub SaveCountingChannelNames() Implements ISettings.SaveCountingChannelNames
-        Throw New NotImplementedException()
-    End Sub
+    Private Function CreateCellSettings() As List(Of CellSetting)
 
-    Public Sub LoadKeyBindings() Implements ISettings.LoadKeyBindings
-        For Each cell In _cellList
-            cell.changeKeyMap("t")
+        Dim cellSettings As New List(Of CellSetting)
+
+        For Each cell In _cells
+            cellSettings.Add(New CellSetting With {.CellType = cell.getCellType(), .KeyMap = cell.getKeyMap(), .File = "File", .Position = cell.getPosition()})
         Next
 
+        Return cellSettings
+
+    End Function
+
+
+    Public Sub Loadsettings() Implements ISettings.LoadSettings
+        Try
+
+            Dim jsonStr = _dataRepo.LoadUserSettings()
+
+            Dim cellSettings As List(Of CellSetting) = JsonConvert.DeserializeObject(Of List(Of CellSetting))(jsonStr)
+
+            For Each cell In _cells
+                For Each cellsetting In cellSettings
+                    If (cell.getPosition = cellsetting.Position) Then
+                        cell.ChangeCellType(cellsetting.CellType)
+                        cell.changeKeyMap(cellsetting.KeyMap)
+                        Exit For 'found it
+                    End If
+                Next
+
+            Next
+        Catch ex As Exception
+
+        End Try
+
+
 
     End Sub
-
-    Public Sub LoadCountingChannelNames() Implements ISettings.LoadCountingChannelNames
-        Throw New NotImplementedException()
-    End Sub
-
-
-
-
 
 
 End Class

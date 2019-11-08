@@ -191,6 +191,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Models\CountingObject.vb" />
+    <Compile Include="Models\Globals.vb" />
     <Compile Include="Models\UserInfo.vb" />
     <Compile Include="ModularCounterForm.Designer.vb">
       <DependentUpon>ModularCounterForm.vb</DependentUpon>
@@ -230,10 +231,10 @@
     <Compile Include="Report.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KeyBind1.Designer.vb">
-      <DependentUpon>KeyBind1.vb</DependentUpon>
+    <Compile Include="KeyBind.Designer.vb">
+      <DependentUpon>KeyBind.vb</DependentUpon>
     </Compile>
-    <Compile Include="KeyBind1.vb">
+    <Compile Include="KeyBind.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -295,8 +296,8 @@
     <EmbeddedResource Include="Report.resx">
       <DependentUpon>Report.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KeyBind1.resx">
-      <DependentUpon>KeyBind1.vb</DependentUpon>
+    <EmbeddedResource Include="KeyBind.resx">
+      <DependentUpon>KeyBind.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -349,9 +350,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Background.jpg" />
+    <None Include="Resources\BoneMarrow.jpg" />
+    <None Include="Resources\BoneMarrow.bmp" />
+    <None Include="Resources\BoneMarrow.ico" />
     <Content Include="Resources\LeftEnd.jpg" />
     <Content Include="Resources\RedButton.jpg" />
     <Content Include="Resources\RedButton.png" />
+    <None Include="Resources\redCell.jpg" />
+    <None Include="Resources\redCell.bmp" />
+    <None Include="Resources\RedCellIcon.ico" />
+    <None Include="Resources\redCell.ico" />
     <Content Include="Resources\RightEnd.jpg" />
     <Content Include="Resources\WhiteButton.png" />
     <None Include="packages.config" />

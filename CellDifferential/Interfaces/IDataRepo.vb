@@ -2,7 +2,7 @@
 
     Sub SaveUserData(cellSettingsJson As String)
 
-    Function LoadUserSettings(userInfo As UserInfo) As Boolean
+    Function LoadUserSettings() As String
 
 
 End Interface

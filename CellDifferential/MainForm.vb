@@ -8,6 +8,7 @@ Public Class MainForm
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ActiveCounters()
 
+        Globals.ProgressBar = ProgressBar1
 
         ToolStripMenuItem6.Text = My.Application.Info.Version.ToString
 
@@ -16,10 +17,12 @@ Public Class MainForm
 
     Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
 
+        Globals.ProgressBar.Increment(10)
+
         Dim cells As New List(Of Cell)
 
-        cells.Add(New Cell("NRBC", 104, "File", 0))
-        cells.Add(New Cell("Blast", 106, "File", 1))
+        cells.Add(New Cell("NRBC", ".", "File", 0))
+        cells.Add(New Cell("Blast", ".", "File", 1))
         cells.Add(New Cell("ProMyelo", 107, "File", 2))
         cells.Add(New Cell("Myelo", 108, "File", 3))
         cells.Add(New Cell("Meta", 59, "File", 4))
@@ -32,8 +35,15 @@ Public Class MainForm
 
 
         Dim modularPeripheralCounterForm As New ModularCounterForm(cells, CounterType.Peripheral)
+        Globals.ProgressBar.Increment(10)
         modularPeripheralCounterForm.Show()
+        Globals.ProgressBar.Increment(10)
+
         ActiveCounters()
+
+
+
+        Globals.ProgressBar.Value = 0
 
     End Sub
 
@@ -54,38 +64,35 @@ Public Class MainForm
 
     Private Sub ToolStripMenuItem3_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem3.Click
 
+        Globals.ProgressBar.Increment(5)
+
         Dim cells As New List(Of Cell)
 
-        cells.Add(New Cell("NRBC", 104, "File", 0))
-        cells.Add(New Cell("Blast", 106, "File", 1))
-        cells.Add(New Cell("ProMyelo", 107, "File", 2))
-        cells.Add(New Cell("Myelo", 108, "File", 3))
-        cells.Add(New Cell("Meta", 59, "File", 4))
-        cells.Add(New Cell("Band", 98, "File", 5))
-        cells.Add(New Cell("Baso", 110, "File", 6))
-        cells.Add(New Cell("Eos", 109, "File", 7))
-        cells.Add(New Cell("Mono", 44, "File", 8))
-        cells.Add(New Cell("Plasma", "p", "File", 9))
-        cells.Add(New Cell("Lym", 46, "File", 11))
-        cells.Add(New Cell("Seg", 47, "File", 12))
-
-
-
-
-        '    Dim User1 As New Cell("User1", "1", "File", 0)
-        '    Dim Meta As New Cell("Meta", "'", "File", 0)
-
-        '    Dim Blast As New Cell("Blast", "k", "File", 0)
-        '    Dim ProNormo As New Cell("ProNormo", "h", "File", 0)
-        '    Dim NormoBlast As New Cell("NormoBlast", "g", "File", 0)
-        '    Dim User2 As New Cell("User2", "2", "File", 0)
-        '    Dim User3 As New Cell("User3", "3", "File", 0)
+        cells.Add(New Cell("User2", "o", "File", 0))
+        cells.Add(New Cell("User1", "i", "File", 1))
+        cells.Add(New Cell("ProNormo", "h", "File", 2))
+        cells.Add(New Cell("NormoBlast", "g", "File", 3))
+        cells.Add(New Cell("NRBC", "h", "File", 4))
+        cells.Add(New Cell("Blast", "k", "File", 5))
+        cells.Add(New Cell("ProMyelo", "l", "File", 6))
+        cells.Add(New Cell("Myelo", ";", "File", 7))
+        cells.Add(New Cell("Meta", "'", "File", 8))
+        cells.Add(New Cell("Band", "b", "File", 9))
+        cells.Add(New Cell("Baso", "n", "File", 10))
+        cells.Add(New Cell("Eos", "m", "File", 11))
+        cells.Add(New Cell("Mono", ",", "File", 12))
+        cells.Add(New Cell("Plasma", "p", "File", 13))
+        cells.Add(New Cell("Lym", ".", "File", 14))
+        cells.Add(New Cell("Seg", "/", "File", 15))
 
 
         Dim modularBoneMarrowCounterForm As New ModularCounterForm(cells, CounterType.BoneMarrow)
+        Globals.ProgressBar.Increment(5)
         modularBoneMarrowCounterForm.Show()
 
         ActiveCounters()
+
+        Globals.ProgressBar.Value = 0
 
     End Sub
 
@@ -124,10 +131,6 @@ Public Class MainForm
 
     End Sub
 
-
-
-
-
     Private Sub LblActiveCounter1_Click(sender As Object, e As EventArgs) Handles LblActiveCounter1.Click
         PeripheralForm.Show()
         BoneMarrowForm.Hide()
@@ -137,4 +140,5 @@ Public Class MainForm
         BoneMarrowForm.Show()
         PeripheralForm.Hide()
     End Sub
+
 End Class

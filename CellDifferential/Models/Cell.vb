@@ -32,7 +32,9 @@ Public Class Cell
     Public Function getCount() As Integer
         Return _Count
     End Function
-
+    Public Function getPosition() As Integer
+        Return _Position
+    End Function
     Public Function getKeyMap() As Integer
         Return _KeyMap
     End Function

@@ -35,10 +35,9 @@ Public Class SqlLiteManager : Implements IDataRepo
 
                 'Create the SQLite database
                 SQLiteConnection.CreateFile(configDb)
-                MessageBox.Show("Database Created...")
 
             Catch ex As Exception
-                MessageBox.Show("Database Created Failed...")
+                Console.WriteLine("Database Created Failed..." + ex.Message)
             End Try
 
         End If
@@ -49,8 +48,6 @@ Public Class SqlLiteManager : Implements IDataRepo
     End Sub
 
     Private Async Sub CreateUserTable()
-
-        Console.WriteLine("Starting CreateTable Sub")
 
         Dim create_table As String = String.Empty
 
@@ -64,17 +61,13 @@ Public Class SqlLiteManager : Implements IDataRepo
                     result.ToString()
                 End Using
             End Using
-            'MessageBox.Show("Table created successfully")
+
         Catch ex As Exception
-            ' MessageBox.Show("create table failed")
+            Console.WriteLine("Table creation failed..." + ex.Message)
         End Try
 
-        Console.WriteLine("Starting long pause in CreateTable sub")
-
         'lets have a long pause
-        Await Task.Delay(1000 * 20)
-
-        Console.WriteLine("End of CreateTable Sub")
+        'Await Task.Delay(1000 * 20)
 
     End Sub
 
@@ -97,18 +90,34 @@ Public Class SqlLiteManager : Implements IDataRepo
                      End Sub
             )
 
+            'userSettings = ActiveDirectoryHelper.GetUserInfo()
+
+            'If (UserExist(userSettings)) Then
+            '    UpdateExisitingUser(userSettings, cellSettingsJson)
+            'Else
+            '    InsertNewUser(userSettings, cellSettingsJson)
+            'End If
+
         Catch ex As Exception
-            'log error
+            Console.WriteLine(ex.Message)
         End Try
 
     End Sub
 
-    Public Function LoadUserSettings(userInfo As UserInfo) As Boolean Implements IDataRepo.LoadUserSettings
+    Public Function LoadUserSettings() As String Implements IDataRepo.LoadUserSettings
+
+        Dim userInfo = ActiveDirectoryHelper.GetUserInfo()
 
         ' create table sql statement
-        Dim queryStr = $"Select * from UserInfo Where UserName = '{userInfo.UserName}'"
+        Dim queryStr As String = String.Empty
 
-        Dim isUserFound = False
+        If (_counterType = CounterType.Peripheral) Then
+            queryStr = $"Select PeripheralSettingsJson from UserInfo Where UserName = '{userInfo.UserName}'"
+        ElseIf (_counterType = CounterType.BoneMarrow) Then
+            queryStr = $"Select BoneMarrowSettingsJson from UserInfo Where UserName = '{userInfo.UserName}'"
+        End If
+
+        Dim result As String = String.Empty
 
         Try
             Task.Run(Sub()
@@ -120,22 +129,22 @@ Public Class SqlLiteManager : Implements IDataRepo
                                  Using cmd As New SQLiteCommand(con)
                                      cmd.Transaction = transaction
                                      cmd.CommandText = queryStr
-                                     Dim reader = cmd.ExecuteReader()
-                                     isUserFound = reader.HasRows()
-                                     reader.Close() 'close the reader
+                                     result = cmd.ExecuteScalar().ToString()
+                                     'cmd.Dispose()
                                  End Using
                                  transaction.Commit()
                              End Using
                          End Using
 
-                     End Sub)
-
+                     End Sub).Wait()
 
         Catch ex As Exception
             MessageBox.Show("error finding user")
         End Try
+        Globals.ProgressBar.Increment(10)
 
-        Return isUserFound
+        Return result
+
     End Function
 
 
@@ -166,10 +175,10 @@ Public Class SqlLiteManager : Implements IDataRepo
                     transaction.Commit()
                 End Using
             End Using
-            'MessageBox.Show("Insert User Success")
+
 
         Catch ex As Exception
-            'MessageBox.Show("Insert User Failed")
+            Console.WriteLine(ex.Message)
         End Try
     End Sub
 
@@ -202,10 +211,10 @@ Public Class SqlLiteManager : Implements IDataRepo
                     transaction.Commit()
                 End Using
             End Using
-            'MessageBox.Show("Insert User Success")
+            Console.WriteLine("Insert User Success")
 
         Catch ex As Exception
-            'MessageBox.Show("Insert User Failed")
+            Console.WriteLine(ex.Message)
         End Try
 
     End Sub
@@ -235,20 +244,11 @@ Public Class SqlLiteManager : Implements IDataRepo
             End Using
 
         Catch ex As Exception
-            '  MessageBox.Show("error finding user")
+            Console.WriteLine(ex.Message)
         End Try
 
         Return isUserFound
     End Function
-
-
-
-
-
-
-
-
-
 
 
 End Class

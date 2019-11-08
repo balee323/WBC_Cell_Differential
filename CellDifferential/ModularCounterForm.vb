@@ -14,6 +14,7 @@ Public Class ModularCounterForm
     Private _counterType As CounterType
 
 
+
     Public Sub New(cells As List(Of Cell), counterType As CounterType)
 
         Me._cells = cells
@@ -26,14 +27,20 @@ Public Class ModularCounterForm
         If (_counterType = CounterType.Peripheral) Then
             Me.Name = "Peripheral Counter"
             Me.Text = "Peripheral Counter"
+            Me.Icon = My.Resources.RedCell
         ElseIf (_counterType = CounterType.BoneMarrow) Then
             Me.Name = "BoneMarrow Counter"
             Me.Text = "BoneMarrow Counter"
+            Me.Icon = My.Resources.BoneMarrow
         End If
+
+        Globals.ProgressBar.Increment(10)
 
     End Sub
 
     Private Sub ModularPeripheralCounterForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        _settings = New Settings(_cells, _counterType)
 
         Me.Focus()
         Me.KeyPreview = True  'important
@@ -48,9 +55,9 @@ Public Class ModularCounterForm
         _FlowLayoutPanel.Margin = New Padding(0)
         _LeftSideModule = New LeftSideModule()
         _LeftSideModule.Margin = New Padding(0)
-        Dim _refreshCellCounts As New Action(AddressOf RefreshCellModules)
+        Dim _refreshCellModules As New Action(AddressOf RefreshCellModules)
         Dim _resetCellCounts As New Action(AddressOf ResetCellCounts)
-        _CountingControlModule = New CountingControlModule(_countingObject, _refreshCellCounts, _resetCellCounts)
+        _CountingControlModule = New CountingControlModule(_countingObject, _refreshCellModules, _resetCellCounts, _cells, _settings)
         _CountingControlModule.Margin = New Padding(0)
         _RightSideModule = New RightSideModule()
         _RightSideModule.Margin = New Padding(0)
@@ -59,6 +66,7 @@ Public Class ModularCounterForm
 
         Me._FlowLayoutPanel.Controls.Add(_LeftSideModule)
 
+        Globals.ProgressBar.Increment(5)
 
         Dim toggleRed As Boolean = True
         For Each cell In _cells
@@ -82,23 +90,21 @@ Public Class ModularCounterForm
         Me._FlowLayoutPanel.Controls.Add(_CountingControlModule)
         Me._FlowLayoutPanel.Controls.Add(_RightSideModule)
 
-        _settings = New Settings(_cells, _counterType)
-
-        GetKeyMapping()
-
-        'testing this
-        _settings.SaveKeyBindings()
 
 
+        Globals.ProgressBar.Increment(5)
+
+        LoadSettings()
 
 
     End Sub
 
 
-    Public Sub GetKeyMapping()
+    Public Sub LoadSettings()
 
         Try
-            _settings.LoadKeyBindings()
+            _settings.LoadSettings()
+            Globals.ProgressBar.Increment(5)
             RefreshCellModules()
 
         Catch ex As Exception
@@ -147,6 +153,7 @@ Public Class ModularCounterForm
     End Sub
 
     Private Sub ModularPeripheralCoubterForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        _settings.SaveSettings()
         _cells.Clear()
     End Sub
 

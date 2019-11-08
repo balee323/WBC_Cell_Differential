@@ -158,11 +158,7 @@ Public Class PeripheralForm
 
     Private Sub BtnEditKeys_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnEditKeys.Click
 
-        'KeyBind1.Settings = _settings
-        'KeyBind1.Cells = AllCells.PeripheralCells
 
-        KeyBind1.Show()
-        KeyBind1.Focus()
 
     End Sub
 

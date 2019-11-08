@@ -2,12 +2,17 @@
 
     Private _countingObject As CountingObject
     Private _refreshCellCounts As Action
-    Private _resetCellCounts As Action
-    Public Sub New(countingObject As CountingObject, refreshCellCounts As Action, resetCellCounts As Action)
+    Private _resetCellModules As Action
+    Private _cells As List(Of Cell)
+    Private _settings As ISettings
+    Public Sub New(countingObject As CountingObject, refreshCellModules As Action, resetCellCounts As Action, cells As List(Of Cell), settings As ISettings)
 
         Me._countingObject = countingObject
-        Me._refreshCellCounts = refreshCellCounts
-        Me._resetCellCounts = resetCellCounts
+        Me._resetCellModules = refreshCellModules
+        Me._refreshCellCounts = resetCellCounts
+        Me._cells = cells
+        Me._settings = settings
+
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -121,11 +126,16 @@
     End Sub
 
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
-        _resetCellCounts()
+        _resetCellModules()
         _refreshCellCounts()
         _countingObject.Total = 0
         ChkBoxIncludeNRBC.Enabled = True
         BtnChangeCount.Enabled = True
         RefreshCountingModuleState()
+    End Sub
+
+    Private Sub BtnEditKeys_Click(sender As Object, e As EventArgs) Handles BtnEditKeys.Click
+        Dim keyBind As New KeyBind(_cells, _settings, _resetCellModules)
+        keyBind.Show()
     End Sub
 End Class

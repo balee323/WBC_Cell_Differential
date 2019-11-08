@@ -1,5 +1,5 @@
 ﻿Imports System.DirectoryServices
-
+Imports System.Threading.Tasks
 
 Public Module ActiveDirectoryHelper
 

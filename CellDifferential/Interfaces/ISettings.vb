@@ -1,9 +1,6 @@
 ﻿Public Interface ISettings
 
-    Sub SaveKeyBindings()
-    Sub SaveCountingChannelNames()
-    Sub LoadKeyBindings()
-    Sub LoadCountingChannelNames()
-
+    Sub SaveSettings()
+    Sub LoadSettings()
 
 End Interface

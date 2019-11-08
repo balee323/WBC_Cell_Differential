@@ -30,8 +30,10 @@
 
     Public Sub ResetState()
         TxtCellTotal.Text = _cell.getCount().ToString()
-        LblBindingKey.Text = _cell.getKeyMapChar
+        LblBindingKey.Text = _cell.getKeyMapChar()
+        LblCellType.Text = _cell.getCellType()
         LblCellType.Refresh()
+        LblBindingKey.Refresh()
     End Sub
 
     Private Sub CellControlModule_Load(sender As Object, e As EventArgs) Handles MyBase.Load
