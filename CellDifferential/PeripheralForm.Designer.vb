@@ -103,7 +103,7 @@ Partial Class PeripheralForm
         Me.TxtChangeCount.Margin = New System.Windows.Forms.Padding(6, 5, 6, 5)
         Me.TxtChangeCount.Name = "TxtChangeCount"
         Me.TxtChangeCount.ReadOnly = True
-        Me.TxtChangeCount.Size = New System.Drawing.Size(55, 25)
+        Me.TxtChangeCount.Size = New System.Drawing.Size(55, 23)
         Me.TxtChangeCount.TabIndex = 30
         Me.TxtChangeCount.TabStop = False
         Me.TxtChangeCount.Text = "100"
@@ -132,7 +132,7 @@ Partial Class PeripheralForm
         Me.RadioButton1.Location = New System.Drawing.Point(5, 20)
         Me.RadioButton1.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(93, 20)
+        Me.RadioButton1.Size = New System.Drawing.Size(82, 17)
         Me.RadioButton1.TabIndex = 34
         Me.RadioButton1.Text = "Sound Off"
         Me.RadioButton1.UseVisualStyleBackColor = False
@@ -146,7 +146,7 @@ Partial Class PeripheralForm
         Me.RadioButton2.Location = New System.Drawing.Point(5, 41)
         Me.RadioButton2.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(58, 20)
+        Me.RadioButton2.Size = New System.Drawing.Size(51, 17)
         Me.RadioButton2.TabIndex = 0
         Me.RadioButton2.TabStop = True
         Me.RadioButton2.Text = "Ding"
@@ -161,7 +161,7 @@ Partial Class PeripheralForm
         Me.RadioButton3.Location = New System.Drawing.Point(71, 41)
         Me.RadioButton3.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(94, 20)
+        Me.RadioButton3.Size = New System.Drawing.Size(79, 17)
         Me.RadioButton3.TabIndex = 36
         Me.RadioButton3.Text = "Explosion"
         Me.RadioButton3.UseVisualStyleBackColor = False
@@ -175,7 +175,7 @@ Partial Class PeripheralForm
         Me.RadioButton4.Location = New System.Drawing.Point(97, 20)
         Me.RadioButton4.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.RadioButton4.Name = "RadioButton4"
-        Me.RadioButton4.Size = New System.Drawing.Size(66, 20)
+        Me.RadioButton4.Size = New System.Drawing.Size(57, 17)
         Me.RadioButton4.TabIndex = 37
         Me.RadioButton4.Text = "Voice"
         Me.RadioButton4.UseVisualStyleBackColor = False
@@ -219,7 +219,7 @@ Partial Class PeripheralForm
         Me.TxtTotal.Margin = New System.Windows.Forms.Padding(6, 5, 6, 5)
         Me.TxtTotal.Name = "TxtTotal"
         Me.TxtTotal.ReadOnly = True
-        Me.TxtTotal.Size = New System.Drawing.Size(57, 28)
+        Me.TxtTotal.Size = New System.Drawing.Size(57, 26)
         Me.TxtTotal.TabIndex = 9
         Me.TxtTotal.TabStop = False
         Me.TxtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -232,7 +232,7 @@ Partial Class PeripheralForm
         Me.Label7.Location = New System.Drawing.Point(852, 36)
         Me.Label7.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(59, 17)
+        Me.Label7.Size = New System.Drawing.Size(49, 15)
         Me.Label7.TabIndex = 18
         Me.Label7.Text = "TOTAL"
         '
@@ -246,7 +246,7 @@ Partial Class PeripheralForm
         Me.TxtSeg.Margin = New System.Windows.Forms.Padding(10)
         Me.TxtSeg.Name = "TxtSeg"
         Me.TxtSeg.ReadOnly = True
-        Me.TxtSeg.Size = New System.Drawing.Size(57, 28)
+        Me.TxtSeg.Size = New System.Drawing.Size(57, 26)
         Me.TxtSeg.TabIndex = 1
         Me.TxtSeg.TabStop = False
         Me.TxtSeg.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -261,7 +261,7 @@ Partial Class PeripheralForm
         Me.TxtBand.Margin = New System.Windows.Forms.Padding(10)
         Me.TxtBand.Name = "TxtBand"
         Me.TxtBand.ReadOnly = True
-        Me.TxtBand.Size = New System.Drawing.Size(57, 28)
+        Me.TxtBand.Size = New System.Drawing.Size(57, 26)
         Me.TxtBand.TabIndex = 2
         Me.TxtBand.TabStop = False
         Me.TxtBand.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -276,7 +276,7 @@ Partial Class PeripheralForm
         Me.TxtBaso.Margin = New System.Windows.Forms.Padding(10)
         Me.TxtBaso.Name = "TxtBaso"
         Me.TxtBaso.ReadOnly = True
-        Me.TxtBaso.Size = New System.Drawing.Size(57, 28)
+        Me.TxtBaso.Size = New System.Drawing.Size(57, 26)
         Me.TxtBaso.TabIndex = 3
         Me.TxtBaso.TabStop = False
         Me.TxtBaso.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -291,7 +291,7 @@ Partial Class PeripheralForm
         Me.TxtMono.Margin = New System.Windows.Forms.Padding(10)
         Me.TxtMono.Name = "TxtMono"
         Me.TxtMono.ReadOnly = True
-        Me.TxtMono.Size = New System.Drawing.Size(57, 28)
+        Me.TxtMono.Size = New System.Drawing.Size(57, 26)
         Me.TxtMono.TabIndex = 4
         Me.TxtMono.TabStop = False
         Me.TxtMono.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -306,7 +306,7 @@ Partial Class PeripheralForm
         Me.TxtLym.Margin = New System.Windows.Forms.Padding(10)
         Me.TxtLym.Name = "TxtLym"
         Me.TxtLym.ReadOnly = True
-        Me.TxtLym.Size = New System.Drawing.Size(57, 28)
+        Me.TxtLym.Size = New System.Drawing.Size(57, 26)
         Me.TxtLym.TabIndex = 5
         Me.TxtLym.TabStop = False
         Me.TxtLym.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -321,7 +321,7 @@ Partial Class PeripheralForm
         Me.TxtNRBC.Margin = New System.Windows.Forms.Padding(10)
         Me.TxtNRBC.Name = "TxtNRBC"
         Me.TxtNRBC.ReadOnly = True
-        Me.TxtNRBC.Size = New System.Drawing.Size(57, 28)
+        Me.TxtNRBC.Size = New System.Drawing.Size(57, 26)
         Me.TxtNRBC.TabIndex = 6
         Me.TxtNRBC.TabStop = False
         Me.TxtNRBC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -334,7 +334,7 @@ Partial Class PeripheralForm
         Me.LblSeg.Location = New System.Drawing.Point(794, 36)
         Me.LblSeg.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.LblSeg.Name = "LblSeg"
-        Me.LblSeg.Size = New System.Drawing.Size(40, 17)
+        Me.LblSeg.Size = New System.Drawing.Size(35, 15)
         Me.LblSeg.TabIndex = 12
         Me.LblSeg.Text = "SEG"
         '
@@ -346,7 +346,7 @@ Partial Class PeripheralForm
         Me.LblBand.Location = New System.Drawing.Point(591, 36)
         Me.LblBand.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.LblBand.Name = "LblBand"
-        Me.LblBand.Size = New System.Drawing.Size(50, 17)
+        Me.LblBand.Size = New System.Drawing.Size(44, 15)
         Me.LblBand.TabIndex = 13
         Me.LblBand.Text = "BAND"
         '
@@ -358,7 +358,7 @@ Partial Class PeripheralForm
         Me.LblBaso.Location = New System.Drawing.Point(465, 36)
         Me.LblBaso.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.LblBaso.Name = "LblBaso"
-        Me.LblBaso.Size = New System.Drawing.Size(50, 17)
+        Me.LblBaso.Size = New System.Drawing.Size(43, 15)
         Me.LblBaso.TabIndex = 14
         Me.LblBaso.Text = "BASO"
         '
@@ -370,7 +370,7 @@ Partial Class PeripheralForm
         Me.LblMono.Location = New System.Drawing.Point(662, 36)
         Me.LblMono.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.LblMono.Name = "LblMono"
-        Me.LblMono.Size = New System.Drawing.Size(43, 17)
+        Me.LblMono.Size = New System.Drawing.Size(39, 15)
         Me.LblMono.TabIndex = 15
         Me.LblMono.Text = "MON"
         '
@@ -382,7 +382,7 @@ Partial Class PeripheralForm
         Me.LblLym.Location = New System.Drawing.Point(728, 36)
         Me.LblLym.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.LblLym.Name = "LblLym"
-        Me.LblLym.Size = New System.Drawing.Size(39, 17)
+        Me.LblLym.Size = New System.Drawing.Size(35, 15)
         Me.LblLym.TabIndex = 16
         Me.LblLym.Text = "LYM"
         '
@@ -394,7 +394,7 @@ Partial Class PeripheralForm
         Me.LblNRBC.Location = New System.Drawing.Point(137, 36)
         Me.LblNRBC.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.LblNRBC.Name = "LblNRBC"
-        Me.LblNRBC.Size = New System.Drawing.Size(50, 17)
+        Me.LblNRBC.Size = New System.Drawing.Size(45, 15)
         Me.LblNRBC.TabIndex = 17
         Me.LblNRBC.Text = "NRBC"
         '
@@ -408,7 +408,7 @@ Partial Class PeripheralForm
         Me.TxtEos.Margin = New System.Windows.Forms.Padding(10)
         Me.TxtEos.Name = "TxtEos"
         Me.TxtEos.ReadOnly = True
-        Me.TxtEos.Size = New System.Drawing.Size(57, 28)
+        Me.TxtEos.Size = New System.Drawing.Size(57, 26)
         Me.TxtEos.TabIndex = 19
         Me.TxtEos.TabStop = False
         Me.TxtEos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -421,7 +421,7 @@ Partial Class PeripheralForm
         Me.LblEos.Location = New System.Drawing.Point(537, 36)
         Me.LblEos.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.LblEos.Name = "LblEos"
-        Me.LblEos.Size = New System.Drawing.Size(40, 17)
+        Me.LblEos.Size = New System.Drawing.Size(35, 15)
         Me.LblEos.TabIndex = 20
         Me.LblEos.Text = "EOS"
         '
@@ -435,7 +435,7 @@ Partial Class PeripheralForm
         Me.TxtMeta.Margin = New System.Windows.Forms.Padding(10)
         Me.TxtMeta.Name = "TxtMeta"
         Me.TxtMeta.ReadOnly = True
-        Me.TxtMeta.Size = New System.Drawing.Size(57, 28)
+        Me.TxtMeta.Size = New System.Drawing.Size(57, 26)
         Me.TxtMeta.TabIndex = 21
         Me.TxtMeta.TabStop = False
         Me.TxtMeta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -450,7 +450,7 @@ Partial Class PeripheralForm
         Me.Txtmyelo.Margin = New System.Windows.Forms.Padding(10)
         Me.Txtmyelo.Name = "Txtmyelo"
         Me.Txtmyelo.ReadOnly = True
-        Me.Txtmyelo.Size = New System.Drawing.Size(57, 28)
+        Me.Txtmyelo.Size = New System.Drawing.Size(57, 26)
         Me.Txtmyelo.TabIndex = 22
         Me.Txtmyelo.TabStop = False
         Me.Txtmyelo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -465,7 +465,7 @@ Partial Class PeripheralForm
         Me.TxtPromyelo.Margin = New System.Windows.Forms.Padding(10)
         Me.TxtPromyelo.Name = "TxtPromyelo"
         Me.TxtPromyelo.ReadOnly = True
-        Me.TxtPromyelo.Size = New System.Drawing.Size(57, 28)
+        Me.TxtPromyelo.Size = New System.Drawing.Size(57, 26)
         Me.TxtPromyelo.TabIndex = 23
         Me.TxtPromyelo.TabStop = False
         Me.TxtPromyelo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -480,7 +480,7 @@ Partial Class PeripheralForm
         Me.TxtBlast.Margin = New System.Windows.Forms.Padding(10)
         Me.TxtBlast.Name = "TxtBlast"
         Me.TxtBlast.ReadOnly = True
-        Me.TxtBlast.Size = New System.Drawing.Size(57, 28)
+        Me.TxtBlast.Size = New System.Drawing.Size(57, 26)
         Me.TxtBlast.TabIndex = 24
         Me.TxtBlast.TabStop = False
         Me.TxtBlast.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -493,7 +493,7 @@ Partial Class PeripheralForm
         Me.LblPro.Location = New System.Drawing.Point(272, 36)
         Me.LblPro.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.LblPro.Name = "LblPro"
-        Me.LblPro.Size = New System.Drawing.Size(41, 17)
+        Me.LblPro.Size = New System.Drawing.Size(36, 15)
         Me.LblPro.TabIndex = 25
         Me.LblPro.Text = "PRO"
         '
@@ -505,7 +505,7 @@ Partial Class PeripheralForm
         Me.LblMyelo.Location = New System.Drawing.Point(321, 36)
         Me.LblMyelo.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.LblMyelo.Name = "LblMyelo"
-        Me.LblMyelo.Size = New System.Drawing.Size(61, 17)
+        Me.LblMyelo.Size = New System.Drawing.Size(54, 15)
         Me.LblMyelo.TabIndex = 26
         Me.LblMyelo.Text = "MYELO"
         '
@@ -517,7 +517,7 @@ Partial Class PeripheralForm
         Me.LblMeta.Location = New System.Drawing.Point(398, 36)
         Me.LblMeta.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.LblMeta.Name = "LblMeta"
-        Me.LblMeta.Size = New System.Drawing.Size(50, 17)
+        Me.LblMeta.Size = New System.Drawing.Size(44, 15)
         Me.LblMeta.TabIndex = 27
         Me.LblMeta.Text = "META"
         '
@@ -529,7 +529,7 @@ Partial Class PeripheralForm
         Me.LblBlast.Location = New System.Drawing.Point(199, 36)
         Me.LblBlast.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.LblBlast.Name = "LblBlast"
-        Me.LblBlast.Size = New System.Drawing.Size(57, 17)
+        Me.LblBlast.Size = New System.Drawing.Size(49, 15)
         Me.LblBlast.TabIndex = 28
         Me.LblBlast.Text = "BLAST"
         '
@@ -538,7 +538,7 @@ Partial Class PeripheralForm
         Me.CheckBox1.AutoSize = True
         Me.CheckBox1.Location = New System.Drawing.Point(6, 19)
         Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(106, 17)
+        Me.CheckBox1.Size = New System.Drawing.Size(103, 17)
         Me.CheckBox1.TabIndex = 42
         Me.CheckBox1.Text = "Include NRBC"
         Me.CheckBox1.UseVisualStyleBackColor = True
@@ -581,13 +581,13 @@ Partial Class PeripheralForm
         Me.Label1.Location = New System.Drawing.Point(559, 334)
         Me.Label1.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(445, 17)
+        Me.Label1.Size = New System.Drawing.Size(394, 15)
         Me.Label1.TabIndex = 44
         Me.Label1.Text = "*Click on Channel labels to Change (i.e. SEG -> plasma cell)"
         '
         'PeripheralForm
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(10.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 17.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.BackgroundImage = Global.WBCDifferential.My.Resources.Resources.DiffCounter4

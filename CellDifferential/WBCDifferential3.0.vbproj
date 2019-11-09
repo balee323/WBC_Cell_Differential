@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -13,10 +14,13 @@
     <AssemblyName>WBCDifferential</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\Brian\Desktop\Published\WBCDiff\</PublishUrl>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>C:\Users\User\Desktop\Published\WBCDiff\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -31,8 +35,8 @@
     <PublisherName>Brian%27s Codes</PublisherName>
     <SuiteName>Lab Tools</SuiteName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>3</ApplicationRevision>
-    <ApplicationVersion>3.1.0.3</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>4.0.0.0</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -44,7 +48,7 @@
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\debug\WBCDiff\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>
     </DocumentationFile>
     <NoWarn>
@@ -58,7 +62,7 @@
     <DefineDebug>false</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
-    <OutputPath>Released Executable\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>
     </DocumentationFile>
     <NoWarn>
@@ -106,12 +110,61 @@
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.6.8\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.112.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.112.0\lib\net451\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.112.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.112.0\lib\net451\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.112.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.112.0\lib\net451\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System.Deployment" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -131,17 +184,28 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cells\Cell.vb" />
+    <Compile Include="ActiveDirectoryHelper.vb" />
+    <Compile Include="Interfaces\IDataRepo.vb" />
+    <Compile Include="Models\Cell.vb" />
     <Compile Include="BoneMarrowForm.Designer.vb">
       <DependentUpon>BoneMarrowForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="BoneMarrowForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="BoneMarrowForm.vb" />
+    <Compile Include="Interfaces\ISettings.vb" />
     <Compile Include="KeyBind2.Designer.vb">
       <DependentUpon>KeyBind2.vb</DependentUpon>
     </Compile>
     <Compile Include="KeyBind2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Models\CountingObject.vb" />
+    <Compile Include="Models\Globals.vb" />
+    <Compile Include="Models\UserInfo.vb" />
+    <Compile Include="ModularCounterForm.Designer.vb">
+      <DependentUpon>ModularCounterForm.vb</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="ModularCounterForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PeripheralForm.vb">
@@ -151,7 +215,7 @@
       <DependentUpon>PeripheralForm.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Cells\AllCells.vb" />
+    <Compile Include="Models\AllCells.vb" />
     <Compile Include="DeveloperInfo.Designer.vb">
       <DependentUpon>DeveloperInfo.vb</DependentUpon>
     </Compile>
@@ -175,10 +239,10 @@
     <Compile Include="Report.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KeyBind1.Designer.vb">
-      <DependentUpon>KeyBind1.vb</DependentUpon>
+    <Compile Include="KeyBind.Designer.vb">
+      <DependentUpon>KeyBind.vb</DependentUpon>
     </Compile>
-    <Compile Include="KeyBind1.vb">
+    <Compile Include="KeyBind.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -192,6 +256,31 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Settings.vb" />
+    <Compile Include="SqlLiteManager.vb" />
+    <Compile Include="UserControls\CountingControlModule.Designer.vb">
+      <DependentUpon>CountingControlModule.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CountingControlModule.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\CellControlModule.Designer.vb">
+      <DependentUpon>CellControlModule.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CellControlModule.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\LeftSideModule.Designer.vb">
+      <DependentUpon>LeftSideModule.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\LeftSideModule.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\RightSideModule.Designer.vb">
+      <DependentUpon>RightSideModule.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\RightSideModule.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BoneMarrowForm.resx">
@@ -199,6 +288,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="KeyBind2.resx">
       <DependentUpon>KeyBind2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModularCounterForm.resx">
+      <DependentUpon>ModularCounterForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PeripheralForm.resx">
       <DependentUpon>PeripheralForm.vb</DependentUpon>
@@ -212,14 +304,26 @@
     <EmbeddedResource Include="Report.resx">
       <DependentUpon>Report.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KeyBind1.resx">
-      <DependentUpon>KeyBind1.vb</DependentUpon>
+    <EmbeddedResource Include="KeyBind.resx">
+      <DependentUpon>KeyBind.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\CountingControlModule.resx">
+      <DependentUpon>CountingControlModule.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\CellControlModule.resx">
+      <DependentUpon>CellControlModule.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\LeftSideModule.resx">
+      <DependentUpon>LeftSideModule.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\RightSideModule.resx">
+      <DependentUpon>RightSideModule.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -236,9 +340,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -254,6 +358,28 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Background.jpg" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x64\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\BoneMarrow.jpg" />
+    <None Include="Resources\BoneMarrow.bmp" />
+    <None Include="Resources\BoneMarrow.ico" />
+    <Content Include="Resources\LeftEnd.jpg" />
+    <Content Include="Resources\RedButton.jpg" />
+    <Content Include="Resources\RedButton.png" />
+    <None Include="Resources\redCell.jpg" />
+    <None Include="Resources\redCell.bmp" />
+    <None Include="Resources\RedCellIcon.ico" />
+    <None Include="Resources\redCell.ico" />
+    <Content Include="Resources\RightEnd.jpg" />
+    <Content Include="Resources\WhiteButton.png" />
+    <None Include="packages.config" />
     <None Include="Resources\DiffCounter4.png" />
     <None Include="Resources\DiffCounter3.png" />
     <None Include="Resources\DiffCounter2.png" />
@@ -284,26 +410,6 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
-    <PublishFile Include="Microsoft.VisualBasic.PowerPacks.Vs">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Microsoft.VisualBasic.PowerPacks.Vs.xml">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>File</FileType>
-    </PublishFile>
     <PublishFile Include="Resources\Background.jpg">
       <Visible>False</Visible>
       <Group>
@@ -316,6 +422,16 @@
     </PublishFile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net451\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.112.0\build\net451\System.Data.SQLite.Core.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net451\System.Data.SQLite.Core.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
