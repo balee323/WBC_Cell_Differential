@@ -21,17 +21,17 @@ Public Class MainForm
 
         Dim cells As New List(Of Cell)
 
-        cells.Add(New Cell("NRBC", ".", "File", 0))
-        cells.Add(New Cell("Blast", ".", "File", 1))
-        cells.Add(New Cell("ProMyelo", 107, "File", 2))
-        cells.Add(New Cell("Myelo", 108, "File", 3))
-        cells.Add(New Cell("Meta", 59, "File", 4))
-        cells.Add(New Cell("Band", 98, "File", 5))
-        cells.Add(New Cell("Baso", 110, "File", 6))
-        cells.Add(New Cell("Eos", 109, "File", 7))
-        cells.Add(New Cell("Mono", 44, "File", 8))
-        cells.Add(New Cell("Lym", 46, "File", 9))
-        cells.Add(New Cell("Seg", 47, "File", 10))
+        cells.Add(New Cell("NRBC", "j", "File", 0))
+        cells.Add(New Cell("Blast", "k", "File", 1))
+        cells.Add(New Cell("ProMyelo", "l", "File", 2))
+        cells.Add(New Cell("Myelo", ";", "File", 3))
+        cells.Add(New Cell("Meta", "'", "File", 4))
+        cells.Add(New Cell("Band", "b", "File", 5))
+        cells.Add(New Cell("Baso", "n", "File", 6))
+        cells.Add(New Cell("Eos", "m", "File", 7))
+        cells.Add(New Cell("Mono", ",", "File", 8))
+        cells.Add(New Cell("Lym", ".", "File", 9))
+        cells.Add(New Cell("Seg", "/", "File", 10))
 
 
         Dim modularPeripheralCounterForm As New ModularCounterForm(cells, CounterType.Peripheral)
@@ -44,6 +44,8 @@ Public Class MainForm
 
 
         Globals.ProgressBar.Value = 0
+
+        Me.Enabled = False
 
     End Sub
 

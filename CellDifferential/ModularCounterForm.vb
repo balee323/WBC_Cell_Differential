@@ -118,8 +118,6 @@ Public Class ModularCounterForm
 
     Sub Control_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Me.KeyPress
 
-        _CountingControlModule.ChkBoxIncludeNRBC.Enabled = True 'this is a stupid as fuck hack.  Diabled checked boxes return as false
-
         For Each cell In _cells
             If e.KeyChar = ChrW(cell.getKeyMap) Then
 
@@ -128,11 +126,15 @@ Public Class ModularCounterForm
                               AudioPlayMode.Background)
                          End Sub)
 
-                If (Not cell.getCellType.ToLower().Contains("nrbc")) Then
+                _CountingControlModule.ChkBoxIncludeNRBC.Enabled = True 'this is a stupid as fuck hack.  Disabled checked boxes return as false.
+
+                If (Not cell.getCellType.ToLower() = ("nrbc")) Then
                     _countingObject.Total += 1
                 ElseIf (_CountingControlModule.ChkBoxIncludeNRBC.Checked) Then
                     _countingObject.Total += 1
                 End If
+
+                _CountingControlModule.ChkBoxIncludeNRBC.Enabled = False
 
                 cell.addToCount()
                 _countingObject.UndoList.Push(cell)
@@ -155,15 +157,19 @@ Public Class ModularCounterForm
     Private Sub ModularPeripheralCoubterForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         _settings.SaveSettings()
         _cells.Clear()
+        MainForm.Enabled = True
     End Sub
 
     Public Sub RefreshCellModules()
 
-        Me.Focus()
+
 
         For Each control In _ControlList
             control.ResetState()
         Next
+
+        Me.Focus()
+
     End Sub
 
     Public Sub ResetCellCounts()

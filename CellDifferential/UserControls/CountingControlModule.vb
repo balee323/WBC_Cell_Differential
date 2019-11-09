@@ -1,15 +1,15 @@
 ﻿Public Class CountingControlModule
 
     Private _countingObject As CountingObject
-    Private _refreshCellCounts As Action
-    Private _resetCellModules As Action
+    Private _resetCellCounts As Action
+    Private _refreshCellModules As Action
     Private _cells As List(Of Cell)
     Private _settings As ISettings
     Public Sub New(countingObject As CountingObject, refreshCellModules As Action, resetCellCounts As Action, cells As List(Of Cell), settings As ISettings)
 
         Me._countingObject = countingObject
-        Me._resetCellModules = refreshCellModules
-        Me._refreshCellCounts = resetCellCounts
+        Me._refreshCellModules = refreshCellModules
+        Me._resetCellCounts = resetCellCounts
         Me._cells = cells
         Me._settings = settings
 
@@ -46,7 +46,7 @@
             'need to lock out button
         End Try
 
-        _refreshCellCounts()
+        _refreshCellModules()
         Me.Refresh()
 
     End Sub
@@ -126,8 +126,8 @@
     End Sub
 
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
-        _resetCellModules()
-        _refreshCellCounts()
+        _resetCellCounts()
+        _refreshCellModules()
         _countingObject.Total = 0
         ChkBoxIncludeNRBC.Enabled = True
         BtnChangeCount.Enabled = True
@@ -135,7 +135,7 @@
     End Sub
 
     Private Sub BtnEditKeys_Click(sender As Object, e As EventArgs) Handles BtnEditKeys.Click
-        Dim keyBind As New KeyBind(_cells, _settings, _resetCellModules)
+        Dim keyBind As New KeyBind(_cells, _settings, _refreshCellModules)
         keyBind.Show()
     End Sub
 End Class

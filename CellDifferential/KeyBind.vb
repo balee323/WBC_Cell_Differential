@@ -179,5 +179,38 @@
         Return Status
     End Function
 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
+        _cells(0).changeKeyMap("j")
+        _cells(1).changeKeyMap("k")
+        _cells(2).changeKeyMap("l")
+        _cells(3).changeKeyMap(";")
+        _cells(4).changeKeyMap("'")
+        _cells(5).changeKeyMap("b")
+        _cells(6).changeKeyMap("n")
+        _cells(7).changeKeyMap("m")
+        _cells(8).changeKeyMap(",")
+        _cells(9).changeKeyMap(".")
+        _cells(10).changeKeyMap("/")
+
+        Me.TextBox1.Text = _cells(0).getKeyMapChar()
+        Me.TextBox2.Text = _cells(1).getKeyMapChar()
+        Me.TextBox3.Text = _cells(2).getKeyMapChar()
+        Me.TextBox4.Text = _cells(3).getKeyMapChar()
+        Me.TextBox5.Text = _cells(4).getKeyMapChar()
+        Me.TextBox6.Text = _cells(5).getKeyMapChar()
+        Me.TextBox7.Text = _cells(6).getKeyMapChar()
+        Me.TextBox8.Text = _cells(7).getKeyMapChar()
+        Me.TextBox9.Text = _cells(8).getKeyMapChar()
+        Me.TextBox10.Text = _cells(9).getKeyMapChar()
+        Me.TextBox11.Text = _cells(10).getKeyMapChar()
+
+        _settings.SaveSettings()
+
+        Me.Refresh()
+        _refreshCellModules()
+        Me.Focus()
+
+
+    End Sub
 End Class
