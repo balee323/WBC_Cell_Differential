@@ -2,9 +2,11 @@
 Imports System.Data.SQLite
 Imports System.Threading.Tasks
 Imports Newtonsoft.Json
+Imports NLog
 
 Public Class SqlLiteManager : Implements IDataRepo
 
+    Private logger As Logger = NLog.LogManager.GetCurrentClassLogger()
 
     Private configDb As String = "WBCDiffSettings.db"
     Private connectionString As String = "Data Source={0};Version=3;"
@@ -37,7 +39,7 @@ Public Class SqlLiteManager : Implements IDataRepo
                 SQLiteConnection.CreateFile(configDb)
 
             Catch ex As Exception
-                Console.WriteLine("Database Created Failed..." + ex.Message)
+                logger.Error(ex, "Database Created Failed...")
             End Try
 
         End If
@@ -63,11 +65,10 @@ Public Class SqlLiteManager : Implements IDataRepo
             End Using
 
         Catch ex As Exception
-            Console.WriteLine("Table creation failed..." + ex.Message)
+            logger.Error(ex, "Table creation failed...")
+            'lets have a long pause
+            'Await Task.Delay(1000 * 20)
         End Try
-
-        'lets have a long pause
-        'Await Task.Delay(1000 * 20)
 
     End Sub
 
@@ -99,7 +100,7 @@ Public Class SqlLiteManager : Implements IDataRepo
             'End If
 
         Catch ex As Exception
-            Console.WriteLine(ex.Message)
+            logger.Error(ex)
         End Try
 
     End Sub
@@ -139,7 +140,7 @@ Public Class SqlLiteManager : Implements IDataRepo
                      End Sub).Wait()
 
         Catch ex As Exception
-            MessageBox.Show("error finding user")
+            logger.Error(ex, "error finding user...")
         End Try
         Globals.ProgressBar.Increment(10)
 
@@ -178,7 +179,7 @@ Public Class SqlLiteManager : Implements IDataRepo
 
 
         Catch ex As Exception
-            Console.WriteLine(ex.Message)
+            logger.Error(ex)
         End Try
     End Sub
 
@@ -214,7 +215,7 @@ Public Class SqlLiteManager : Implements IDataRepo
             Console.WriteLine("Insert User Success")
 
         Catch ex As Exception
-            Console.WriteLine(ex.Message)
+            logger.Error(ex)
         End Try
 
     End Sub
@@ -244,7 +245,7 @@ Public Class SqlLiteManager : Implements IDataRepo
             End Using
 
         Catch ex As Exception
-            Console.WriteLine(ex.Message)
+            logger.Error(ex)
         End Try
 
         Return isUserFound
