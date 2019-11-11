@@ -40,10 +40,10 @@ Partial Class CountingControlModule
         Me.BtnReport.BackColor = System.Drawing.Color.LightSteelBlue
         Me.BtnReport.Cursor = System.Windows.Forms.Cursors.Hand
         Me.BtnReport.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.150944!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnReport.Location = New System.Drawing.Point(115, 220)
+        Me.BtnReport.Location = New System.Drawing.Point(115, 221)
         Me.BtnReport.Margin = New System.Windows.Forms.Padding(6, 5, 6, 5)
         Me.BtnReport.Name = "BtnReport"
-        Me.BtnReport.Size = New System.Drawing.Size(70, 40)
+        Me.BtnReport.Size = New System.Drawing.Size(70, 75)
         Me.BtnReport.TabIndex = 40
         Me.BtnReport.TabStop = False
         Me.BtnReport.Text = "Create Report"
@@ -57,7 +57,7 @@ Partial Class CountingControlModule
         Me.BtnEditKeys.Location = New System.Drawing.Point(11, 221)
         Me.BtnEditKeys.Margin = New System.Windows.Forms.Padding(6, 5, 6, 5)
         Me.BtnEditKeys.Name = "BtnEditKeys"
-        Me.BtnEditKeys.Size = New System.Drawing.Size(70, 40)
+        Me.BtnEditKeys.Size = New System.Drawing.Size(90, 75)
         Me.BtnEditKeys.TabIndex = 39
         Me.BtnEditKeys.TabStop = False
         Me.BtnEditKeys.Text = "See Key Bindings"
@@ -98,7 +98,7 @@ Partial Class CountingControlModule
         Me.ChkBoxIncludeNRBC.AutoSize = True
         Me.ChkBoxIncludeNRBC.Location = New System.Drawing.Point(6, 17)
         Me.ChkBoxIncludeNRBC.Name = "ChkBoxIncludeNRBC"
-        Me.ChkBoxIncludeNRBC.Size = New System.Drawing.Size(103, 17)
+        Me.ChkBoxIncludeNRBC.Size = New System.Drawing.Size(106, 17)
         Me.ChkBoxIncludeNRBC.TabIndex = 42
         Me.ChkBoxIncludeNRBC.Text = "Include NRBC"
         Me.ChkBoxIncludeNRBC.UseVisualStyleBackColor = True
@@ -141,7 +141,7 @@ Partial Class CountingControlModule
         Me.TxtCountLimit.Margin = New System.Windows.Forms.Padding(6, 5, 6, 5)
         Me.TxtCountLimit.Name = "TxtCountLimit"
         Me.TxtCountLimit.ReadOnly = True
-        Me.TxtCountLimit.Size = New System.Drawing.Size(43, 23)
+        Me.TxtCountLimit.Size = New System.Drawing.Size(43, 25)
         Me.TxtCountLimit.TabIndex = 30
         Me.TxtCountLimit.TabStop = False
         Me.TxtCountLimit.Text = "100"
@@ -157,7 +157,7 @@ Partial Class CountingControlModule
         Me.TxtTotal.Margin = New System.Windows.Forms.Padding(6, 5, 6, 5)
         Me.TxtTotal.Name = "TxtTotal"
         Me.TxtTotal.ReadOnly = True
-        Me.TxtTotal.Size = New System.Drawing.Size(88, 32)
+        Me.TxtTotal.Size = New System.Drawing.Size(88, 35)
         Me.TxtTotal.TabIndex = 44
         Me.TxtTotal.TabStop = False
         Me.TxtTotal.Text = "100"
@@ -169,7 +169,7 @@ Partial Class CountingControlModule
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(12, 21)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(59, 26)
+        Me.Label1.Size = New System.Drawing.Size(69, 29)
         Me.Label1.TabIndex = 45
         Me.Label1.Text = "Total"
         '

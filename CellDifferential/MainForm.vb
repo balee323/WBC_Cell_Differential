@@ -6,21 +6,18 @@ Public Class MainForm
 
 
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ActiveCounters()
 
         Globals.ProgressBar = ProgressBar1
-
         ToolStripMenuItem6.Text = My.Application.Info.Version.ToString
-
 
     End Sub
 
     Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
 
+        'peripheral counter
         Globals.ProgressBar.Increment(10)
 
         Dim cells As New List(Of Cell)
-
         cells.Add(New Cell("NRBC", "j", "File", 0))
         cells.Add(New Cell("Blast", "k", "File", 1))
         cells.Add(New Cell("ProMyelo", "l", "File", 2))
@@ -33,24 +30,19 @@ Public Class MainForm
         cells.Add(New Cell("Lym", ".", "File", 9))
         cells.Add(New Cell("Seg", "/", "File", 10))
 
-
         Dim modularPeripheralCounterForm As New ModularCounterForm(cells, CounterType.Peripheral)
         Globals.ProgressBar.Increment(10)
         modularPeripheralCounterForm.Show()
         Globals.ProgressBar.Increment(10)
 
-        ActiveCounters()
-
-
-
         Globals.ProgressBar.Value = 0
-
-        Me.Enabled = False
+        'Me.Enabled = False
 
     End Sub
 
     Private Sub MainForm_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
+        'save user data on any open forms
 
         Dim result As DialogResult
 
@@ -92,13 +84,11 @@ Public Class MainForm
         Globals.ProgressBar.Increment(5)
         modularBoneMarrowCounterForm.Show()
 
-        ActiveCounters()
-
         Globals.ProgressBar.Value = 0
 
     End Sub
 
-    Private Sub ViewSavedReports_Click(sender As Object, e As EventArgs) Handles ViewSavedReports.Click
+    Private Sub ViewSavedReports_Click(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -111,36 +101,8 @@ Public Class MainForm
         Process.Start("http://sourceforge.net/projects/celldiff/support")
     End Sub
 
-    Private Sub ActiveCounters()
 
-        'this will probably go away...
-        Dim frm As Form
-
-        For Each frm In My.Application.OpenForms
-
-            If frm.Equals(PeripheralForm) Then
-                LblActiveCounter1.Visible = True
-                LblActiveCounter1.Text = (frm.Text.ToString())
-            End If
-
-            If frm.Equals(BoneMarrowForm) Then
-                LblActiveCounter2.Visible = True
-                LblActiveCounter2.Text = (frm.Text.ToString())
-            End If
-
-        Next
-        Me.Refresh()
-
+    Private Sub MenuOptions_Click(sender As Object, e As EventArgs) Handles MenuOptions.Click
+        MessageBox.Show("this will display a reports page to searh, view, edit, save, export as pdf, and print reports")
     End Sub
-
-    Private Sub LblActiveCounter1_Click(sender As Object, e As EventArgs) Handles LblActiveCounter1.Click
-        PeripheralForm.Show()
-        BoneMarrowForm.Hide()
-    End Sub
-
-    Private Sub LblActiveCounter2_Click(sender As Object, e As EventArgs) Handles LblActiveCounter2.Click
-        BoneMarrowForm.Show()
-        PeripheralForm.Hide()
-    End Sub
-
 End Class

@@ -51,19 +51,21 @@ Partial Class KeyBind
         '
         'BtnDone
         '
-        Me.BtnDone.Location = New System.Drawing.Point(414, 274)
+        Me.BtnDone.BackColor = System.Drawing.Color.LightSteelBlue
+        Me.BtnDone.Location = New System.Drawing.Point(425, 275)
+        Me.BtnDone.Margin = New System.Windows.Forms.Padding(5)
         Me.BtnDone.Name = "BtnDone"
         Me.BtnDone.Size = New System.Drawing.Size(172, 31)
         Me.BtnDone.TabIndex = 0
         Me.BtnDone.Text = "Close"
-        Me.BtnDone.UseVisualStyleBackColor = True
+        Me.BtnDone.UseVisualStyleBackColor = False
         '
         'TextBox1
         '
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox1.Location = New System.Drawing.Point(178, 16)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 26)
+        Me.TextBox1.Size = New System.Drawing.Size(100, 28)
         Me.TextBox1.TabIndex = 0
         Me.TextBox1.Text = "/"
         Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -73,7 +75,7 @@ Partial Class KeyBind
         Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox2.Location = New System.Drawing.Point(178, 51)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(100, 26)
+        Me.TextBox2.Size = New System.Drawing.Size(100, 28)
         Me.TextBox2.TabIndex = 1
         Me.TextBox2.Text = "."
         Me.TextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -83,7 +85,7 @@ Partial Class KeyBind
         Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox3.Location = New System.Drawing.Point(178, 86)
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(100, 26)
+        Me.TextBox3.Size = New System.Drawing.Size(100, 28)
         Me.TextBox3.TabIndex = 6
         Me.TextBox3.Text = ","
         Me.TextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -93,7 +95,7 @@ Partial Class KeyBind
         Me.TextBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox4.Location = New System.Drawing.Point(178, 124)
         Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(100, 26)
+        Me.TextBox4.Size = New System.Drawing.Size(100, 28)
         Me.TextBox4.TabIndex = 8
         Me.TextBox4.Text = "m"
         Me.TextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -103,7 +105,7 @@ Partial Class KeyBind
         Me.TextBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox7.Location = New System.Drawing.Point(178, 235)
         Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(100, 26)
+        Me.TextBox7.Size = New System.Drawing.Size(100, 28)
         Me.TextBox7.TabIndex = 10
         Me.TextBox7.Text = "l"
         Me.TextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -113,7 +115,7 @@ Partial Class KeyBind
         Me.TextBox8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox8.Location = New System.Drawing.Point(178, 274)
         Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(100, 26)
+        Me.TextBox8.Size = New System.Drawing.Size(100, 28)
         Me.TextBox8.TabIndex = 12
         Me.TextBox8.Text = "k"
         Me.TextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -123,7 +125,7 @@ Partial Class KeyBind
         Me.TextBox9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox9.Location = New System.Drawing.Point(497, 13)
         Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(100, 26)
+        Me.TextBox9.Size = New System.Drawing.Size(100, 28)
         Me.TextBox9.TabIndex = 14
         Me.TextBox9.Text = "j"
         Me.TextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -133,7 +135,7 @@ Partial Class KeyBind
         Me.TextBox10.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox10.Location = New System.Drawing.Point(497, 47)
         Me.TextBox10.Name = "TextBox10"
-        Me.TextBox10.Size = New System.Drawing.Size(100, 26)
+        Me.TextBox10.Size = New System.Drawing.Size(100, 28)
         Me.TextBox10.TabIndex = 16
         Me.TextBox10.Text = "h"
         Me.TextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -143,7 +145,7 @@ Partial Class KeyBind
         Me.TextBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox5.Location = New System.Drawing.Point(178, 163)
         Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(100, 26)
+        Me.TextBox5.Size = New System.Drawing.Size(100, 28)
         Me.TextBox5.TabIndex = 18
         Me.TextBox5.Text = "n"
         Me.TextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -153,7 +155,7 @@ Partial Class KeyBind
         Me.TextBox11.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox11.Location = New System.Drawing.Point(497, 81)
         Me.TextBox11.Name = "TextBox11"
-        Me.TextBox11.Size = New System.Drawing.Size(100, 26)
+        Me.TextBox11.Size = New System.Drawing.Size(100, 28)
         Me.TextBox11.TabIndex = 20
         Me.TextBox11.Text = ";"
         Me.TextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -163,7 +165,7 @@ Partial Class KeyBind
         Me.TextBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox6.Location = New System.Drawing.Point(178, 201)
         Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(100, 26)
+        Me.TextBox6.Size = New System.Drawing.Size(100, 28)
         Me.TextBox6.TabIndex = 22
         Me.TextBox6.Text = "b"
         Me.TextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -173,7 +175,7 @@ Partial Class KeyBind
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(11, 24)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(45, 13)
+        Me.Label1.Size = New System.Drawing.Size(55, 16)
         Me.Label1.TabIndex = 23
         Me.Label1.Text = "Label1"
         '
@@ -182,7 +184,7 @@ Partial Class KeyBind
         Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(8, 59)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(45, 13)
+        Me.Label2.Size = New System.Drawing.Size(55, 16)
         Me.Label2.TabIndex = 24
         Me.Label2.Text = "Label2"
         '
@@ -191,7 +193,7 @@ Partial Class KeyBind
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(11, 97)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(45, 13)
+        Me.Label3.Size = New System.Drawing.Size(55, 16)
         Me.Label3.TabIndex = 25
         Me.Label3.Text = "Label3"
         '
@@ -200,7 +202,7 @@ Partial Class KeyBind
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(8, 134)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(45, 13)
+        Me.Label4.Size = New System.Drawing.Size(55, 16)
         Me.Label4.TabIndex = 26
         Me.Label4.Text = "Label4"
         '
@@ -209,7 +211,7 @@ Partial Class KeyBind
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(8, 169)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(45, 13)
+        Me.Label5.Size = New System.Drawing.Size(55, 16)
         Me.Label5.TabIndex = 27
         Me.Label5.Text = "Label5"
         '
@@ -218,7 +220,7 @@ Partial Class KeyBind
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(8, 209)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(45, 13)
+        Me.Label6.Size = New System.Drawing.Size(55, 16)
         Me.Label6.TabIndex = 28
         Me.Label6.Text = "Label6"
         '
@@ -227,7 +229,7 @@ Partial Class KeyBind
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(8, 243)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(45, 13)
+        Me.Label7.Size = New System.Drawing.Size(55, 16)
         Me.Label7.TabIndex = 29
         Me.Label7.Text = "Label7"
         '
@@ -236,7 +238,7 @@ Partial Class KeyBind
         Me.Label8.AutoSize = True
         Me.Label8.Location = New System.Drawing.Point(8, 282)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(45, 13)
+        Me.Label8.Size = New System.Drawing.Size(55, 16)
         Me.Label8.TabIndex = 30
         Me.Label8.Text = "Label8"
         '
@@ -245,7 +247,7 @@ Partial Class KeyBind
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(361, 21)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(45, 13)
+        Me.Label9.Size = New System.Drawing.Size(55, 16)
         Me.Label9.TabIndex = 31
         Me.Label9.Text = "Label9"
         '
@@ -254,7 +256,7 @@ Partial Class KeyBind
         Me.Label10.AutoSize = True
         Me.Label10.Location = New System.Drawing.Point(361, 55)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(52, 13)
+        Me.Label10.Size = New System.Drawing.Size(63, 16)
         Me.Label10.TabIndex = 32
         Me.Label10.Text = "Label10"
         '
@@ -263,32 +265,37 @@ Partial Class KeyBind
         Me.Label11.AutoSize = True
         Me.Label11.Location = New System.Drawing.Point(361, 89)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(52, 13)
+        Me.Label11.Size = New System.Drawing.Size(63, 16)
         Me.Label11.TabIndex = 33
         Me.Label11.Text = "Label11"
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(414, 228)
+        Me.Button1.BackColor = System.Drawing.Color.LightSteelBlue
+        Me.Button1.Location = New System.Drawing.Point(425, 234)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(5)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(172, 31)
         Me.Button1.TabIndex = 34
         Me.Button1.Text = "Update Bindings"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(414, 180)
+        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.Button2.Location = New System.Drawing.Point(425, 193)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(5)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(172, 31)
         Me.Button2.TabIndex = 35
         Me.Button2.Text = "Reset Defaults"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.UseVisualStyleBackColor = False
         '
         'KeyBind
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(140, Byte), Integer), CType(CType(143, Byte), Integer), CType(CType(148, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(609, 318)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)

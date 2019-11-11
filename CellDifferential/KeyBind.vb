@@ -5,8 +5,6 @@
     Private _settings As ISettings
     Private _refreshCellModules As Action
 
-
-
     Public Sub New(cells As List(Of Cell), settings As ISettings, refreshCellModules As Action)
 
         _cells = cells
@@ -50,12 +48,6 @@
         Me.TextBox10.Text = _cells(9).getKeyMapChar()
         Me.TextBox11.Text = _cells(10).getKeyMapChar()
 
-
-
-        'for user defined stuff
-        If _cells.Count > 11 Then
-
-        End If
         Me.Refresh()
 
     End Sub
@@ -94,9 +86,6 @@
         _cells(10).changeKeyMap(TextBox11.Text)
 
         _settings.SaveSettings()
-
-        'MessageBox.Show(TextBox1.Text)
-
 
         Me.Refresh()
         _refreshCellModules()

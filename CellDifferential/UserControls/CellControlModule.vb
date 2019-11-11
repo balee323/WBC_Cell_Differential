@@ -2,6 +2,7 @@
 
     Private _cell As Cell
     Public Property IncludeNRBC As Boolean = False
+
     Public Sub New(cell As Cell)
 
         Me._cell = cell

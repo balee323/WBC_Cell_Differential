@@ -56,16 +56,19 @@ Partial Class KeyBind2
         Me.TextBox15 = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.TextBox16 = New System.Windows.Forms.TextBox()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'BtnDone
         '
-        Me.BtnDone.Location = New System.Drawing.Point(434, 335)
+        Me.BtnDone.BackColor = System.Drawing.Color.LightSteelBlue
+        Me.BtnDone.Location = New System.Drawing.Point(447, 339)
+        Me.BtnDone.Margin = New System.Windows.Forms.Padding(5)
         Me.BtnDone.Name = "BtnDone"
         Me.BtnDone.Size = New System.Drawing.Size(172, 31)
         Me.BtnDone.TabIndex = 0
         Me.BtnDone.Text = "Close"
-        Me.BtnDone.UseVisualStyleBackColor = True
+        Me.BtnDone.UseVisualStyleBackColor = False
         '
         'TextBox1
         '
@@ -278,12 +281,14 @@ Partial Class KeyBind2
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(434, 274)
+        Me.Button1.BackColor = System.Drawing.Color.LightSteelBlue
+        Me.Button1.Location = New System.Drawing.Point(447, 298)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(5)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(172, 31)
         Me.Button1.TabIndex = 34
         Me.Button1.Text = "Update Bindings"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'Label12
         '
@@ -375,11 +380,24 @@ Partial Class KeyBind2
         Me.TextBox16.TabIndex = 43
         Me.TextBox16.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.Button2.Location = New System.Drawing.Point(447, 257)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(5)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(172, 31)
+        Me.Button2.TabIndex = 45
+        Me.Button2.Text = "Reset Defaults"
+        Me.Button2.UseVisualStyleBackColor = False
+        '
         'KeyBind2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(140, Byte), Integer), CType(CType(143, Byte), Integer), CType(CType(148, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(633, 379)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.TextBox16)
         Me.Controls.Add(Me.Label15)
@@ -455,4 +473,5 @@ Partial Class KeyBind2
     Friend WithEvents TextBox15 As System.Windows.Forms.TextBox
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents TextBox16 As System.Windows.Forms.TextBox
+    Friend WithEvents Button2 As Button
 End Class

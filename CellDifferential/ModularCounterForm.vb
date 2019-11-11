@@ -11,14 +11,16 @@ Public Class ModularCounterForm
     Dim _ControlList As New List(Of CellControlModule)
     Private _cells As New List(Of Cell)
     Private _settings As ISettings
-    Private _counterType As CounterType
+    'Private _counterType As CounterType
+
+    Public Property CounterType As CounterType
 
 
 
     Public Sub New(cells As List(Of Cell), counterType As CounterType)
 
         Me._cells = cells
-        Me._counterType = counterType
+        Me.CounterType = counterType
         ' This call is required by the designer.
 
         InitializeComponent()
@@ -46,7 +48,7 @@ Public Class ModularCounterForm
         Me.KeyPreview = True  'important
 
         Me.AutoSize = True
-        Me._countingObject = New CountingObject()
+        Me._countingObject = New CountingObject(_counterType)
 
         _FlowLayoutPanel = New FlowLayoutPanel()
         _FlowLayoutPanel.AutoSize = True

@@ -40,11 +40,11 @@ Partial Class CellControlModule
         Me.TxtCellTotal.Cursor = System.Windows.Forms.Cursors.No
         Me.TxtCellTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtCellTotal.ForeColor = System.Drawing.Color.Black
-        Me.TxtCellTotal.Location = New System.Drawing.Point(16, 108)
+        Me.TxtCellTotal.Location = New System.Drawing.Point(4, 108)
         Me.TxtCellTotal.Margin = New System.Windows.Forms.Padding(0)
         Me.TxtCellTotal.Name = "TxtCellTotal"
         Me.TxtCellTotal.ReadOnly = True
-        Me.TxtCellTotal.Size = New System.Drawing.Size(50, 26)
+        Me.TxtCellTotal.Size = New System.Drawing.Size(71, 28)
         Me.TxtCellTotal.TabIndex = 13
         Me.TxtCellTotal.TabStop = False
         Me.TxtCellTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -55,10 +55,10 @@ Partial Class CellControlModule
         Me.LblCellType.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.LblCellType.BackColor = System.Drawing.Color.Transparent
         Me.LblCellType.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.830189!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblCellType.Location = New System.Drawing.Point(13, 74)
+        Me.LblCellType.Location = New System.Drawing.Point(4, 62)
         Me.LblCellType.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.LblCellType.Name = "LblCellType"
-        Me.LblCellType.Size = New System.Drawing.Size(60, 20)
+        Me.LblCellType.Size = New System.Drawing.Size(74, 32)
         Me.LblCellType.TabIndex = 14
         Me.LblCellType.Text = "CellType"
         '
@@ -90,10 +90,10 @@ Partial Class CellControlModule
         Me.LblBindingKey.BackColor = System.Drawing.Color.Transparent
         Me.LblBindingKey.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblBindingKey.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.LblBindingKey.Location = New System.Drawing.Point(13, 162)
+        Me.LblBindingKey.Location = New System.Drawing.Point(3, 162)
         Me.LblBindingKey.Margin = New System.Windows.Forms.Padding(6, 0, 6, 0)
         Me.LblBindingKey.Name = "LblBindingKey"
-        Me.LblBindingKey.Size = New System.Drawing.Size(60, 20)
+        Me.LblBindingKey.Size = New System.Drawing.Size(75, 42)
         Me.LblBindingKey.TabIndex = 17
         Me.LblBindingKey.Text = "key"
         Me.LblBindingKey.TextAlign = System.Drawing.ContentAlignment.MiddleCenter

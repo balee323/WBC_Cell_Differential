@@ -510,8 +510,5 @@ Public Class PeripheralForm
     'End Sub
 
 
-    Private Sub PeripheralForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-        MainForm.LblActiveCounter1.Visible = False
-    End Sub
 
 End Class

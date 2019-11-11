@@ -1,5 +1,8 @@
-﻿Public Class CountingControlModule
+﻿Imports NLog
 
+Public Class CountingControlModule
+
+    Private _logger As Logger = NLog.LogManager.GetCurrentClassLogger()
     Private _countingObject As CountingObject
     Private _resetCellCounts As Action
     Private _refreshCellModules As Action
@@ -12,7 +15,6 @@
         Me._resetCellCounts = resetCellCounts
         Me._cells = cells
         Me._settings = settings
-
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -93,7 +95,6 @@
         Dim Title As String = "Change Cell Count"
         Dim DefaultValue As String = "100"
 
-
         'checks the value of the input
         CheckCountInput(InputBox(Message, Title, DefaultValue))
         TxtCountLimit.Refresh()
@@ -135,7 +136,19 @@
     End Sub
 
     Private Sub BtnEditKeys_Click(sender As Object, e As EventArgs) Handles BtnEditKeys.Click
-        Dim keyBind As New KeyBind(_cells, _settings, _refreshCellModules)
-        keyBind.Show()
+
+        Try
+            If _countingObject.CounterType = CounterType.Peripheral Then
+                Dim keybind As New KeyBind(_cells, _settings, _refreshCellModules)
+                keybind.Show()
+
+            ElseIf _countingObject.CounterType = CounterType.BoneMarrow Then
+                Dim keybind As New KeyBind2(_cells, _settings, _refreshCellModules)
+                keybind.Show()
+            End If
+        Catch ex As Exception
+            _logger.Error(ex, "Error displaying keybind window.  Keytype not property not set.")
+        End Try
+
     End Sub
 End Class
