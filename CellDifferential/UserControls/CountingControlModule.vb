@@ -151,4 +151,9 @@ Public Class CountingControlModule
         End Try
 
     End Sub
+
+    Private Sub BtnReport_Click(sender As Object, e As EventArgs) Handles BtnReport.Click
+        Dim report = New Report(_cells, _settings, _countingObject)
+        report.Show()
+    End Sub
 End Class

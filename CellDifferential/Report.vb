@@ -1,82 +1,46 @@
 ﻿Imports System.Drawing.Printing
+Imports System.Text
+Imports NLog
+Imports PdfSharp
+Imports PdfSharp.Drawing
+Imports PdfSharp.Drawing.Layout
+Imports PdfSharp.Pdf
 
-Public Class FrmReport
+
+Public Class Report
 
 
     'all values brought in from CellDiffMain
-    Public Count As Integer = 0
-    Public DiffType As Integer = 0
-
-    Dim reportType As String = ""
-
-    Private cellCollection As List(Of Cell)
-
+    Private _cells As New List(Of Cell)
+    Private _settings As ISettings
+    Private _countingObject As CountingObject
+    Private _excludeUserCell As Boolean = False
     Private WithEvents docToPrint As New PrintDocument
-
-
-    Public Sub StartReport()
-
-        'good diagnotic tool!!!  'let me know that the collection was not set up correctly
-
-        'MessageBox.Show("form Loaded")
-
-        'If DiffType = 1 Then
-        '    cellCollection.AddRange(AllCells.PeripheralCells)
-        'ElseIf DiffType = 2 Then
-        '    cellCollection.AddRange(AllCells.BoneMarrowCells)
-        'ElseIf DiffType = 3 Then
-
-        'End If
-
-        'MessageBox.Show("cellCount :" & cellCollection.Count)
-    End Sub
+    Private _logger As Logger = NLog.LogManager.GetCurrentClassLogger()
+    Private _reportBuilder As StringBuilder
 
 
 
-    Private Sub FrmReport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        cellCollection = New List(Of Cell)
 
+    Public Sub New(cells As List(Of Cell), settings As ISettings, counteringObject As CountingObject)
 
-        ' MessageBox.Show("form Loaded")
+        Me._cells = cells
+        Me._settings = settings
+        Me._countingObject = counteringObject
+        Me._reportBuilder = New StringBuilder()
+        ' This call is required by the designer.
+        InitializeComponent()
 
-        If DiffType = 1 Then
-            cellCollection.AddRange(AllCells.PeripheralCells)
-            reportType = "Peripheral Differential"
-        ElseIf DiffType = 2 Then
-            cellCollection.AddRange(AllCells.BoneMarrowCells)
-            reportType = "Bone Marrow Differential"
-        ElseIf DiffType = 3 Then
+        RichTextBox1.ReadOnly = True
 
-        End If
-
-        ' MessageBox.Show("cellCount :" & cellCollection.Count)
-
+        ' Add any initialization after the InitializeComponent() call.
 
     End Sub
-
-
-
-    'Public Seg As Integer = 0
-    'Public Lym As Integer = 0
-    'Public Mono As Integer = 0
-    'Public Eos As Integer = 0
-    'Public Baso As Integer = 0
-    'Public Band As Integer = 0
-    'Public Meta As Integer = 0
-    'Public Myelo As Integer = 0
-    'Public Promyelo As Integer = 0
-    'Public Blast As Integer = 0
-    'Public NRBC As Integer = 0
-
-  
 
 
     Private Sub BtnPrint_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnPrint.Click
 
-
-        'PrintDocument1.Print()
         docToPrint.Print()
-
 
     End Sub
 
@@ -85,27 +49,23 @@ Public Class FrmReport
     'for setting up the document for printing, since I only want to print the listbox
     Private Sub PrintedPage(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintPageEventArgs) Handles docToPrint.PrintPage
 
-        Dim printFont As New Font("Courier New", 12, System.Drawing.FontStyle.Regular)
+        'Dim printFont As New Font("Courier New", 12, System.Drawing.FontStyle.Regular)
 
 
-        Dim YPosition As Integer = 25
+        'Dim YPosition As Integer = 25
 
-        For Each ThingToPrint As String In LstReport.Items
+        'For Each ThingToPrint As String In LstReport.Items
 
-            e.Graphics.DrawString(ThingToPrint, printFont, System.Drawing.Brushes.Black, 25, YPosition)
+        '    e.Graphics.DrawString(ThingToPrint, printFont, System.Drawing.Brushes.Black, 25, YPosition)
 
 
-            YPosition += 25
+        '    YPosition += 25
 
-        Next
+        'Next
 
 
 
     End Sub
-
-
-
-
 
 
     Private Sub BtnCloseReport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnCloseReport.Click
@@ -115,8 +75,13 @@ Public Class FrmReport
     End Sub
 
     Private Sub BtnCreate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnCreate.Click
+        GenerateReport()
 
-        LstReport.Items.Clear()
+    End Sub
+
+    Private Sub GenerateReport()
+
+        RichTextBox1.Clear()
 
 
         Dim PatientName As String = ""
@@ -127,85 +92,170 @@ Public Class FrmReport
         'Set current Date
         Dim Today As String = CStr(DateAndTime.Now)
 
-        FacilityName = InputBox("Please Enter Name of facility. I.E. General Hospital Pathology Laboratory. ")
-        PatientName = InputBox("Please Enter Patient Name as Last, First ")
-        PatientID = InputBox("Please Enter Patient ID number ")
-        PatientDOB = InputBox("Please Enter Patient DOB as MM/DD/YYYY")
+        'FacilityName = InputBox("Please Enter Name of facility. I.E. General Hospital Pathology Laboratory. ")
+        'PatientName = InputBox("Please Enter Patient Name as Last, First ")
+        'PatientID = InputBox("Please Enter Patient ID number ")
+        'PatientDOB = InputBox("Please Enter Patient DOB as MM/DD/YYYY")
+
+
+
+
+        _reportBuilder.AppendLine("===================================================================")
+
+        _reportBuilder.AppendLine("===================================================================")
+        _reportBuilder.AppendLine(FacilityName)
+        _reportBuilder.AppendLine("Hematology Report")
+        _reportBuilder.AppendLine("===================================================================")
+        _reportBuilder.AppendLine("Hematology Report")
+        _reportBuilder.AppendLine(Today)
+        _reportBuilder.AppendLine("")
+        _reportBuilder.AppendLine("")
+        _reportBuilder.AppendLine("Patient Information")
+        _reportBuilder.AppendLine(PatientName & " | " & PatientID & " | " & PatientDOB)
+        _reportBuilder.AppendLine("")
+        _reportBuilder.AppendLine("Blood Cell Manual" & "  " & _countingObject.CounterType.ToString())
+        _reportBuilder.AppendLine("Total Cells Counted: " & _countingObject.Total)
+        _reportBuilder.AppendLine("")
+
 
         'Percentages need to be formatted
-        Dim ColumnSpacing As String = "{0, -25}{1, 1}{2, 10}{3, 30}{4, 2}" 'column(s) and spacing
-        Dim ColumnSpacing2 As String = "{0, -25}{1, 1}{2, 10}" 'column(s) and spacing
+        '{column, (- left align)spacing}  
+        Dim ColumnSpacing1 As String = "{0, -15}{1, -10}{2, -1}"
 
+        _reportBuilder.AppendFormat(ColumnSpacing1, "Cell Type", "Count", "Percentage")
+        _reportBuilder.AppendLine()
 
-        LstReport.Items.Add("===================================================================")
-        LstReport.Items.Add(FacilityName)
-        LstReport.Items.Add("Hematology Report")
-        LstReport.Items.Add("===================================================================")
-        LstReport.Items.Add("Hematology Report")
-        LstReport.Items.Add(Today)
-        LstReport.Items.Add("")
-        LstReport.Items.Add("")
-        LstReport.Items.Add("Patient Information")
-        LstReport.Items.Add(PatientName & " | " & PatientID & " | " & PatientDOB)
-        LstReport.Items.Add("")
-        LstReport.Items.Add("Blood Cell Manual" & "  " & reportType)
-        LstReport.Items.Add("Total Cells Counted: " & Count)
-        LstReport.Items.Add("")
-
-
-
+        Dim ColumnSpacing2 As String = "{0, -15}{1, -10}{2, -1}{3, -2}"
+        'I guess I was excluding these for some reason?
         Dim i As Integer = 0
-        While i < cellCollection.Count
-            If Not cellCollection(i).getCellType.Contains("User") Then
-                LstReport.Items.Add(String.Format(ColumnSpacing, cellCollection(i).getCellType, "", cellCollection(i).getCount, getPercent(cellCollection(i).getCount), " %"))
+        While i < _cells.Count
+            If Not _cells(i).getCellType.Contains("User") Then
+                _reportBuilder.AppendFormat(ColumnSpacing2, _cells(i).getCellType, _cells(i).getCount, getPercent(_cells(i).getCount), " %")
+                _reportBuilder.AppendLine()
             End If
-
             i = i + 1
         End While
 
-        'LstReport.Items.Add(String.Format(ColumnSpacing, "Segmented Neutrophils:", "", CStr(Seg), CStr(Seg / Count * 100), " %"))
-        'LstReport.Items.Add(String.Format(ColumnSpacing, "Lymphocytes:", " ", CStr(Lym), CStr(Lym / Count * 100), " %"))
-        'LstReport.Items.Add(String.Format(ColumnSpacing, "Monocytes:", " ", CStr(Mono), CStr(Mono / Count * 100), " %"))
-        'LstReport.Items.Add(String.Format(ColumnSpacing, "Eosinophils:", " ", CStr(Eos), CStr(Eos / Count * 100), " %"))
-        'LstReport.Items.Add(String.Format(ColumnSpacing, "Basophils:", " ", CStr(Baso), CStr(Baso / Count * 100), " %"))
-        'LstReport.Items.Add(String.Format(ColumnSpacing, "Banded Neutrophils:", " ", CStr(Band), CStr(Band / Count * 100), " %"))
-        'LstReport.Items.Add(String.Format(ColumnSpacing, "Metamyeloyctes:", " ", CStr(Meta), CStr(Meta / Count * 100), " %"))
-        'LstReport.Items.Add(String.Format(ColumnSpacing, "Myelocytes:", " ", CStr(Myelo), CStr(Myelo / Count * 100), " %"))
-        'LstReport.Items.Add(String.Format(ColumnSpacing, "Promyelocytes:", " ", CStr(Promyelo), CStr(Promyelo / Count * 100), " %"))
-        'LstReport.Items.Add(String.Format(ColumnSpacing, "Blast Cells:", " ", CStr(Blast), CStr(Blast / Count * 100), " %"))
-        'LstReport.Items.Add(String.Format(ColumnSpacing2, "Nucleated Red Cells:", " ", CStr(NRBC)))
+        _reportBuilder.AppendLine("")
+        _reportBuilder.AppendLine("")
+        _reportBuilder.AppendLine("Red Cell morphology")
+        _reportBuilder.AppendLine("")
+        _reportBuilder.AppendLine("")
+        _reportBuilder.AppendLine("")
+        _reportBuilder.AppendLine("Other findings")
+        _reportBuilder.AppendLine("")
+        _reportBuilder.AppendLine("")
+        _reportBuilder.AppendLine("")
+        _reportBuilder.AppendLine("===================================================================")
 
-
-        LstReport.Items.Add("")
-        LstReport.Items.Add("")
-        LstReport.Items.Add("Red Cell morphology")
-        LstReport.Items.Add("")
-        LstReport.Items.Add("")
-        LstReport.Items.Add("")
-        LstReport.Items.Add("Other findings")
-        LstReport.Items.Add("")
-        LstReport.Items.Add("")
-        LstReport.Items.Add("")
-        LstReport.Items.Add("===================================================================")
-
+        RichTextBox1.Text = _reportBuilder.ToString()
 
     End Sub
-
 
     Private Function getPercent(number As Integer) As Double
         Dim percent As Double
 
-        percent = number / Count * 100
+        If (number < 1) Then
+            Return 0.0
+        End If
+        percent = number / _countingObject.Total * 100
 
         Return percent
 
     End Function
 
 
-    Private Sub LstReport_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LstReport.SelectedIndexChanged
+    Private Sub BtnGenPDF_Click(sender As Object, e As EventArgs) Handles BtnGenPDF.Click
 
+        Try
+
+            Dim reportStr = _reportBuilder.ToString()
+
+
+            If (String.IsNullOrWhiteSpace(reportStr)) Then
+                MessageBox.Show("Empty report, please generate a report.", "PDF Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                Return
+            End If
+
+
+            Dim document As PdfDocument = New PdfDocument()
+            document.Info.Title = $"Patient_Report_{DateTime.Now.ToString("MMddyyyy_hhmmsssss")}"
+
+            Dim page As PdfPage = document.AddPage()
+
+            Dim gfx = XGraphics.FromPdfPage(page)
+            Dim font = New XFont("Courier New", 10, XFontStyle.Bold)
+            Dim tf As XTextFormatter = New XTextFormatter(gfx)
+
+            Dim rect = New XRect(40, 100, 250, 800)
+
+
+            tf.DrawString(reportStr, font, XBrushes.Black, rect, XStringFormats.TopLeft)
+
+            Dim fileName = SaveFileName(document.Info.Title)
+
+            document.Save(fileName)
+
+            Process.Start(fileName)
+
+        Catch ex As Exception
+            _logger.Error(ex)
+        End Try
 
     End Sub
 
-    
+
+    Private Function OpenDirectory() As String
+        'Dim fd As OpenFileDialog = New OpenFileDialog()
+        Dim fd = New FolderBrowserDialog()
+        fd.Description = "Choose or create folder."
+        fd.RootFolder = Environment.SpecialFolder.MyComputer
+
+        Dim path As String = ""
+
+        If fd.ShowDialog() = DialogResult.OK Then
+            path = fd.SelectedPath
+        End If
+
+        Return path
+
+    End Function
+
+
+    Private Function SaveFileName(suggestedName As String) As String
+        Dim fd As SaveFileDialog = New SaveFileDialog()
+        Dim strFileName As String = ""
+
+        fd.Title = "Open File Dialog"
+        fd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) 'look at _userSettings to see what the common used location is
+        fd.Filter = "(*.pdf)|*.pdf"
+        fd.FileName = suggestedName
+        fd.FilterIndex = 1
+        fd.RestoreDirectory = True
+
+        If fd.ShowDialog() = DialogResult.OK Then
+            strFileName = fd.FileName
+        End If
+
+        Return strFileName
+
+    End Function
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        PatientInputPanel.Hide()
+    End Sub
+
+    Private Sub TextBox2_Click(sender As Object, e As EventArgs) Handles TextBox2.Click
+        TextBox2.Clear()
+    End Sub
+
+    Private Sub TextBox3_Click(sender As Object, e As EventArgs) Handles TextBox3.Click
+        TextBox3.Clear()
+    End Sub
+    Private Sub TextBox4_Click(sender As Object, e As EventArgs) Handles TextBox4.Click
+        TextBox4.Clear()
+    End Sub
+    Private Sub TextBox1_Click(sender As Object, e As EventArgs) Handles TextBox1.Click
+        TextBox1.Clear()
+    End Sub
 End Class

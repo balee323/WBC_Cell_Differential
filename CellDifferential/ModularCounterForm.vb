@@ -11,16 +11,15 @@ Public Class ModularCounterForm
     Dim _ControlList As New List(Of CellControlModule)
     Private _cells As New List(Of Cell)
     Private _settings As ISettings
-    'Private _counterType As CounterType
+    Private _counterType As CounterType
 
-    Public Property CounterType As CounterType
 
 
 
     Public Sub New(cells As List(Of Cell), counterType As CounterType)
 
         Me._cells = cells
-        Me.CounterType = counterType
+        Me._counterType = counterType
         ' This call is required by the designer.
 
         InitializeComponent()

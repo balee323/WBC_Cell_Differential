@@ -8,7 +8,6 @@ Public Class PeripheralForm
     Private _count As Integer = 100
     Private _total As Integer = 0
     Private _undoList As New Stack(Of String)
-    Private _settings As ISettings
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -258,32 +257,6 @@ Public Class PeripheralForm
 
     End Sub
 
-
-    Private Sub BtnReport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnReport.Click
-
-        Dim frm As Form
-
-        For Each frm In My.Application.OpenForms
-            If frm.Name = "FrmReport" Then
-                FrmReport.Close()
-                ' FrmReport.Show()
-                '  FrmReport.BtnCreate.PerformClick()
-                Exit For
-            End If
-        Next
-
-
-        FrmReport.Count = _count  'Still need this!
-        FrmReport.DiffType = 1
-        FrmReport.Show()
-        FrmReport.Focus()
-        '   FrmReport.StartReport()
-
-        'clicks the Create Report button on the report Form
-        FrmReport.BtnCreate.PerformClick()
-
-
-    End Sub
     Private Sub Label13_Click(sender As Object, e As EventArgs)
         FrmDeveloper.Show()
     End Sub
