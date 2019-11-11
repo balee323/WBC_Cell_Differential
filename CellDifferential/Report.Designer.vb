@@ -24,20 +24,19 @@ Partial Class Report
     Private Sub InitializeComponent()
         Me.BtnCloseReport = New System.Windows.Forms.Button()
         Me.BtnPrint = New System.Windows.Forms.Button()
-        Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
-        Me.BtnCreate = New System.Windows.Forms.Button()
+        Me.BtnNewReport = New System.Windows.Forms.Button()
         Me.BtnGenPDF = New System.Windows.Forms.Button()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.PatientInputPanel = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.TxtOtherFindings = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TxtRBCMorph = New System.Windows.Forms.TextBox()
+        Me.TxtPatientId = New System.Windows.Forms.TextBox()
+        Me.TxtPatientDOB = New System.Windows.Forms.TextBox()
+        Me.TxtFacilityName = New System.Windows.Forms.TextBox()
+        Me.TxtPatientName = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PatientInputPanel.SuspendLayout()
         Me.SuspendLayout()
@@ -64,16 +63,16 @@ Partial Class Report
         Me.BtnPrint.Text = "Print "
         Me.BtnPrint.UseVisualStyleBackColor = False
         '
-        'BtnCreate
+        'BtnNewReport
         '
-        Me.BtnCreate.BackColor = System.Drawing.Color.LightSteelBlue
-        Me.BtnCreate.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnCreate.Location = New System.Drawing.Point(7, 499)
-        Me.BtnCreate.Name = "BtnCreate"
-        Me.BtnCreate.Size = New System.Drawing.Size(92, 70)
-        Me.BtnCreate.TabIndex = 5
-        Me.BtnCreate.Text = "New Report"
-        Me.BtnCreate.UseVisualStyleBackColor = False
+        Me.BtnNewReport.BackColor = System.Drawing.Color.LightSteelBlue
+        Me.BtnNewReport.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnNewReport.Location = New System.Drawing.Point(7, 499)
+        Me.BtnNewReport.Name = "BtnNewReport"
+        Me.BtnNewReport.Size = New System.Drawing.Size(92, 70)
+        Me.BtnNewReport.TabIndex = 5
+        Me.BtnNewReport.Text = "New Report"
+        Me.BtnNewReport.UseVisualStyleBackColor = False
         '
         'BtnGenPDF
         '
@@ -99,14 +98,14 @@ Partial Class Report
         '
         Me.PatientInputPanel.BackColor = System.Drawing.Color.FromArgb(CType(CType(140, Byte), Integer), CType(CType(143, Byte), Integer), CType(CType(148, Byte), Integer))
         Me.PatientInputPanel.Controls.Add(Me.Button1)
-        Me.PatientInputPanel.Controls.Add(Me.TextBox6)
+        Me.PatientInputPanel.Controls.Add(Me.TxtOtherFindings)
         Me.PatientInputPanel.Controls.Add(Me.Label3)
         Me.PatientInputPanel.Controls.Add(Me.Label2)
-        Me.PatientInputPanel.Controls.Add(Me.TextBox5)
-        Me.PatientInputPanel.Controls.Add(Me.TextBox4)
-        Me.PatientInputPanel.Controls.Add(Me.TextBox3)
-        Me.PatientInputPanel.Controls.Add(Me.TextBox2)
-        Me.PatientInputPanel.Controls.Add(Me.TextBox1)
+        Me.PatientInputPanel.Controls.Add(Me.TxtRBCMorph)
+        Me.PatientInputPanel.Controls.Add(Me.TxtPatientId)
+        Me.PatientInputPanel.Controls.Add(Me.TxtPatientDOB)
+        Me.PatientInputPanel.Controls.Add(Me.TxtFacilityName)
+        Me.PatientInputPanel.Controls.Add(Me.TxtPatientName)
         Me.PatientInputPanel.Controls.Add(Me.Label1)
         Me.PatientInputPanel.Location = New System.Drawing.Point(59, 26)
         Me.PatientInputPanel.Name = "PatientInputPanel"
@@ -124,14 +123,15 @@ Partial Class Report
         Me.Button1.Text = "Done"
         Me.Button1.UseVisualStyleBackColor = False
         '
-        'TextBox6
+        'TxtOtherFindings
         '
-        Me.TextBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox6.Location = New System.Drawing.Point(46, 346)
-        Me.TextBox6.Multiline = True
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(679, 56)
-        Me.TextBox6.TabIndex = 8
+        Me.TxtOtherFindings.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtOtherFindings.Location = New System.Drawing.Point(46, 346)
+        Me.TxtOtherFindings.MaxLength = 1000
+        Me.TxtOtherFindings.Multiline = True
+        Me.TxtOtherFindings.Name = "TxtOtherFindings"
+        Me.TxtOtherFindings.Size = New System.Drawing.Size(679, 56)
+        Me.TxtOtherFindings.TabIndex = 8
         '
         'Label3
         '
@@ -153,50 +153,51 @@ Partial Class Report
         Me.Label2.TabIndex = 6
         Me.Label2.Text = "Red Cell morphology"
         '
-        'TextBox5
+        'TxtRBCMorph
         '
-        Me.TextBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox5.Location = New System.Drawing.Point(46, 240)
-        Me.TextBox5.Multiline = True
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(679, 56)
-        Me.TextBox5.TabIndex = 5
+        Me.TxtRBCMorph.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtRBCMorph.Location = New System.Drawing.Point(46, 240)
+        Me.TxtRBCMorph.MaxLength = 1000
+        Me.TxtRBCMorph.Multiline = True
+        Me.TxtRBCMorph.Name = "TxtRBCMorph"
+        Me.TxtRBCMorph.Size = New System.Drawing.Size(679, 56)
+        Me.TxtRBCMorph.TabIndex = 5
         '
-        'TextBox4
+        'TxtPatientId
         '
-        Me.TextBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox4.Location = New System.Drawing.Point(46, 93)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(679, 28)
-        Me.TextBox4.TabIndex = 4
-        Me.TextBox4.Text = "[Patient Id]"
+        Me.TxtPatientId.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtPatientId.Location = New System.Drawing.Point(46, 93)
+        Me.TxtPatientId.Name = "TxtPatientId"
+        Me.TxtPatientId.Size = New System.Drawing.Size(679, 28)
+        Me.TxtPatientId.TabIndex = 4
+        Me.TxtPatientId.Text = "[Patient Id]"
         '
-        'TextBox3
+        'TxtPatientDOB
         '
-        Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(46, 127)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(679, 28)
-        Me.TextBox3.TabIndex = 3
-        Me.TextBox3.Text = "[Patient DOB]"
+        Me.TxtPatientDOB.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtPatientDOB.Location = New System.Drawing.Point(46, 127)
+        Me.TxtPatientDOB.Name = "TxtPatientDOB"
+        Me.TxtPatientDOB.Size = New System.Drawing.Size(679, 28)
+        Me.TxtPatientDOB.TabIndex = 3
+        Me.TxtPatientDOB.Text = "[Patient DOB]"
         '
-        'TextBox2
+        'TxtFacilityName
         '
-        Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(46, 161)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(679, 28)
-        Me.TextBox2.TabIndex = 2
-        Me.TextBox2.Text = "[Faclility Name]"
+        Me.TxtFacilityName.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtFacilityName.Location = New System.Drawing.Point(46, 161)
+        Me.TxtFacilityName.Name = "TxtFacilityName"
+        Me.TxtFacilityName.Size = New System.Drawing.Size(679, 28)
+        Me.TxtFacilityName.TabIndex = 2
+        Me.TxtFacilityName.Text = "[Faclility Name]"
         '
-        'TextBox1
+        'TxtPatientName
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(46, 59)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(679, 28)
-        Me.TextBox1.TabIndex = 1
-        Me.TextBox1.Text = "[Patient Name]"
+        Me.TxtPatientName.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtPatientName.Location = New System.Drawing.Point(46, 59)
+        Me.TxtPatientName.Name = "TxtPatientName"
+        Me.TxtPatientName.Size = New System.Drawing.Size(679, 28)
+        Me.TxtPatientName.TabIndex = 1
+        Me.TxtPatientName.Text = "[Patient Name]"
         '
         'Label1
         '
@@ -216,7 +217,7 @@ Partial Class Report
         Me.Controls.Add(Me.PatientInputPanel)
         Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.BtnGenPDF)
-        Me.Controls.Add(Me.BtnCreate)
+        Me.Controls.Add(Me.BtnNewReport)
         Me.Controls.Add(Me.BtnPrint)
         Me.Controls.Add(Me.BtnCloseReport)
         Me.Name = "Report"
@@ -228,19 +229,18 @@ Partial Class Report
     End Sub
     Friend WithEvents BtnCloseReport As System.Windows.Forms.Button
     Friend WithEvents BtnPrint As System.Windows.Forms.Button
-    Friend WithEvents PrintDocument1 As System.Drawing.Printing.PrintDocument
-    Friend WithEvents BtnCreate As System.Windows.Forms.Button
+    Friend WithEvents BtnNewReport As System.Windows.Forms.Button
     Friend WithEvents BtnGenPDF As Button
     Friend WithEvents RichTextBox1 As RichTextBox
     Friend WithEvents PatientInputPanel As Panel
     Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents TxtPatientId As TextBox
+    Friend WithEvents TxtPatientDOB As TextBox
+    Friend WithEvents TxtFacilityName As TextBox
+    Friend WithEvents TxtPatientName As TextBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents TextBox5 As TextBox
-    Friend WithEvents TextBox6 As TextBox
+    Friend WithEvents TxtRBCMorph As TextBox
+    Friend WithEvents TxtOtherFindings As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Button1 As Button
 End Class

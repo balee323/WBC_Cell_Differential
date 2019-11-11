@@ -9,17 +9,15 @@ Imports PdfSharp.Pdf
 
 Public Class Report
 
-
-    'all values brought in from CellDiffMain
     Private _cells As New List(Of Cell)
     Private _settings As ISettings
     Private _countingObject As CountingObject
     Private _excludeUserCell As Boolean = False
-    Private WithEvents docToPrint As New PrintDocument
     Private _logger As Logger = NLog.LogManager.GetCurrentClassLogger()
     Private _reportBuilder As StringBuilder
 
-
+    'need an event to handle print
+    Private WithEvents _docToPrint As New PrintDocument
 
 
     Public Sub New(cells As List(Of Cell), settings As ISettings, counteringObject As CountingObject)
@@ -32,6 +30,7 @@ Public Class Report
         InitializeComponent()
 
         RichTextBox1.ReadOnly = True
+        DisableButtons()
 
         ' Add any initialization after the InitializeComponent() call.
 
@@ -40,30 +39,40 @@ Public Class Report
 
     Private Sub BtnPrint_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnPrint.Click
 
-        docToPrint.Print()
+        DisableButtons()
+
+        Try
+
+            Dim printDialog = New PrintDialog()
+            printDialog.Document = _docToPrint
+            printDialog.AllowSomePages = True
+
+            If printDialog.ShowDialog = DialogResult.OK Then
+                _docToPrint.PrinterSettings = printDialog.PrinterSettings
+                _docToPrint.DefaultPageSettings.Margins = New Margins(20, 10, 10, 20)
+                _docToPrint.Print() 'creates print event
+            End If
+
+        Catch ex As Exception
+            _logger.Error(ex)
+            MessageBox.Show("Couldn't save file, file in use.")
+            EnableButtons()
+        End Try
+
+        EnableButtons()
 
     End Sub
 
 
+    'Handles Print Event
+    Private Sub PrintEventHandler(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintPageEventArgs) Handles _docToPrint.PrintPage
 
-    'for setting up the document for printing, since I only want to print the listbox
-    Private Sub PrintedPage(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintPageEventArgs) Handles docToPrint.PrintPage
+        Dim printFont As Font = New Font("Courier New", 11, GraphicsUnit.Point)
+        'Dim printFont As New Font("Courier New", 10, System.Drawing.FontStyle.Regular)
 
-        'Dim printFont As New Font("Courier New", 12, System.Drawing.FontStyle.Regular)
+        e.Graphics.DrawString(_reportBuilder.ToString(), printFont, Brushes.Black, e.MarginBounds)
 
-
-        'Dim YPosition As Integer = 25
-
-        'For Each ThingToPrint As String In LstReport.Items
-
-        '    e.Graphics.DrawString(ThingToPrint, printFont, System.Drawing.Brushes.Black, 25, YPosition)
-
-
-        '    YPosition += 25
-
-        'Next
-
-
+        EnableButtons()
 
     End Sub
 
@@ -74,15 +83,16 @@ Public Class Report
 
     End Sub
 
-    Private Sub BtnCreate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnCreate.Click
-        GenerateReport()
+    Private Sub BtnCreate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnNewReport.Click
+        DisableButtons()
+        PatientInputPanel.Show()
 
     End Sub
 
     Private Sub GenerateReport()
 
         RichTextBox1.Clear()
-
+        _reportBuilder.Clear()
 
         Dim PatientName As String = ""
         Dim PatientID As String = ""
@@ -92,34 +102,26 @@ Public Class Report
         'Set current Date
         Dim Today As String = CStr(DateAndTime.Now)
 
-        'FacilityName = InputBox("Please Enter Name of facility. I.E. General Hospital Pathology Laboratory. ")
-        'PatientName = InputBox("Please Enter Patient Name as Last, First ")
-        'PatientID = InputBox("Please Enter Patient ID number ")
-        'PatientDOB = InputBox("Please Enter Patient DOB as MM/DD/YYYY")
+        FacilityName = TxtFacilityName.Text
+        PatientName = TxtPatientName.Text
+        PatientID = TxtPatientId.Text
+        PatientDOB = TxtPatientDOB.Text
 
-
-
-
-        _reportBuilder.AppendLine("===================================================================")
-
-        _reportBuilder.AppendLine("===================================================================")
-        _reportBuilder.AppendLine(FacilityName)
-        _reportBuilder.AppendLine("Hematology Report")
         _reportBuilder.AppendLine("===================================================================")
         _reportBuilder.AppendLine("Hematology Report")
-        _reportBuilder.AppendLine(Today)
+        _reportBuilder.AppendLine("Patient Information - " + "Name: " + PatientName & " | ID: " & PatientID & " | DOB: " & PatientDOB)
+        _reportBuilder.AppendLine("Date: " + Today)
+        _reportBuilder.AppendLine("Facility: " + FacilityName)
+        _reportBuilder.AppendLine("===================================================================")
+        _reportBuilder.AppendLine("Hematology Report")
         _reportBuilder.AppendLine("")
-        _reportBuilder.AppendLine("")
-        _reportBuilder.AppendLine("Patient Information")
-        _reportBuilder.AppendLine(PatientName & " | " & PatientID & " | " & PatientDOB)
-        _reportBuilder.AppendLine("")
-        _reportBuilder.AppendLine("Blood Cell Manual" & "  " & _countingObject.CounterType.ToString())
+        _reportBuilder.AppendLine("Blood Cell Manual - " & _countingObject.CounterType.ToString())
         _reportBuilder.AppendLine("Total Cells Counted: " & _countingObject.Total)
         _reportBuilder.AppendLine("")
 
 
         'Percentages need to be formatted
-        '{column, (- left align)spacing}  
+        'Good Info to Have!!  {column, (- left align)spacing}  
         Dim ColumnSpacing1 As String = "{0, -15}{1, -10}{2, -1}"
 
         _reportBuilder.AppendFormat(ColumnSpacing1, "Cell Type", "Count", "Percentage")
@@ -137,18 +139,16 @@ Public Class Report
         End While
 
         _reportBuilder.AppendLine("")
+        _reportBuilder.AppendLine("Red Cell morphology:")
+        _reportBuilder.AppendLine(TxtRBCMorph.Text)
         _reportBuilder.AppendLine("")
-        _reportBuilder.AppendLine("Red Cell morphology")
-        _reportBuilder.AppendLine("")
-        _reportBuilder.AppendLine("")
-        _reportBuilder.AppendLine("")
-        _reportBuilder.AppendLine("Other findings")
-        _reportBuilder.AppendLine("")
-        _reportBuilder.AppendLine("")
-        _reportBuilder.AppendLine("")
+        _reportBuilder.AppendLine("Other Findings:")
+        _reportBuilder.AppendLine(TxtOtherFindings.Text)
         _reportBuilder.AppendLine("===================================================================")
 
         RichTextBox1.Text = _reportBuilder.ToString()
+
+        EnableButtons()
 
     End Sub
 
@@ -186,20 +186,19 @@ Public Class Report
             Dim gfx = XGraphics.FromPdfPage(page)
             Dim font = New XFont("Courier New", 10, XFontStyle.Bold)
             Dim tf As XTextFormatter = New XTextFormatter(gfx)
-
-            Dim rect = New XRect(40, 100, 250, 800)
-
+            Dim rect = New XRect(20, 20, 500, 1000)
 
             tf.DrawString(reportStr, font, XBrushes.Black, rect, XStringFormats.TopLeft)
 
             Dim fileName = SaveFileName(document.Info.Title)
-
             document.Save(fileName)
 
             Process.Start(fileName)
 
         Catch ex As Exception
             _logger.Error(ex)
+            MessageBox.Show("Couldn't save file, file in use.")
+            EnableButtons()
         End Try
 
     End Sub
@@ -243,19 +242,33 @@ Public Class Report
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         PatientInputPanel.Hide()
+        GenerateReport()
     End Sub
 
-    Private Sub TextBox2_Click(sender As Object, e As EventArgs) Handles TextBox2.Click
-        TextBox2.Clear()
+    Private Sub TextBox2_Click(sender As Object, e As EventArgs) Handles TxtFacilityName.Click
+        TxtFacilityName.Clear()
     End Sub
 
-    Private Sub TextBox3_Click(sender As Object, e As EventArgs) Handles TextBox3.Click
-        TextBox3.Clear()
+    Private Sub TextBox3_Click(sender As Object, e As EventArgs) Handles TxtPatientDOB.Click
+        TxtPatientDOB.Clear()
     End Sub
-    Private Sub TextBox4_Click(sender As Object, e As EventArgs) Handles TextBox4.Click
-        TextBox4.Clear()
+    Private Sub TextBox4_Click(sender As Object, e As EventArgs) Handles TxtPatientId.Click
+        TxtPatientId.Clear()
     End Sub
-    Private Sub TextBox1_Click(sender As Object, e As EventArgs) Handles TextBox1.Click
-        TextBox1.Clear()
+    Private Sub TextBox1_Click(sender As Object, e As EventArgs) Handles TxtPatientName.Click
+        TxtPatientName.Clear()
     End Sub
+
+    Private Sub DisableButtons()
+        BtnPrint.Enabled = False
+        BtnGenPDF.Enabled = False
+        BtnNewReport.Enabled = False
+    End Sub
+
+    Private Sub EnableButtons()
+        BtnPrint.Enabled = True
+        BtnGenPDF.Enabled = True
+        BtnNewReport.Enabled = True
+    End Sub
+
 End Class
