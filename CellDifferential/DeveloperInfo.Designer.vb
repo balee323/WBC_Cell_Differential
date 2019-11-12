@@ -55,7 +55,7 @@ Partial Class FrmDeveloper
         '
         Me.PictureBox1.BackColor = System.Drawing.Color.White
         Me.PictureBox1.Image = Global.WBCDifferential.My.Resources.Resources.linkedInLogo
-        Me.PictureBox1.Location = New System.Drawing.Point(73, 288)
+        Me.PictureBox1.Location = New System.Drawing.Point(98, 255)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(152, 45)
         Me.PictureBox1.TabIndex = 2

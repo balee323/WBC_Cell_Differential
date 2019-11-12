@@ -261,6 +261,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ReportPickerForm.Designer.vb">
+      <DependentUpon>ReportPickerForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportPickerForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Settings.vb" />
     <Compile Include="SqlLiteManager.vb" />
     <Compile Include="UserControls\CountingControlModule.Designer.vb">
@@ -318,6 +324,9 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportPickerForm.resx">
+      <DependentUpon>ReportPickerForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\CountingControlModule.resx">
       <DependentUpon>CountingControlModule.vb</DependentUpon>
@@ -409,22 +418,22 @@
   <ItemGroup>
     <PublishFile Include="CellDiff.ico">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Resources\Background.jpg">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>

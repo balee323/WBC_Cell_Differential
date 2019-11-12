@@ -65,7 +65,7 @@
 
         'reset cell key maps
         _cells(0).changeKeyMap("h")
-        _cells(1).changeKeyMap("k")
+        _cells(1).changeKeyMap("y")
         _cells(2).changeKeyMap("i")
         _cells(3).changeKeyMap("o")
         _cells(4).changeKeyMap("p")

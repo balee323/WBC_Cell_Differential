@@ -103,6 +103,6 @@ Public Class MainForm
 
 
     Private Sub MenuOptions_Click(sender As Object, e As EventArgs) Handles MenuOptions.Click
-        MessageBox.Show("this will display a reports page to searh, view, edit, save, export as pdf, and print reports")
+        ReportPickerForm.Show()
     End Sub
 End Class

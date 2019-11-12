@@ -6,44 +6,31 @@ Imports NLog
 
 Public Class SqlLiteManager : Implements IDataRepo
 
-    Private logger As Logger = NLog.LogManager.GetCurrentClassLogger()
-
-    Private configDb As String = "WBCDiffSettings.db"
-    Private connectionString As String = "Data Source={0};Version=3;"
+    Private _logger As Logger = NLog.LogManager.GetCurrentClassLogger()
+    Private _configDb As String = "WBCDiffSettings.db"
+    Private _connectionString As String = "Data Source={0};Version=3;"
     Private _counterType As CounterType
 
 
     Public Sub New(counterType As CounterType)
-        _counterType = counterType
 
+        _counterType = counterType
         Task.Run(Sub() CreateDatabase())
 
-        'I need to install NLog
     End Sub
 
     Private Sub CreateDatabase()
 
-        If Not My.Computer.FileSystem.FileExists(configDb) Then
+        If Not My.Computer.FileSystem.FileExists(_configDb) Then
 
             Try
-
-                'Task.Run(Sub()
-
-                '             ' Create the SQLite database
-                '             SQLiteConnection.CreateFile(configDb)
-                '             MessageBox.Show("Database Created...")
-                '         End Sub
-                ')
-
-                'Create the SQLite database
-                SQLiteConnection.CreateFile(configDb)
-
+                SQLiteConnection.CreateFile(_configDb)
             Catch ex As Exception
-                logger.Error(ex, "Database Created Failed...")
+                _logger.Error(ex, "Database Created Failed...")
+                Return
             End Try
 
         End If
-
 
         CreateUserTable()
 
@@ -51,12 +38,10 @@ Public Class SqlLiteManager : Implements IDataRepo
 
     Private Async Sub CreateUserTable()
 
-        Dim create_table As String = String.Empty
-
-        create_table &= "CREATE TABLE UserInfo(UserName VarChar(50) NOT NULL PRIMARY KEY, GivenName VarChar(50), PeripheralSettingsJson VarChar(500), BoneMarrowSettingsJson VarChar(500), DateCreated DateTime2(3), DateModified DateTime2(3));"
+        Dim create_table = "CREATE TABLE UserInfo(UserName VarChar(50) NOT NULL PRIMARY KEY, GivenName VarChar(50), PeripheralSettingsJson VarChar(500), BoneMarrowSettingsJson VarChar(500), DateCreated DateTime2(3), DateModified DateTime2(3));"
 
         Try
-            Using con As New SQLiteConnection(connectionString)
+            Using con As New SQLiteConnection(_connectionString)
                 con.Open()
                 Using cmd As New SQLiteCommand(create_table, con)
                     Dim result = Await cmd.ExecuteNonQueryAsync()
@@ -65,9 +50,7 @@ Public Class SqlLiteManager : Implements IDataRepo
             End Using
 
         Catch ex As Exception
-            logger.Error(ex, "Table creation failed...")
-            'lets have a long pause
-            'Await Task.Delay(1000 * 20)
+            _logger.Error(ex, "Table creation failed...")
         End Try
 
     End Sub
@@ -78,7 +61,7 @@ Public Class SqlLiteManager : Implements IDataRepo
         Dim userSettings As New UserInfo()
 
         Try
-
+            'this task is fine as we don't need to wait on it.
             Task.Run(Sub()
 
                          userSettings = ActiveDirectoryHelper.GetUserInfo()
@@ -91,16 +74,8 @@ Public Class SqlLiteManager : Implements IDataRepo
                      End Sub
             )
 
-            'userSettings = ActiveDirectoryHelper.GetUserInfo()
-
-            'If (UserExist(userSettings)) Then
-            '    UpdateExisitingUser(userSettings, cellSettingsJson)
-            'Else
-            '    InsertNewUser(userSettings, cellSettingsJson)
-            'End If
-
         Catch ex As Exception
-            logger.Error(ex)
+            _logger.Error(ex)
         End Try
 
     End Sub
@@ -123,7 +98,7 @@ Public Class SqlLiteManager : Implements IDataRepo
         Try
             Task.Run(Sub()
 
-                         Using con As New SQLiteConnection(connectionString)
+                         Using con As New SQLiteConnection(_connectionString)
                              con.Open()
                              Dim transaction As SQLiteTransaction = con.BeginTransaction()
                              Using transaction
@@ -140,7 +115,7 @@ Public Class SqlLiteManager : Implements IDataRepo
                      End Sub).Wait()
 
         Catch ex As Exception
-            logger.Error(ex, "error finding user...")
+            _logger.Error(ex, "error finding user...")
         End Try
         Globals.ProgressBar.Increment(10)
 
@@ -152,7 +127,7 @@ Public Class SqlLiteManager : Implements IDataRepo
     Private Sub InsertNewUser(userInfo As UserInfo, cellSettingsJson As String)
 
         Try
-            Using con As New SQLiteConnection(connectionString)
+            Using con As New SQLiteConnection(_connectionString)
                 con.Open()
                 Dim transaction As SQLiteTransaction = con.BeginTransaction()
                 Using transaction
@@ -179,7 +154,7 @@ Public Class SqlLiteManager : Implements IDataRepo
 
 
         Catch ex As Exception
-            logger.Error(ex)
+            _logger.Error(ex)
         End Try
     End Sub
 
@@ -187,8 +162,7 @@ Public Class SqlLiteManager : Implements IDataRepo
     Private Sub UpdateExisitingUser(userInfo As UserInfo, cellSettingsJson As String)
 
         Try
-
-            Using con As New SQLiteConnection(connectionString)
+            Using con As New SQLiteConnection(_connectionString)
                 con.Open()
                 Dim transaction As SQLiteTransaction = con.BeginTransaction()
                 Using transaction
@@ -215,7 +189,7 @@ Public Class SqlLiteManager : Implements IDataRepo
             Console.WriteLine("Insert User Success")
 
         Catch ex As Exception
-            logger.Error(ex)
+            _logger.Error(ex)
         End Try
 
     End Sub
@@ -225,11 +199,10 @@ Public Class SqlLiteManager : Implements IDataRepo
 
         ' create table sql statement
         Dim queryStr = $"Select * from UserInfo Where UserName = '{userInfo.UserName}'"
-
         Dim isUserFound = False
 
         Try
-            Using con As New SQLiteConnection(connectionString)
+            Using con As New SQLiteConnection(_connectionString)
                 con.Open()
                 Dim transaction As SQLiteTransaction = con.BeginTransaction()
                 Using transaction
@@ -245,11 +218,10 @@ Public Class SqlLiteManager : Implements IDataRepo
             End Using
 
         Catch ex As Exception
-            logger.Error(ex)
+            _logger.Error(ex)
         End Try
 
         Return isUserFound
     End Function
-
 
 End Class

@@ -117,22 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="RichTextBox1.Text" xml:space="preserve">
-    <value>
-About the Developer:
-
-This software is part of a clinical laboratory software
-suite created by Brian Lee. Brian has a background in 
-Clinical laboratory Science and Information Technology
-and creates useful Applications for his fellow 
-Medtechs so their day can be a little easier.  
-If you are interested in knowing more about Brian please
-view his LinkedIn page at:
-
-
-
-               http://www.linkedin.com/in/brianalexanderlee
-
-               Email me at: Mailto:brianscodes@gmail.com</value>
-  </data>
 </root>

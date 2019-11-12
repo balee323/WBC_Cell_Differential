@@ -1,20 +1,16 @@
 ﻿Imports System.Threading.Tasks
+Imports System.Windows
+Imports NLog
 
 Public Class ModularCounterForm
 
-    Dim _FlowLayoutPanel As FlowLayoutPanel
-
-    Dim _LeftSideModule As LeftSideModule
-    Dim _RightSideModule As RightSideModule
     Dim _CountingControlModule As CountingControlModule
     Dim _countingObject As CountingObject
     Dim _ControlList As New List(Of CellControlModule)
     Private _cells As New List(Of Cell)
     Private _settings As ISettings
     Private _counterType As CounterType
-
-
-
+    Private _logger As Logger = NLog.LogManager.GetCurrentClassLogger()
 
     Public Sub New(cells As List(Of Cell), counterType As CounterType)
 
@@ -49,6 +45,10 @@ Public Class ModularCounterForm
         Me.AutoSize = True
         Me._countingObject = New CountingObject(_counterType)
 
+        Dim _FlowLayoutPanel As FlowLayoutPanel
+        Dim _LeftSideModule As LeftSideModule
+        Dim _RightSideModule As RightSideModule
+
         _FlowLayoutPanel = New FlowLayoutPanel()
         _FlowLayoutPanel.AutoSize = True
         _FlowLayoutPanel.WrapContents = False
@@ -63,9 +63,9 @@ Public Class ModularCounterForm
         _RightSideModule = New RightSideModule()
         _RightSideModule.Margin = New Padding(0)
 
-        Me.Controls.Add(Me._FlowLayoutPanel)
+        Me.Controls.Add(_FlowLayoutPanel)
 
-        Me._FlowLayoutPanel.Controls.Add(_LeftSideModule)
+        _FlowLayoutPanel.Controls.Add(_LeftSideModule)
 
         Globals.ProgressBar.Increment(5)
 
@@ -84,19 +84,16 @@ Public Class ModularCounterForm
             End If
 
             _ControlList.Add(cellControlModule)
-            Me._FlowLayoutPanel.Controls.Add(cellControlModule)
+            _FlowLayoutPanel.Controls.Add(cellControlModule)
 
         Next
 
-        Me._FlowLayoutPanel.Controls.Add(_CountingControlModule)
-        Me._FlowLayoutPanel.Controls.Add(_RightSideModule)
-
-
+        _FlowLayoutPanel.Controls.Add(_CountingControlModule)
+        _FlowLayoutPanel.Controls.Add(_RightSideModule)
 
         Globals.ProgressBar.Increment(5)
 
         LoadSettings()
-
 
     End Sub
 
@@ -109,11 +106,8 @@ Public Class ModularCounterForm
             RefreshCellModules()
 
         Catch ex As Exception
-
-            'if error, keys use default bindings set at object instance creation
+            _logger.Error(ex)
         End Try
-
-
 
     End Sub
 
@@ -146,7 +140,7 @@ Public Class ModularCounterForm
         Next
 
         If _countingObject.Total = _countingObject.Limit Then
-            'PlaySound()
+            My.Computer.Audio.Play(My.Resources.Regular_Ding, AudioPlayMode.Background)
             MessageBox.Show("Complete", "Total Count", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End If
 
@@ -155,15 +149,46 @@ Public Class ModularCounterForm
 
     End Sub
 
-    Private Sub ModularPeripheralCoubterForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+
+
+    Private Sub ModularPeripheralCoubterForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+
         _settings.SaveSettings()
         _cells.Clear()
+
+
+        Dim result As DialogResult
+
+        result = MessageBox.Show("Are you sure you wish to close Periperhal Counter?", "Close?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+
+        If result = Forms.DialogResult.Yes Then
+            e.Cancel = False
+
+            Dim frm As Form
+            For Each frm In My.Application.OpenForms
+                frm.Show()
+            Next
+
+            MainForm.Show()
+        Else
+            e.Cancel = True
+        End If
+
         MainForm.Enabled = True
+
+
+
     End Sub
 
+    'Private Sub ModularPeripheralCoubterForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+
+    '    _settings.SaveSettings()
+    '    _cells.Clear()
+    '    MainForm.Enabled = True
+
+    'End Sub
+
     Public Sub RefreshCellModules()
-
-
 
         For Each control In _ControlList
             control.ResetState()
@@ -174,9 +199,11 @@ Public Class ModularCounterForm
     End Sub
 
     Public Sub ResetCellCounts()
+
         For Each cell In _cells
             cell.ResetCount()
         Next
+
     End Sub
 
 End Class
