@@ -86,6 +86,8 @@ Public Class CountingControlModule
         TxtTotal.Text = _countingObject.Total.ToString()
     End Sub
 
+
+
     Private Sub BtnChangeCount_Click(sender As Object, e As EventArgs) Handles BtnChangeCount.Click
         TxtCountLimit.ReadOnly = False
 
@@ -127,6 +129,10 @@ Public Class CountingControlModule
     End Sub
 
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
+        ClearCountingModule()
+    End Sub
+
+    Public Sub ClearCountingModule()
         _resetCellCounts()
         _refreshCellModules()
         _countingObject.Total = 0

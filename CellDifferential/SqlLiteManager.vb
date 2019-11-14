@@ -96,23 +96,19 @@ Public Class SqlLiteManager : Implements IDataRepo
         Dim result As String = String.Empty
 
         Try
-            Task.Run(Sub()
-
-                         Using con As New SQLiteConnection(_connectionString)
-                             con.Open()
-                             Dim transaction As SQLiteTransaction = con.BeginTransaction()
-                             Using transaction
-                                 Using cmd As New SQLiteCommand(con)
-                                     cmd.Transaction = transaction
-                                     cmd.CommandText = queryStr
-                                     result = cmd.ExecuteScalar().ToString()
-                                     'cmd.Dispose()
-                                 End Using
-                                 transaction.Commit()
-                             End Using
-                         End Using
-
-                     End Sub).Wait()
+            Using con As New SQLiteConnection(_connectionString)
+                con.Open()
+                Dim transaction As SQLiteTransaction = con.BeginTransaction()
+                Using transaction
+                    Using cmd As New SQLiteCommand(con)
+                        cmd.Transaction = transaction
+                        cmd.CommandText = queryStr
+                        result = cmd.ExecuteScalar().ToString()
+                        'cmd.Dispose()
+                    End Using
+                    transaction.Commit()
+                End Using
+            End Using
 
         Catch ex As Exception
             _logger.Error(ex, "error finding user...")

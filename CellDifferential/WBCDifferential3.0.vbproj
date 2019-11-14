@@ -191,6 +191,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveDirectoryHelper.vb" />
+    <Compile Include="CellViewOptions.Designer.vb">
+      <DependentUpon>CellViewOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CellViewOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Interfaces\IDataRepo.vb" />
     <Compile Include="Models\Cell.vb" />
     <Compile Include="BoneMarrowForm.Designer.vb">
@@ -212,13 +218,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="ModularCounterForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PeripheralForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PeripheralForm.Designer.vb">
-      <DependentUpon>PeripheralForm.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Models\AllCells.vb" />
@@ -298,14 +297,14 @@
     <EmbeddedResource Include="BoneMarrowForm.resx">
       <DependentUpon>BoneMarrowForm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CellViewOptions.resx">
+      <DependentUpon>CellViewOptions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="KeyBind2.resx">
       <DependentUpon>KeyBind2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModularCounterForm.resx">
       <DependentUpon>ModularCounterForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PeripheralForm.resx">
-      <DependentUpon>PeripheralForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DeveloperInfo.resx">
       <DependentUpon>DeveloperInfo.vb</DependentUpon>

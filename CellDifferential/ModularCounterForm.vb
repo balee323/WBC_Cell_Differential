@@ -11,6 +11,8 @@ Public Class ModularCounterForm
     Private _settings As ISettings
     Private _counterType As CounterType
     Private _logger As Logger = NLog.LogManager.GetCurrentClassLogger()
+    Private _FlowLayoutPanel As FlowLayoutPanel
+
 
     Public Sub New(cells As List(Of Cell), counterType As CounterType)
 
@@ -45,22 +47,31 @@ Public Class ModularCounterForm
         Me.AutoSize = True
         Me._countingObject = New CountingObject(_counterType)
 
-        Dim _FlowLayoutPanel As FlowLayoutPanel
-        Dim _LeftSideModule As LeftSideModule
-        Dim _RightSideModule As RightSideModule
+        LoadSettings()
+
+        BuildCounter()
+
+        Globals.ProgressBar.Increment(5)
+
+
+
+    End Sub
+
+    Private Sub BuildCounter()
 
         _FlowLayoutPanel = New FlowLayoutPanel()
         _FlowLayoutPanel.AutoSize = True
         _FlowLayoutPanel.WrapContents = False
         _FlowLayoutPanel.Padding = New Padding(0)
         _FlowLayoutPanel.Margin = New Padding(0)
-        _LeftSideModule = New LeftSideModule()
-        _LeftSideModule.Margin = New Padding(0)
         Dim _refreshCellModules As New Action(AddressOf RefreshCellModules)
         Dim _resetCellCounts As New Action(AddressOf ResetCellCounts)
+        Dim _rebuildCellModules As New Action(AddressOf RebuildCellModules)
+        Dim _LeftSideModule = New LeftSideModule(_cells, _rebuildCellModules, _resetCellCounts)
+        _LeftSideModule.Margin = New Padding(0)
         _CountingControlModule = New CountingControlModule(_countingObject, _refreshCellModules, _resetCellCounts, _cells, _settings)
         _CountingControlModule.Margin = New Padding(0)
-        _RightSideModule = New RightSideModule()
+        Dim _RightSideModule = New RightSideModule()
         _RightSideModule.Margin = New Padding(0)
 
         Me.Controls.Add(_FlowLayoutPanel)
@@ -74,6 +85,10 @@ Public Class ModularCounterForm
             'create a new cell module passing in cell object.
             Dim cellControlModule As New CellControlModule(cell)
             cellControlModule.Margin = New Padding(0)
+
+            If cell.EnableInCounter = False Then
+                Continue For 'skip adding
+            End If
 
             If (toggleRed) Then
                 toggleRed = False
@@ -90,13 +105,7 @@ Public Class ModularCounterForm
 
         _FlowLayoutPanel.Controls.Add(_CountingControlModule)
         _FlowLayoutPanel.Controls.Add(_RightSideModule)
-
-        Globals.ProgressBar.Increment(5)
-
-        LoadSettings()
-
     End Sub
-
 
     Public Sub LoadSettings()
 
@@ -116,12 +125,18 @@ Public Class ModularCounterForm
         For Each cell In _cells
             If e.KeyChar = ChrW(cell.getKeyMap) Then
 
+                If (cell.EnableInCounter = False) Then
+                    Continue For
+                End If
+
                 Task.Run(Sub()
                              My.Computer.Audio.Play(My.Resources.click3,
                               AudioPlayMode.Background)
                          End Sub)
 
                 _CountingControlModule.ChkBoxIncludeNRBC.Enabled = True 'this is a stupid as fuck hack.  Disabled checked boxes return as false.
+
+
 
                 If (Not cell.getCellType.ToLower() = ("nrbc")) Then
                     _countingObject.Total += 1
@@ -180,13 +195,6 @@ Public Class ModularCounterForm
 
     End Sub
 
-    'Private Sub ModularPeripheralCoubterForm_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-
-    '    _settings.SaveSettings()
-    '    _cells.Clear()
-    '    MainForm.Enabled = True
-
-    'End Sub
 
     Public Sub RefreshCellModules()
 
@@ -203,6 +211,23 @@ Public Class ModularCounterForm
         For Each cell In _cells
             cell.ResetCount()
         Next
+
+    End Sub
+
+
+
+    Private Sub RebuildCellModules()
+
+        ' MessageBox.Show("Rebuilding Counter")
+
+        For Each control In _ControlList
+            control.Dispose()
+        Next
+
+        _ControlList.Clear()
+        _FlowLayoutPanel.Dispose()
+        _CountingControlModule.ClearCountingModule()
+        BuildCounter()
 
     End Sub
 
