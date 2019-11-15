@@ -3,6 +3,7 @@ Imports System.Data.SQLite
 Imports System.Threading.Tasks
 Imports Newtonsoft.Json
 Imports NLog
+Imports WBCDifferential
 
 Public Class SqlLiteManager : Implements IDataRepo
 
@@ -10,6 +11,7 @@ Public Class SqlLiteManager : Implements IDataRepo
     Private _configDb As String = "WBCDiffSettings.db"
     Private _connectionString As String = "Data Source={0};Version=3;"
     Private _counterType As CounterType
+    Private WithEvents _timer1 As System.Threading.Timer
 
 
     Public Sub New(counterType As CounterType)
@@ -104,7 +106,6 @@ Public Class SqlLiteManager : Implements IDataRepo
                         cmd.Transaction = transaction
                         cmd.CommandText = queryStr
                         result = cmd.ExecuteScalar().ToString()
-                        'cmd.Dispose()
                     End Using
                     transaction.Commit()
                 End Using
@@ -220,4 +221,49 @@ Public Class SqlLiteManager : Implements IDataRepo
         Return isUserFound
     End Function
 
+
+    Public Async Sub SaveReports(reportDetailsJson As String, progressBar As ProgressBar, saveCompleted As Label) Implements IDataRepo.SaveReports
+
+        Dim userSettings As New UserInfo()
+        progressBar.Increment(15)
+
+        Try
+
+            Await Task.Run(Sub()
+
+                               userSettings = ActiveDirectoryHelper.GetUserInfo()
+
+                               'I should just pass in the action from the report form.  
+                               progressBar.Invoke(Sub() progressBar.Value = 100)
+                               saveCompleted.Invoke(Sub() saveCompleted.Visible = True)
+
+                               If (UserExist(userSettings)) Then
+                                   'UpdateExisitingReport(userSettings, reportDetailsJson)
+                               Else
+                                   ' InsertNewReport(userSettings, reportDetailsJson)
+                               End If
+
+                           End Sub
+            )
+
+            _timer1 = New System.Threading.Timer(New Threading.TimerCallback(Sub() saveCompleted.Invoke(Sub() saveCompleted.Visible = False)), Nothing, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(0))
+
+        Catch ex As Exception
+            _logger.Error(ex)
+        End Try
+
+
+    End Sub
+
+    Private Sub InsertNewReport(userSettings As UserInfo, reportDetailsJson As String)
+        Throw New NotImplementedException()
+    End Sub
+
+    Private Sub UpdateExisitingReport(userSettings As UserInfo, reportDetailsJson As String)
+        Throw New NotImplementedException()
+    End Sub
+
+    Public Function LoadReports() As String Implements IDataRepo.LoadReports
+        Throw New NotImplementedException()
+    End Function
 End Class

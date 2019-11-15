@@ -238,10 +238,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Report.Designer.vb">
-      <DependentUpon>Report.vb</DependentUpon>
+    <Compile Include="ReportForm.Designer.vb">
+      <DependentUpon>ReportForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Report.vb">
+    <Compile Include="ReportForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="KeyBind.Designer.vb">
@@ -312,8 +312,8 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report.resx">
-      <DependentUpon>Report.vb</DependentUpon>
+    <EmbeddedResource Include="ReportForm.resx">
+      <DependentUpon>ReportForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KeyBind.resx">
       <DependentUpon>KeyBind.vb</DependentUpon>
@@ -371,6 +371,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Report.vb" />
     <Content Include="Resources\Background.jpg" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

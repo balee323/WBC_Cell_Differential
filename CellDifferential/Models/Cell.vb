@@ -12,6 +12,7 @@ Public Class Cell
 
 
 
+
     Public Sub New(CellType As String, KeyMap As Integer, ImageFile As String, Position As Integer)
         Me.CellType = CellType 'Seg, Lym, etc..
         Me._KeyMap = KeyMap

@@ -25,7 +25,7 @@ Public Class Settings : Implements ISettings
         Dim cellSettings As List(Of CellSetting) = CreateCellSettings()
 
         Dim jsonStr = JsonConvert.SerializeObject(cellSettings, Formatting.Indented)
-        cellSettings = JsonConvert.DeserializeObject(Of List(Of CellSetting))(jsonStr)
+        ' cellSettings = JsonConvert.DeserializeObject(Of List(Of CellSetting))(jsonStr)
 
         _dataRepo.SaveUserData(jsonStr)
 

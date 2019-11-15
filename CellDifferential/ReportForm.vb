@@ -1,5 +1,6 @@
 ﻿Imports System.Drawing.Printing
 Imports System.Text
+Imports Newtonsoft.Json
 Imports NLog
 Imports PdfSharp
 Imports PdfSharp.Drawing
@@ -7,7 +8,7 @@ Imports PdfSharp.Drawing.Layout
 Imports PdfSharp.Pdf
 
 
-Public Class Report
+Public Class ReportForm
 
     Private _cells As New List(Of Cell)
     Private _settings As ISettings
@@ -131,7 +132,7 @@ Public Class Report
         'I guess I was excluding these for some reason?
         Dim i As Integer = 0
         While i < _cells.Count
-            If Not _cells(i).getCellType.Contains("User") Then
+            If Not _cells(i).getCellType.Contains("User") And _cells(i).EnableInCounter Then
                 _reportBuilder.AppendFormat(ColumnSpacing2, _cells(i).getCellType, _cells(i).getCount, getPercent(_cells(i).getCount), " %")
                 _reportBuilder.AppendLine()
             End If
@@ -270,5 +271,42 @@ Public Class Report
         BtnGenPDF.Enabled = True
         BtnNewReport.Enabled = True
     End Sub
+
+    Private Sub BtnSaveToDB_Click(sender As Object, e As EventArgs) Handles BtnSaveToDB.Click
+
+        ProgressBar1.Value = 0
+
+        ProgressBar1.Increment(10)
+
+        Dim reportDetails = CreateReportDetails()
+
+        Dim dataRepo As IDataRepo = New SqlLiteManager(_countingObject.CounterType)
+
+        Dim reportDetailsJson = JsonConvert.SerializeObject(reportDetails, Formatting.Indented)
+
+        dataRepo.SaveReports(reportDetailsJson, ProgressBar1, LblReportSaved)
+
+
+    End Sub
+
+    Private Function CreateReportDetails() As ReportDetails
+
+        Dim reportDetails As New ReportDetails()
+
+        reportDetails.CellMorphology = TxtRBCMorph.Text
+        reportDetails.OtherFindings = TxtOtherFindings.Text
+        reportDetails.FacilityName = TxtFacilityName.Text
+        reportDetails.CountingObject = _countingObject
+
+        reportDetails.CellReportItems = New List(Of CellReportItem)
+
+
+        For Each cell In _cells
+            reportDetails.CellReportItems.Add(New CellReportItem With {.CellType = cell.getCellType(), .Count = cell.getCount()})
+        Next
+
+        Return reportDetails
+
+    End Function
 
 End Class

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class Report
+Partial Class ReportForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -38,6 +38,9 @@ Partial Class Report
         Me.TxtFacilityName = New System.Windows.Forms.TextBox()
         Me.TxtPatientName = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.BtnSaveToDB = New System.Windows.Forms.Button()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.LblReportSaved = New System.Windows.Forms.Label()
         Me.PatientInputPanel.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -209,22 +212,56 @@ Partial Class Report
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Please enter report information:"
         '
-        'Report
+        'BtnSaveToDB
+        '
+        Me.BtnSaveToDB.BackColor = System.Drawing.Color.LightSteelBlue
+        Me.BtnSaveToDB.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSaveToDB.Location = New System.Drawing.Point(357, 499)
+        Me.BtnSaveToDB.Name = "BtnSaveToDB"
+        Me.BtnSaveToDB.Size = New System.Drawing.Size(241, 46)
+        Me.BtnSaveToDB.TabIndex = 9
+        Me.BtnSaveToDB.Text = "Save To Database"
+        Me.BtnSaveToDB.UseVisualStyleBackColor = False
+        '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Location = New System.Drawing.Point(358, 540)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(240, 23)
+        Me.ProgressBar1.TabIndex = 10
+        '
+        'LblReportSaved
+        '
+        Me.LblReportSaved.AutoSize = True
+        Me.LblReportSaved.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.818182!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblReportSaved.ForeColor = System.Drawing.Color.LawnGreen
+        Me.LblReportSaved.Location = New System.Drawing.Point(604, 499)
+        Me.LblReportSaved.Name = "LblReportSaved"
+        Me.LblReportSaved.Size = New System.Drawing.Size(59, 20)
+        Me.LblReportSaved.TabIndex = 11
+        Me.LblReportSaved.Text = "Saved"
+        Me.LblReportSaved.Visible = False
+        '
+        'ReportForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(962, 575)
+        Me.Controls.Add(Me.LblReportSaved)
+        Me.Controls.Add(Me.ProgressBar1)
+        Me.Controls.Add(Me.BtnSaveToDB)
         Me.Controls.Add(Me.PatientInputPanel)
         Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.BtnGenPDF)
         Me.Controls.Add(Me.BtnNewReport)
         Me.Controls.Add(Me.BtnPrint)
         Me.Controls.Add(Me.BtnCloseReport)
-        Me.Name = "Report"
+        Me.Name = "ReportForm"
         Me.Text = "Patient Report"
         Me.PatientInputPanel.ResumeLayout(False)
         Me.PatientInputPanel.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents BtnCloseReport As System.Windows.Forms.Button
@@ -243,4 +280,7 @@ Partial Class Report
     Friend WithEvents TxtOtherFindings As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Button1 As Button
+    Friend WithEvents BtnSaveToDB As Button
+    Friend WithEvents ProgressBar1 As ProgressBar
+    Friend WithEvents LblReportSaved As Label
 End Class
