@@ -1,17 +1,24 @@
 ﻿Imports Newtonsoft.Json
 
 
-Public Class ReportHeader
+
+
+Public Class Report
 
     Public Property ReportDate As DateTime
 
     Public Property PatientName As String
 
-    Public Property PatientDOB As DateTime
+    Public Property PatientDOB As Date
 
     Public Property PatientID As String
 
     Public Property FacilityName As String
+
+    Public Property UserName As String
+    Public Property GivenName As String
+
+    Public Property ReportDetails As ReportDetails
 
 End Class
 
@@ -33,8 +40,13 @@ Public Class ReportDetails
 
 End Class
 
+<JsonObject(MemberSerialization.OptIn)>
 Public Class CellReportItem
+
+    <JsonProperty>
     Public Property CellType As String
+
+    <JsonProperty>
     Public Property Count As Integer
 End Class
 

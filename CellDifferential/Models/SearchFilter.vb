@@ -3,7 +3,7 @@ Public Class SearchFilter
 
     Public Property UserInfo As UserInfo
 
-    Public Property ReportHeader As ReportHeader
+    Public Property Report As Report
 
 
 End Class

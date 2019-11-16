@@ -4,9 +4,9 @@
 
     Function LoadUserSettings() As String
 
-    Function LoadReports() As String
+    Function LoadReports(searchFiler As SearchFilter) As List(Of String)
 
-    Sub SaveReport(reportHeader As ReportHeader, reportDetailsJson As String, progressBar As ProgressBar, saveComplete As Label)
+    Sub SaveReport(report As Report, reportDetailsJson As String, progressBar As ProgressBar, saveComplete As Label)
 
 
 

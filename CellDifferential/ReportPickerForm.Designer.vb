@@ -30,11 +30,20 @@ Partial Class ReportPickerForm
         Me.ChkBoxUser = New System.Windows.Forms.CheckBox()
         Me.ChkBoxPatientID = New System.Windows.Forms.CheckBox()
         Me.ChkBoxPatientName = New System.Windows.Forms.CheckBox()
-        Me.Reports = New System.Windows.Forms.GroupBox()
+        Me.ReportsGroup = New System.Windows.Forms.GroupBox()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.ReportDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PatientName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PatientID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PatientDOB = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ReportCreatorUserName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GivenName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ReportDetails = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.BtnOpenReport = New System.Windows.Forms.Button()
-        Me.CheckedListBox1 = New System.Windows.Forms.CheckedListBox()
+        Me.BtnOpen = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
-        Me.Reports.SuspendLayout()
+        Me.ReportsGroup.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -64,9 +73,9 @@ Partial Class ReportPickerForm
         Me.GroupBox1.Controls.Add(Me.ChkBoxPatientName)
         Me.GroupBox1.Controls.Add(Me.TextBox1)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Location = New System.Drawing.Point(3, 435)
+        Me.GroupBox1.Location = New System.Drawing.Point(3, 550)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(827, 117)
+        Me.GroupBox1.Size = New System.Drawing.Size(1002, 117)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Search"
@@ -122,16 +131,93 @@ Partial Class ReportPickerForm
         Me.ChkBoxPatientName.Text = "Patient Name"
         Me.ChkBoxPatientName.UseVisualStyleBackColor = True
         '
-        'Reports
+        'ReportsGroup
         '
-        Me.Reports.Controls.Add(Me.BtnOpenReport)
-        Me.Reports.Controls.Add(Me.CheckedListBox1)
-        Me.Reports.Location = New System.Drawing.Point(3, 12)
-        Me.Reports.Name = "Reports"
-        Me.Reports.Size = New System.Drawing.Size(827, 412)
-        Me.Reports.TabIndex = 3
-        Me.Reports.TabStop = False
-        Me.Reports.Text = "GroupBox2"
+        Me.ReportsGroup.Controls.Add(Me.DataGridView1)
+        Me.ReportsGroup.Controls.Add(Me.BtnOpenReport)
+        Me.ReportsGroup.Location = New System.Drawing.Point(3, 12)
+        Me.ReportsGroup.Name = "ReportsGroup"
+        Me.ReportsGroup.Size = New System.Drawing.Size(1283, 532)
+        Me.ReportsGroup.TabIndex = 3
+        Me.ReportsGroup.TabStop = False
+        Me.ReportsGroup.Text = "Reports"
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.AllowUserToAddRows = False
+        Me.DataGridView1.AllowUserToDeleteRows = False
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ReportDate, Me.PatientName, Me.PatientID, Me.PatientDOB, Me.ReportCreatorUserName, Me.GivenName, Me.ReportDetails})
+        Me.DataGridView1.Location = New System.Drawing.Point(10, 19)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.ReadOnly = True
+        Me.DataGridView1.RowHeadersWidth = 47
+        Me.DataGridView1.Size = New System.Drawing.Size(1258, 507)
+        Me.DataGridView1.TabIndex = 2
+        '
+        'ReportDate
+        '
+        Me.ReportDate.DataPropertyName = "ReportDate"
+        Me.ReportDate.HeaderText = "Report Date"
+        Me.ReportDate.MinimumWidth = 6
+        Me.ReportDate.Name = "ReportDate"
+        Me.ReportDate.ReadOnly = True
+        Me.ReportDate.Width = 115
+        '
+        'PatientName
+        '
+        Me.PatientName.DataPropertyName = "PatientName"
+        Me.PatientName.HeaderText = "Patient name"
+        Me.PatientName.MinimumWidth = 6
+        Me.PatientName.Name = "PatientName"
+        Me.PatientName.ReadOnly = True
+        Me.PatientName.Width = 115
+        '
+        'PatientID
+        '
+        Me.PatientID.DataPropertyName = "PatientID"
+        Me.PatientID.HeaderText = "Patient ID"
+        Me.PatientID.MinimumWidth = 6
+        Me.PatientID.Name = "PatientID"
+        Me.PatientID.ReadOnly = True
+        Me.PatientID.Width = 115
+        '
+        'PatientDOB
+        '
+        Me.PatientDOB.DataPropertyName = "PatientDOB"
+        Me.PatientDOB.HeaderText = "Patient DOB"
+        Me.PatientDOB.MinimumWidth = 6
+        Me.PatientDOB.Name = "PatientDOB"
+        Me.PatientDOB.ReadOnly = True
+        Me.PatientDOB.Width = 115
+        '
+        'ReportCreatorUserName
+        '
+        Me.ReportCreatorUserName.DataPropertyName = "UserName"
+        Me.ReportCreatorUserName.HeaderText = "Report Creator UserName"
+        Me.ReportCreatorUserName.MinimumWidth = 6
+        Me.ReportCreatorUserName.Name = "ReportCreatorUserName"
+        Me.ReportCreatorUserName.ReadOnly = True
+        Me.ReportCreatorUserName.Width = 115
+        '
+        'GivenName
+        '
+        Me.GivenName.DataPropertyName = "GivenName"
+        Me.GivenName.HeaderText = "Report Creator Name"
+        Me.GivenName.MinimumWidth = 6
+        Me.GivenName.Name = "GivenName"
+        Me.GivenName.ReadOnly = True
+        Me.GivenName.Width = 115
+        '
+        'ReportDetails
+        '
+        Me.ReportDetails.DataPropertyName = "ReportDetails"
+        Me.ReportDetails.HeaderText = "Report Details"
+        Me.ReportDetails.MinimumWidth = 6
+        Me.ReportDetails.Name = "ReportDetails"
+        Me.ReportDetails.ReadOnly = True
+        Me.ReportDetails.Visible = False
+        Me.ReportDetails.Width = 115
         '
         'BtnOpenReport
         '
@@ -143,49 +229,30 @@ Partial Class ReportPickerForm
         Me.BtnOpenReport.Text = "Open Report"
         Me.BtnOpenReport.UseVisualStyleBackColor = True
         '
-        'CheckedListBox1
+        'BtnOpen
         '
-        Me.CheckedListBox1.CheckOnClick = True
-        Me.CheckedListBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.818182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CheckedListBox1.FormattingEnabled = True
-        Me.CheckedListBox1.Items.AddRange(New Object() {"Doe, John | 12345 | DOB: |  ReportDate:   | Type: Periperal | Tech: Brian Lee (Bl" &
-                "ee)", "Doe, John | 12345 | DOB: |  ReportDate:   | Type: Periperal | Tech: Brian Lee (Bl" &
-                "ee)", "Doe, John | 12345 | DOB: |  ReportDate:   | Type: Periperal | Tech: Brian Lee (Bl" &
-                "ee)", "Doe, John | 12345 | DOB: |  ReportDate:   | Type: Periperal | Tech: Brian Lee (Bl" &
-                "ee)", "Doe, John | 12345 | DOB: |  ReportDate:   | Type: Periperal | Tech: Brian Lee (Bl" &
-                "ee)", "Doe, John | 12345 | DOB: |  ReportDate:   | Type: Periperal | Tech: Brian Lee (Bl" &
-                "ee)", "Lee, Kelly | 12345 | DOB: |  ReportDate:   | Type: Periperal | Tech: Brian Lee (B" &
-                "lee)", "Lee, Kelly | 12345 | DOB: |  ReportDate:   | Type: Periperal | Tech: Brian Lee (B" &
-                "lee)", "Lee, Kelly | 12345 | DOB: |  ReportDate:   | Type: Periperal | Tech: Brian Lee (B" &
-                "lee)", "Lee, Kelly | 12345 | DOB: |  ReportDate:   | Type: Periperal | Tech: Brian Lee (B" &
-                "lee)", "Lee, Kelly | 12345 | DOB: |  ReportDate:   | Type: Periperal | Tech: Brian Lee (B" &
-                "lee)", "Lee, Kelly | 12345 | DOB: |  ReportDate:   | Type: Periperal | Tech: Brian Lee (B" &
-                "lee)", "Williams, Ed | 12345 | DOB: |  ReportDate:   | Type: Periperal | Tech: Brian Lee " &
-                "(Blee)", "Williams, Ed | 12345 | DOB: |  ReportDate:   | Type: Periperal | Tech: Brian Lee " &
-                "(Blee)", "Williams, Ed | 12345 | DOB: |  ReportDate:   | Type: Periperal | Tech: Brian Lee " &
-                "(Blee)", "Williams, Ed | 12345 | DOB: |  ReportDate:   | Type: Periperal | Tech: Brian Lee " &
-                "(Blee)", "Williams, Ed | 12345 | DOB: |  ReportDate:   | Type: Periperal | Tech: Brian Lee " &
-                "(Blee)", "Williams, Ed | 12345 | DOB: |  ReportDate:   | Type: Periperal | Tech: Brian Lee " &
-                "(Blee)"})
-        Me.CheckedListBox1.Location = New System.Drawing.Point(18, 29)
-        Me.CheckedListBox1.Name = "CheckedListBox1"
-        Me.CheckedListBox1.Size = New System.Drawing.Size(795, 327)
-        Me.CheckedListBox1.Sorted = True
-        Me.CheckedListBox1.TabIndex = 0
-        Me.CheckedListBox1.ThreeDCheckBoxes = True
+        Me.BtnOpen.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.818182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnOpen.Location = New System.Drawing.Point(1064, 601)
+        Me.BtnOpen.Name = "BtnOpen"
+        Me.BtnOpen.Size = New System.Drawing.Size(207, 66)
+        Me.BtnOpen.TabIndex = 7
+        Me.BtnOpen.Text = "Open Report"
+        Me.BtnOpen.UseVisualStyleBackColor = True
         '
         'ReportPickerForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(850, 554)
-        Me.Controls.Add(Me.Reports)
+        Me.ClientSize = New System.Drawing.Size(1339, 694)
+        Me.Controls.Add(Me.BtnOpen)
+        Me.Controls.Add(Me.ReportsGroup)
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "ReportPickerForm"
         Me.Text = "Report Selector"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        Me.Reports.ResumeLayout(False)
+        Me.ReportsGroup.ResumeLayout(False)
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -198,7 +265,15 @@ Partial Class ReportPickerForm
     Friend WithEvents ChkBoxPatientID As CheckBox
     Friend WithEvents ChkBoxPatientName As CheckBox
     Friend WithEvents BtnSearch As Button
-    Friend WithEvents Reports As GroupBox
+    Friend WithEvents ReportsGroup As GroupBox
     Friend WithEvents BtnOpenReport As Button
-    Friend WithEvents CheckedListBox1 As CheckedListBox
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents ReportDate As DataGridViewTextBoxColumn
+    Friend WithEvents PatientName As DataGridViewTextBoxColumn
+    Friend WithEvents PatientID As DataGridViewTextBoxColumn
+    Friend WithEvents PatientDOB As DataGridViewTextBoxColumn
+    Friend WithEvents ReportCreatorUserName As DataGridViewTextBoxColumn
+    Friend WithEvents GivenName As DataGridViewTextBoxColumn
+    Friend WithEvents ReportDetails As DataGridViewTextBoxColumn
+    Friend WithEvents BtnOpen As Button
 End Class

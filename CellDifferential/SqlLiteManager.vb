@@ -10,7 +10,7 @@ Public Class SqlLiteManager : Implements IDataRepo
     Private _logger As Logger = NLog.LogManager.GetCurrentClassLogger()
     Private _configDb As String = "WBCDiffSettings.db"
     Private _connectionString As String = "Data Source={0};Version=3;"
-    Private _counterType As CounterType
+    Private _counterType As CounterType = CounterType.Peripheral 'default
     Private WithEvents _timer1 As Threading.Timer
 
 
@@ -19,6 +19,15 @@ Public Class SqlLiteManager : Implements IDataRepo
         _counterType = counterType
         Task.Run(Sub() CreateDatabase())
 
+    End Sub
+
+    Public Sub New(counterType As CounterType?)
+
+        Task.Run(Sub() CreateDatabase())
+
+    End Sub
+
+    Public Sub New()
     End Sub
 
     Private Sub CreateDatabase()
@@ -36,9 +45,6 @@ Public Class SqlLiteManager : Implements IDataRepo
 
         CreateUserTable()
         CreateReportsTable()
-
-        'testing
-        LoadReports()
 
     End Sub
 
@@ -245,7 +251,7 @@ Public Class SqlLiteManager : Implements IDataRepo
     End Function
 
 
-    Public Async Sub SaveReport(reportHeader As ReportHeader, reportDetailsJson As String, progressBar As ProgressBar, saveCompleted As Label) Implements IDataRepo.SaveReport
+    Public Async Sub SaveReport(report As Report, reportDetailsJson As String, progressBar As ProgressBar, saveCompleted As Label) Implements IDataRepo.SaveReport
 
         Dim userSettings As New UserInfo()
         progressBar.Increment(15)
@@ -260,7 +266,7 @@ Public Class SqlLiteManager : Implements IDataRepo
                                progressBar.Invoke(Sub() progressBar.Value = 100)
                                saveCompleted.Invoke(Sub() saveCompleted.Visible = True)
 
-                               InsertNewReport(userSettings, reportHeader, reportDetailsJson)
+                               InsertNewReport(userSettings, report, reportDetailsJson)
 
                            End Sub
             )
@@ -273,7 +279,7 @@ Public Class SqlLiteManager : Implements IDataRepo
 
     End Sub
 
-    Private Sub InsertNewReport(userInfo As UserInfo, reportHeader As ReportHeader, reportDetailsJson As String)
+    Private Sub InsertNewReport(userInfo As UserInfo, report As Report, reportDetailsJson As String)
 
         Try
             Using con As New SQLiteConnection(_connectionString)
@@ -286,8 +292,8 @@ Public Class SqlLiteManager : Implements IDataRepo
                         ' create the SQL statement
 
                         Sql &= "INSERT INTO Reports (ReportID, UserName, GivenName, PatientID, PatientName, PatientDOB, ReportDetailsJson, DateCreated) VALUES "
-                        Sql &= $"('{Guid.NewGuid().ToString()}', '{userInfo.UserName}', '{userInfo.GivenName}', '{reportHeader.PatientID}', '{reportHeader.PatientName}',"
-                        Sql &= $" '{reportHeader.PatientDOB}', '{reportDetailsJson}', '{reportHeader.ReportDate}') "
+                        Sql &= $"('{Guid.NewGuid().ToString()}', '{userInfo.UserName}', '{userInfo.GivenName}', '{report.PatientID}', '{report.PatientName}',"
+                        Sql &= $" '{report.PatientDOB}', '{reportDetailsJson}', '{report.ReportDate}') "
 
 
 
@@ -314,13 +320,11 @@ Public Class SqlLiteManager : Implements IDataRepo
     End Sub
 
 
-
-
-    Public Function LoadReports() As String Implements IDataRepo.LoadReports
+    Public Function LoadReports(searchFilter As SearchFilter) As List(Of String) Implements IDataRepo.LoadReports
         ' create table sql statement
         Dim queryStr = $"Select * from Reports"
 
-        Dim reportsJson As New List(Of String)
+        Dim reportsStr As New List(Of String)
 
         Try
             Using con As New SQLiteConnection(_connectionString)
@@ -341,19 +345,14 @@ Public Class SqlLiteManager : Implements IDataRepo
 
                                 Dim data As String = String.Empty
                                 For Each key In keys
-                                    data += collection.Get(key) + "/"
+                                    data += collection.Get(key) + "|"
                                 Next
 
-                                reportsJson.Add(data)
+                                reportsStr.Add(data)
 
                             End If
 
                         End While
-
-
-                        'ReportID UNIQUEIDENTIFIER Not NULL PRIMARY KEY, UserName VarChar(50), GivenName VarChar(50), PatientID VarChar(50), 
-                        'PatientName VarChar(100), PatientDOB DateTime2(2), ReportDetailsJson VarChar(5000), DateCreated DateTime2(3),
-                        'DateModified DateTime2(3)
 
                         reader.Close() 'close the reader
                     End Using
@@ -365,7 +364,7 @@ Public Class SqlLiteManager : Implements IDataRepo
             _logger.Error(ex)
         End Try
 
-
+        Return reportsStr
 
     End Function
 End Class

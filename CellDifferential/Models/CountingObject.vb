@@ -10,12 +10,11 @@ Public Class CountingObject
     <JsonProperty>
     Public Property Total As Integer
 
-
+    <JsonProperty, JsonIgnore>
     Public Property UndoList As New Stack(Of Cell)
 
     <JsonProperty>
     Public Property Limit As Integer = 100
-
 
     <JsonProperty>
     Public Property CounterType As CounterType

@@ -15,7 +15,7 @@ Public Class ReportForm
     Private _countingObject As CountingObject
     Private _excludeUserCell As Boolean = False
     Private _logger As Logger = NLog.LogManager.GetCurrentClassLogger()
-    Private _reportBuilder As StringBuilder
+    Private _reportBuilder As New StringBuilder()
 
     'need an event to handle print
 #Disable Warning IDE1006 ' Naming Styles
@@ -30,6 +30,20 @@ Public Class ReportForm
         Me._countingObject = counteringObject
         Me._reportBuilder = New StringBuilder()
         ' This call is required by the designer.
+        InitializeComponent()
+
+        RichTextBox1.ReadOnly = True
+        DisableButtons()
+
+        ' Add any initialization after the InitializeComponent() call.
+
+    End Sub
+
+
+
+    Public Sub New()
+
+
         InitializeComponent()
 
         RichTextBox1.ReadOnly = True
@@ -103,7 +117,7 @@ Public Class ReportForm
         Dim FacilityName = TxtFacilityName.Text
         Dim PatientName = TxtPatientName.Text
         Dim PatientID = TxtPatientId.Text
-        Dim PatientDOB = DateTimePatientDOB.Value
+        Dim PatientDOB = DateTimePatientDOB.Value.Date
 
         _reportBuilder.AppendLine("===================================================================")
         _reportBuilder.AppendLine("Hematology Report")
@@ -113,8 +127,8 @@ Public Class ReportForm
         _reportBuilder.AppendLine("===================================================================")
         _reportBuilder.AppendLine("Hematology Report")
         _reportBuilder.AppendLine("")
-        _reportBuilder.AppendLine("Blood Cell Manual - " & _countingObject.CounterType.ToString())
-        _reportBuilder.AppendLine("Total Cells Counted: " & _countingObject.Total)
+        _reportBuilder.AppendLine("Blood Cell Manual - " & _countingObject?.CounterType.ToString())
+        _reportBuilder.AppendLine("Total Cells Counted: " & _countingObject?.Total)
         _reportBuilder.AppendLine("")
 
 
@@ -128,7 +142,7 @@ Public Class ReportForm
         Dim ColumnSpacing2 As String = "{0, -15}{1, -10}{2, -1}{3, -2}"
         'I guess I was excluding these for some reason?
         Dim i As Integer = 0
-        While i < _cells.Count
+        While i < _cells?.Count
             If Not _cells(i).GetCellType.Contains("User") And _cells(i).EnableInCounter Then
                 _reportBuilder.AppendFormat(ColumnSpacing2, _cells(i).GetCellType, _cells(i).GetCount, GetPercent(_cells(i).GetCount), " %")
                 _reportBuilder.AppendLine()
@@ -273,7 +287,7 @@ Public Class ReportForm
         Dim reportHeader = CreateReportHeader()
         Dim reportDetails = CreateReportDetails()
 
-        Dim dataRepo As IDataRepo = New SqlLiteManager(_countingObject.CounterType)
+        Dim dataRepo As IDataRepo = New SqlLiteManager(_countingObject?.CounterType)
 
         Dim reportDetailsJson = JsonConvert.SerializeObject(reportDetails, Formatting.Indented)
 
@@ -282,17 +296,17 @@ Public Class ReportForm
 
     End Sub
 
-    Private Function CreateReportHeader() As ReportHeader
+    Private Function CreateReportHeader() As Report
 
-        Dim reportHeader As New ReportHeader()
+        Dim report As New Report()
 
-        reportHeader.PatientName = TxtPatientName.Text
-        reportHeader.PatientID = TxtPatientId.Text
-        reportHeader.PatientDOB = DateTimePatientDOB.Value
-        reportHeader.FacilityName = TxtFacilityName.Text
-        reportHeader.ReportDate = DateTime.Now()
+        report.PatientName = TxtPatientName.Text
+        report.PatientID = TxtPatientId.Text
+        report.PatientDOB = DateTimePatientDOB.Value
+        report.FacilityName = TxtFacilityName.Text
+        report.ReportDate = DateTime.Now()
 
-        Return reportHeader
+        Return report
 
     End Function
 
