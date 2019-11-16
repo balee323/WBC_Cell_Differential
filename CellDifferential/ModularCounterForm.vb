@@ -123,7 +123,7 @@ Public Class ModularCounterForm
     Sub Control_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Me.KeyPress
 
         For Each cell In _cells
-            If e.KeyChar = ChrW(cell.getKeyMap) Then
+            If e.KeyChar = ChrW(cell.GetKeyMap) Then
 
                 If (cell.EnableInCounter = False) Then
                     Continue For
@@ -138,7 +138,7 @@ Public Class ModularCounterForm
 
 
 
-                If (Not cell.getCellType.ToLower() = ("nrbc")) Then
+                If (Not cell.GetCellType.ToLower() = ("nrbc")) Then
                     _countingObject.Total += 1
                 ElseIf (_CountingControlModule.ChkBoxIncludeNRBC.Checked) Then
                     _countingObject.Total += 1
@@ -146,7 +146,7 @@ Public Class ModularCounterForm
 
                 _CountingControlModule.ChkBoxIncludeNRBC.Enabled = False
 
-                cell.addToCount()
+                cell.AddToCount()
                 _countingObject.UndoList.Push(cell)
 
                 Exit For

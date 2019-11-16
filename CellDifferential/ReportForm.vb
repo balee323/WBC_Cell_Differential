@@ -18,7 +18,9 @@ Public Class ReportForm
     Private _reportBuilder As StringBuilder
 
     'need an event to handle print
+#Disable Warning IDE1006 ' Naming Styles
     Private WithEvents _docToPrint As New PrintDocument
+#Enable Warning IDE1006 ' Naming Styles
 
 
     Public Sub New(cells As List(Of Cell), settings As ISettings, counteringObject As CountingObject)
@@ -95,18 +97,13 @@ Public Class ReportForm
         RichTextBox1.Clear()
         _reportBuilder.Clear()
 
-        Dim PatientName As String = ""
-        Dim PatientID As String = ""
-        Dim PatientDOB As String = ""
-        Dim FacilityName As String = ""
-
         'Set current Date
         Dim Today As String = CStr(DateAndTime.Now)
 
-        FacilityName = TxtFacilityName.Text
-        PatientName = TxtPatientName.Text
-        PatientID = TxtPatientId.Text
-        PatientDOB = TxtPatientDOB.Text
+        Dim FacilityName = TxtFacilityName.Text
+        Dim PatientName = TxtPatientName.Text
+        Dim PatientID = TxtPatientId.Text
+        Dim PatientDOB = TxtPatientDOB.Text
 
         _reportBuilder.AppendLine("===================================================================")
         _reportBuilder.AppendLine("Hematology Report")
@@ -132,11 +129,11 @@ Public Class ReportForm
         'I guess I was excluding these for some reason?
         Dim i As Integer = 0
         While i < _cells.Count
-            If Not _cells(i).getCellType.Contains("User") And _cells(i).EnableInCounter Then
-                _reportBuilder.AppendFormat(ColumnSpacing2, _cells(i).getCellType, _cells(i).getCount, getPercent(_cells(i).getCount), " %")
+            If Not _cells(i).GetCellType.Contains("User") And _cells(i).EnableInCounter Then
+                _reportBuilder.AppendFormat(ColumnSpacing2, _cells(i).GetCellType, _cells(i).GetCount, GetPercent(_cells(i).GetCount), " %")
                 _reportBuilder.AppendLine()
             End If
-            i = i + 1
+            i += 1
         End While
 
         _reportBuilder.AppendLine("")
@@ -153,7 +150,7 @@ Public Class ReportForm
 
     End Sub
 
-    Private Function getPercent(number As Integer) As Double
+    Private Function GetPercent(number As Integer) As Double
         Dim percent As Double
 
         If (number < 1) Then
@@ -302,7 +299,7 @@ Public Class ReportForm
 
 
         For Each cell In _cells
-            reportDetails.CellReportItems.Add(New CellReportItem With {.CellType = cell.getCellType(), .Count = cell.getCount()})
+            reportDetails.CellReportItems.Add(New CellReportItem With {.CellType = cell.GetCellType(), .Count = cell.GetCount()})
         Next
 
         Return reportDetails

@@ -11,7 +11,7 @@ Public Class SqlLiteManager : Implements IDataRepo
     Private _configDb As String = "WBCDiffSettings.db"
     Private _connectionString As String = "Data Source={0};Version=3;"
     Private _counterType As CounterType
-    Private WithEvents _timer1 As System.Threading.Timer
+    Private WithEvents _timer1 As Threading.Timer
 
 
     Public Sub New(counterType As CounterType)
@@ -130,7 +130,7 @@ Public Class SqlLiteManager : Implements IDataRepo
                 Using transaction
                     Using cmd As New SQLiteCommand(con)
                         cmd.Transaction = transaction
-                        Dim Sql As String
+                        Dim Sql As String = ""
                         ' create the SQL statement
 
                         If (_counterType = CounterType.Peripheral) Then
@@ -165,7 +165,7 @@ Public Class SqlLiteManager : Implements IDataRepo
                 Using transaction
                     Using cmd As New SQLiteCommand(con)
                         cmd.Transaction = transaction
-                        Dim Sql As String
+                        Dim Sql As String = ""
                         ' create the SQL statement
                         Sql &= "Update UserInfo "
                         If (_counterType = CounterType.Peripheral) Then

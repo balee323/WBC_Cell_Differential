@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WBCDifferential3.0", "CellDifferential\WBCDifferential3.0.vbproj", "{53A93799-2715-4195-B7D9-C4596924C00E}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{EE83738F-9ED8-4210-9074-0EE4EC140554}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,12 +23,16 @@ Global
 		{53A93799-2715-4195-B7D9-C4596924C00E}.Release|x64.Build.0 = Release|x64
 		{53A93799-2715-4195-B7D9-C4596924C00E}.Release|x86.ActiveCfg = Release|x86
 		{53A93799-2715-4195-B7D9-C4596924C00E}.Release|x86.Build.0 = Release|x86
+		{EE83738F-9ED8-4210-9074-0EE4EC140554}.Debug|x64.ActiveCfg = Debug
+		{EE83738F-9ED8-4210-9074-0EE4EC140554}.Debug|x86.ActiveCfg = Debug
+		{EE83738F-9ED8-4210-9074-0EE4EC140554}.Release|x64.ActiveCfg = Release
+		{EE83738F-9ED8-4210-9074-0EE4EC140554}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		SolutionGuid = {A523ACF4-CE13-427B-B744-5D15B1D07EFC}
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal

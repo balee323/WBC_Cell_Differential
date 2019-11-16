@@ -1,7 +1,11 @@
 ﻿Public Class LeftSideModule
 
+#Disable Warning IDE0044 ' Add readonly modifier
     Private _cells As List(Of Cell)
+#Enable Warning IDE0044 ' Add readonly modifier
+#Disable Warning IDE0044 ' Add readonly modifier
     Private _rebuildCellModules As Action
+#Enable Warning IDE0044 ' Add readonly modifier
     Private _resetCellCounts As Action
     Public Sub New(cells As List(Of Cell), rebuildCellModules As Action, resetCellCounts As Action)
         Me._cells = cells

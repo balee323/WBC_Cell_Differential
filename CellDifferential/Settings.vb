@@ -36,7 +36,7 @@ Public Class Settings : Implements ISettings
         Dim cellSettings As New List(Of CellSetting)
 
         For Each cell In _cells
-            cellSettings.Add(New CellSetting With {.CellType = cell.getCellType(), .KeyMap = cell.getKeyMap(), .File = "File", .Position = cell.getPosition(), .EnableInCounter = cell.EnableInCounter})
+            cellSettings.Add(New CellSetting With {.CellType = cell.GetCellType(), .KeyMap = cell.GetKeyMap(), .File = "File", .Position = cell.GetPosition(), .EnableInCounter = cell.EnableInCounter})
         Next
 
         Return cellSettings
@@ -54,9 +54,9 @@ Public Class Settings : Implements ISettings
 
             For Each cell In _cells
                 For Each cellsetting In cellSettings
-                    If (cell.getPosition = cellsetting.Position) Then
+                    If (cell.GetPosition = cellsetting.Position) Then
                         cell.ChangeCellType(cellsetting.CellType)
-                        cell.changeKeyMap(cellsetting.KeyMap)
+                        cell.ChangeKeyMap(cellsetting.KeyMap)
                         cell.EnableInCounter = cellsetting.EnableInCounter
                         Exit For 'found it
                     End If

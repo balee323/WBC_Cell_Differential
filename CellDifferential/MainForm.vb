@@ -17,18 +17,19 @@ Public Class MainForm
         'peripheral counter
         Globals.ProgressBar.Increment(10)
 
-        Dim cells As New List(Of Cell)
-        cells.Add(New Cell("NRBC", "j", "File", 0))
-        cells.Add(New Cell("Blast", "k", "File", 1))
-        cells.Add(New Cell("ProMyelo", "l", "File", 2))
-        cells.Add(New Cell("Myelo", ";", "File", 3))
-        cells.Add(New Cell("Meta", "'", "File", 4))
-        cells.Add(New Cell("Band", "b", "File", 5))
-        cells.Add(New Cell("Baso", "n", "File", 6))
-        cells.Add(New Cell("Eos", "m", "File", 7))
-        cells.Add(New Cell("Mono", ",", "File", 8))
-        cells.Add(New Cell("Lym", ".", "File", 9))
-        cells.Add(New Cell("Seg", "/", "File", 10))
+        Dim cells As New List(Of Cell) From {
+            New Cell("NRBC", "j", "File", 0),
+            New Cell("Blast", "k", "File", 1),
+            New Cell("ProMyelo", "l", "File", 2),
+            New Cell("Myelo", ";", "File", 3),
+            New Cell("Meta", "'", "File", 4),
+            New Cell("Band", "b", "File", 5),
+            New Cell("Baso", "n", "File", 6),
+            New Cell("Eos", "m", "File", 7),
+            New Cell("Mono", ",", "File", 8),
+            New Cell("Lym", ".", "File", 9),
+            New Cell("Seg", "/", "File", 10)
+        }
 
         Dim modularPeripheralCounterForm As New ModularCounterForm(cells, CounterType.Peripheral)
         Globals.ProgressBar.Increment(10)
@@ -60,24 +61,24 @@ Public Class MainForm
 
         Globals.ProgressBar.Increment(5)
 
-        Dim cells As New List(Of Cell)
-
-        cells.Add(New Cell("User2", "o", "File", 0))
-        cells.Add(New Cell("User1", "i", "File", 1))
-        cells.Add(New Cell("ProNormo", "h", "File", 2))
-        cells.Add(New Cell("NormoBlast", "g", "File", 3))
-        cells.Add(New Cell("NRBC", "h", "File", 4))
-        cells.Add(New Cell("Blast", "k", "File", 5))
-        cells.Add(New Cell("ProMyelo", "l", "File", 6))
-        cells.Add(New Cell("Myelo", ";", "File", 7))
-        cells.Add(New Cell("Meta", "'", "File", 8))
-        cells.Add(New Cell("Band", "b", "File", 9))
-        cells.Add(New Cell("Baso", "n", "File", 10))
-        cells.Add(New Cell("Eos", "m", "File", 11))
-        cells.Add(New Cell("Mono", ",", "File", 12))
-        cells.Add(New Cell("Plasma", "p", "File", 13))
-        cells.Add(New Cell("Lym", ".", "File", 14))
-        cells.Add(New Cell("Seg", "/", "File", 15))
+        Dim cells As New List(Of Cell) From {
+            New Cell("User2", "o", "File", 0),
+            New Cell("User1", "i", "File", 1),
+            New Cell("ProNormo", "h", "File", 2),
+            New Cell("NormoBlast", "g", "File", 3),
+            New Cell("NRBC", "h", "File", 4),
+            New Cell("Blast", "k", "File", 5),
+            New Cell("ProMyelo", "l", "File", 6),
+            New Cell("Myelo", ";", "File", 7),
+            New Cell("Meta", "'", "File", 8),
+            New Cell("Band", "b", "File", 9),
+            New Cell("Baso", "n", "File", 10),
+            New Cell("Eos", "m", "File", 11),
+            New Cell("Mono", ",", "File", 12),
+            New Cell("Plasma", "p", "File", 13),
+            New Cell("Lym", ".", "File", 14),
+            New Cell("Seg", "/", "File", 15)
+        }
 
 
         Dim modularBoneMarrowCounterForm As New ModularCounterForm(cells, CounterType.BoneMarrow)

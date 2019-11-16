@@ -24,29 +24,29 @@
         Keys = New List(Of String)
 
 
-        Me.Label1.Text = _cells(0).getCellType
-        Me.Label2.Text = _cells(1).getCellType
-        Me.Label3.Text = _cells(2).getCellType
-        Me.Label4.Text = _cells(3).getCellType
-        Me.Label5.Text = _cells(4).getCellType
-        Me.Label6.Text = _cells(5).getCellType
-        Me.Label7.Text = _cells(6).getCellType
-        Me.Label8.Text = _cells(7).getCellType
-        Me.Label9.Text = _cells(8).getCellType
-        Me.Label10.Text = _cells(9).getCellType
-        Me.Label11.Text = _cells(10).getCellType
+        Me.Label1.Text = _cells(0).GetCellType
+        Me.Label2.Text = _cells(1).GetCellType
+        Me.Label3.Text = _cells(2).GetCellType
+        Me.Label4.Text = _cells(3).GetCellType
+        Me.Label5.Text = _cells(4).GetCellType
+        Me.Label6.Text = _cells(5).GetCellType
+        Me.Label7.Text = _cells(6).GetCellType
+        Me.Label8.Text = _cells(7).GetCellType
+        Me.Label9.Text = _cells(8).GetCellType
+        Me.Label10.Text = _cells(9).GetCellType
+        Me.Label11.Text = _cells(10).GetCellType
 
-        Me.TextBox1.Text = _cells(0).getKeyMapChar()
-        Me.TextBox2.Text = _cells(1).getKeyMapChar()
-        Me.TextBox3.Text = _cells(2).getKeyMapChar()
-        Me.TextBox4.Text = _cells(3).getKeyMapChar()
-        Me.TextBox5.Text = _cells(4).getKeyMapChar()
-        Me.TextBox6.Text = _cells(5).getKeyMapChar()
-        Me.TextBox7.Text = _cells(6).getKeyMapChar()
-        Me.TextBox8.Text = _cells(7).getKeyMapChar()
-        Me.TextBox9.Text = _cells(8).getKeyMapChar()
-        Me.TextBox10.Text = _cells(9).getKeyMapChar()
-        Me.TextBox11.Text = _cells(10).getKeyMapChar()
+        Me.TextBox1.Text = _cells(0).GetKeyMapChar()
+        Me.TextBox2.Text = _cells(1).GetKeyMapChar()
+        Me.TextBox3.Text = _cells(2).GetKeyMapChar()
+        Me.TextBox4.Text = _cells(3).GetKeyMapChar()
+        Me.TextBox5.Text = _cells(4).GetKeyMapChar()
+        Me.TextBox6.Text = _cells(5).GetKeyMapChar()
+        Me.TextBox7.Text = _cells(6).GetKeyMapChar()
+        Me.TextBox8.Text = _cells(7).GetKeyMapChar()
+        Me.TextBox9.Text = _cells(8).GetKeyMapChar()
+        Me.TextBox10.Text = _cells(9).GetKeyMapChar()
+        Me.TextBox11.Text = _cells(10).GetKeyMapChar()
 
         Me.Refresh()
 
@@ -63,27 +63,25 @@
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim Passed As Boolean = True
 
-
-        Passed = Validation()
+        Dim Passed = Validation()
 
         If Passed = False Then
             Return
         End If
 
 
-        _cells(0).changeKeyMap(TextBox1.Text)
-        _cells(1).changeKeyMap(TextBox2.Text)
-        _cells(2).changeKeyMap(TextBox3.Text)
-        _cells(3).changeKeyMap(TextBox4.Text)
-        _cells(4).changeKeyMap(TextBox5.Text)
-        _cells(5).changeKeyMap(TextBox6.Text)
-        _cells(6).changeKeyMap(TextBox7.Text)
-        _cells(7).changeKeyMap(TextBox8.Text)
-        _cells(8).changeKeyMap(TextBox9.Text)
-        _cells(9).changeKeyMap(TextBox10.Text)
-        _cells(10).changeKeyMap(TextBox11.Text)
+        _cells(0).ChangeKeyMap(TextBox1.Text)
+        _cells(1).ChangeKeyMap(TextBox2.Text)
+        _cells(2).ChangeKeyMap(TextBox3.Text)
+        _cells(3).ChangeKeyMap(TextBox4.Text)
+        _cells(4).ChangeKeyMap(TextBox5.Text)
+        _cells(5).ChangeKeyMap(TextBox6.Text)
+        _cells(6).ChangeKeyMap(TextBox7.Text)
+        _cells(7).ChangeKeyMap(TextBox8.Text)
+        _cells(8).ChangeKeyMap(TextBox9.Text)
+        _cells(9).ChangeKeyMap(TextBox10.Text)
+        _cells(10).ChangeKeyMap(TextBox11.Text)
 
         _settings.SaveSettings()
 
@@ -159,9 +157,9 @@
                     Return Status
                     ' Exit Function
                 End If
-                j = j + 1
+                j += 1
             End While
-            i = i + 1
+            i += 1
         End While
 
 
@@ -170,29 +168,29 @@
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
-        _cells(0).changeKeyMap("j")
-        _cells(1).changeKeyMap("k")
-        _cells(2).changeKeyMap("l")
-        _cells(3).changeKeyMap(";")
-        _cells(4).changeKeyMap("'")
-        _cells(5).changeKeyMap("b")
-        _cells(6).changeKeyMap("n")
-        _cells(7).changeKeyMap("m")
-        _cells(8).changeKeyMap(",")
-        _cells(9).changeKeyMap(".")
-        _cells(10).changeKeyMap("/")
+        _cells(0).ChangeKeyMap("j")
+        _cells(1).ChangeKeyMap("k")
+        _cells(2).ChangeKeyMap("l")
+        _cells(3).ChangeKeyMap(";")
+        _cells(4).ChangeKeyMap("'")
+        _cells(5).ChangeKeyMap("b")
+        _cells(6).ChangeKeyMap("n")
+        _cells(7).ChangeKeyMap("m")
+        _cells(8).ChangeKeyMap(",")
+        _cells(9).ChangeKeyMap(".")
+        _cells(10).ChangeKeyMap("/")
 
-        Me.TextBox1.Text = _cells(0).getKeyMapChar()
-        Me.TextBox2.Text = _cells(1).getKeyMapChar()
-        Me.TextBox3.Text = _cells(2).getKeyMapChar()
-        Me.TextBox4.Text = _cells(3).getKeyMapChar()
-        Me.TextBox5.Text = _cells(4).getKeyMapChar()
-        Me.TextBox6.Text = _cells(5).getKeyMapChar()
-        Me.TextBox7.Text = _cells(6).getKeyMapChar()
-        Me.TextBox8.Text = _cells(7).getKeyMapChar()
-        Me.TextBox9.Text = _cells(8).getKeyMapChar()
-        Me.TextBox10.Text = _cells(9).getKeyMapChar()
-        Me.TextBox11.Text = _cells(10).getKeyMapChar()
+        Me.TextBox1.Text = _cells(0).GetKeyMapChar()
+        Me.TextBox2.Text = _cells(1).GetKeyMapChar()
+        Me.TextBox3.Text = _cells(2).GetKeyMapChar()
+        Me.TextBox4.Text = _cells(3).GetKeyMapChar()
+        Me.TextBox5.Text = _cells(4).GetKeyMapChar()
+        Me.TextBox6.Text = _cells(5).GetKeyMapChar()
+        Me.TextBox7.Text = _cells(6).GetKeyMapChar()
+        Me.TextBox8.Text = _cells(7).GetKeyMapChar()
+        Me.TextBox9.Text = _cells(8).GetKeyMapChar()
+        Me.TextBox10.Text = _cells(9).GetKeyMapChar()
+        Me.TextBox11.Text = _cells(10).GetKeyMapChar()
 
         _settings.SaveSettings()
 

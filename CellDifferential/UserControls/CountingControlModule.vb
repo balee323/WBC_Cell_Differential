@@ -36,7 +36,7 @@ Public Class CountingControlModule
             Dim lastCountedCell = _countingObject.UndoList.Pop
             'find NRBC
             Dim NRBC As Cell = Nothing
-            If lastCountedCell.getCellType.Contains("NRBC") Then
+            If lastCountedCell.GetCellType.Contains("NRBC") Then
                 NRBC = lastCountedCell
             End If
 
@@ -57,15 +57,15 @@ Public Class CountingControlModule
 
         'NRBC are part of count and will be removed
         If ChkBoxIncludeNRBC.Checked Then
-            _countingObject.Total = _countingObject.Total - 1
+            _countingObject.Total -= 1
             TxtTotal.Text = CStr(_countingObject.Total)
             cell.UndoCount()
         Else
-            If cell.getCellType() <> "NRBC" Then
-                _countingObject.Total = _countingObject.Total - 1
+            If cell.GetCellType() <> "NRBC" Then
+                _countingObject.Total -= 1
                 TxtTotal.Text = CStr(_countingObject.Total)
                 cell.UndoCount()
-            ElseIf cell.getCellType() = "NRBC" Then
+            ElseIf cell.GetCellType() = "NRBC" Then
                 cell.UndoCount() 'removes 1 from NRBC count
             End If
         End If
