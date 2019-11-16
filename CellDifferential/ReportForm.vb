@@ -103,7 +103,7 @@ Public Class ReportForm
         Dim FacilityName = TxtFacilityName.Text
         Dim PatientName = TxtPatientName.Text
         Dim PatientID = TxtPatientId.Text
-        Dim PatientDOB = TxtPatientDOB.Text
+        Dim PatientDOB = DateTimePatientDOB.Value
 
         _reportBuilder.AppendLine("===================================================================")
         _reportBuilder.AppendLine("Hematology Report")
@@ -188,7 +188,7 @@ Public Class ReportForm
 
             tf.DrawString(reportStr, font, XBrushes.Black, rect, XStringFormats.TopLeft)
 
-            Dim fileName = SaveFileName(document.Info.Title)
+            Dim fileName = GetPDFSaveFileName(document.Info.Title)
             document.Save(fileName)
 
             Process.Start(fileName)
@@ -201,25 +201,23 @@ Public Class ReportForm
 
     End Sub
 
+    'Private Function OpenDirectory() As String
+    '    'Dim fd As OpenFileDialog = New OpenFileDialog()
+    '    Dim fd = New FolderBrowserDialog()
+    '    fd.Description = "Choose or create folder."
+    '    fd.RootFolder = Environment.SpecialFolder.MyComputer
 
-    Private Function OpenDirectory() As String
-        'Dim fd As OpenFileDialog = New OpenFileDialog()
-        Dim fd = New FolderBrowserDialog()
-        fd.Description = "Choose or create folder."
-        fd.RootFolder = Environment.SpecialFolder.MyComputer
+    '    Dim path As String = ""
 
-        Dim path As String = ""
+    '    If fd.ShowDialog() = DialogResult.OK Then
+    '        path = fd.SelectedPath
+    '    End If
 
-        If fd.ShowDialog() = DialogResult.OK Then
-            path = fd.SelectedPath
-        End If
+    '    Return path
 
-        Return path
+    'End Function
 
-    End Function
-
-
-    Private Function SaveFileName(suggestedName As String) As String
+    Private Function GetPDFSaveFileName(suggestedName As String) As String
         Dim fd As SaveFileDialog = New SaveFileDialog()
         Dim strFileName As String = ""
 
@@ -247,9 +245,6 @@ Public Class ReportForm
         TxtFacilityName.Clear()
     End Sub
 
-    Private Sub TextBox3_Click(sender As Object, e As EventArgs) Handles TxtPatientDOB.Click
-        TxtPatientDOB.Clear()
-    End Sub
     Private Sub TextBox4_Click(sender As Object, e As EventArgs) Handles TxtPatientId.Click
         TxtPatientId.Clear()
     End Sub
@@ -275,16 +270,31 @@ Public Class ReportForm
 
         ProgressBar1.Increment(10)
 
+        Dim reportHeader = CreateReportHeader()
         Dim reportDetails = CreateReportDetails()
 
         Dim dataRepo As IDataRepo = New SqlLiteManager(_countingObject.CounterType)
 
         Dim reportDetailsJson = JsonConvert.SerializeObject(reportDetails, Formatting.Indented)
 
-        dataRepo.SaveReports(reportDetailsJson, ProgressBar1, LblReportSaved)
+        dataRepo.SaveReport(reportHeader, reportDetailsJson, ProgressBar1, LblReportSaved)
 
 
     End Sub
+
+    Private Function CreateReportHeader() As ReportHeader
+
+        Dim reportHeader As New ReportHeader()
+
+        reportHeader.PatientName = TxtPatientName.Text
+        reportHeader.PatientID = TxtPatientId.Text
+        reportHeader.PatientDOB = DateTimePatientDOB.Value
+        reportHeader.FacilityName = TxtFacilityName.Text
+        reportHeader.ReportDate = DateTime.Now()
+
+        Return reportHeader
+
+    End Function
 
     Private Function CreateReportDetails() As ReportDetails
 
@@ -292,11 +302,8 @@ Public Class ReportForm
 
         reportDetails.CellMorphology = TxtRBCMorph.Text
         reportDetails.OtherFindings = TxtOtherFindings.Text
-        reportDetails.FacilityName = TxtFacilityName.Text
         reportDetails.CountingObject = _countingObject
-
         reportDetails.CellReportItems = New List(Of CellReportItem)
-
 
         For Each cell In _cells
             reportDetails.CellReportItems.Add(New CellReportItem With {.CellType = cell.GetCellType(), .Count = cell.GetCount()})

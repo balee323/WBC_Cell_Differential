@@ -10,7 +10,7 @@ Public Class CountingObject
     <JsonProperty>
     Public Property Total As Integer
 
-    <JsonProperty>
+
     Public Property UndoList As New Stack(Of Cell)
 
     <JsonProperty>

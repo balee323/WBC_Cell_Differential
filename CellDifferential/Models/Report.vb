@@ -1,12 +1,17 @@
 ﻿Imports Newtonsoft.Json
 
-Public Class Report
+
+Public Class ReportHeader
+
     Public Property ReportDate As DateTime
+
     Public Property PatientName As String
+
     Public Property PatientDOB As DateTime
+
     Public Property PatientID As String
 
-    Public Property ReportDetails As ReportDetails
+    Public Property FacilityName As String
 
 End Class
 
@@ -25,9 +30,6 @@ Public Class ReportDetails
 
     <JsonProperty>
     Public Property OtherFindings As String
-
-    <JsonProperty>
-    Public Property FacilityName As String
 
 End Class
 

@@ -6,7 +6,7 @@
 
     Function LoadReports() As String
 
-    Sub SaveReports(reportDetailsJson As String, progressBar As ProgressBar, saveComplete As Label)
+    Sub SaveReport(reportHeader As ReportHeader, reportDetailsJson As String, progressBar As ProgressBar, saveComplete As Label)
 
 
 

@@ -200,10 +200,6 @@
     <Compile Include="GlobalSuppressions.vb" />
     <Compile Include="Interfaces\IDataRepo.vb" />
     <Compile Include="Models\Cell.vb" />
-    <Compile Include="BoneMarrowForm.Designer.vb">
-      <DependentUpon>BoneMarrowForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="BoneMarrowForm.vb" />
     <Compile Include="Interfaces\ISettings.vb" />
     <Compile Include="KeyBind2.Designer.vb">
       <DependentUpon>KeyBind2.vb</DependentUpon>
@@ -213,6 +209,7 @@
     </Compile>
     <Compile Include="Models\CountingObject.vb" />
     <Compile Include="Models\Globals.vb" />
+    <Compile Include="Models\SearchFilter.vb" />
     <Compile Include="Models\UserInfo.vb" />
     <Compile Include="ModularCounterForm.Designer.vb">
       <DependentUpon>ModularCounterForm.vb</DependentUpon>
@@ -295,9 +292,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BoneMarrowForm.resx">
-      <DependentUpon>BoneMarrowForm.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CellViewOptions.resx">
       <DependentUpon>CellViewOptions.vb</DependentUpon>
     </EmbeddedResource>

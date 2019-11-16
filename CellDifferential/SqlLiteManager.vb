@@ -35,12 +35,35 @@ Public Class SqlLiteManager : Implements IDataRepo
         End If
 
         CreateUserTable()
+        CreateReportsTable()
+
+        'testing
+        LoadReports()
 
     End Sub
 
     Private Async Sub CreateUserTable()
 
-        Dim create_table = "CREATE TABLE UserInfo(UserName VarChar(50) NOT NULL PRIMARY KEY, GivenName VarChar(50), PeripheralSettingsJson VarChar(500), BoneMarrowSettingsJson VarChar(500), DateCreated DateTime2(3), DateModified DateTime2(3));"
+        Dim create_table = "CREATE TABLE IF NOT EXISTS UserInfo(UserName VarChar(50) NOT NULL PRIMARY KEY, GivenName VarChar(50), PeripheralSettingsJson VarChar(500), BoneMarrowSettingsJson VarChar(500), DateCreated DateTime2(3), DateModified DateTime2(3));"
+
+        Try
+            Using con As New SQLiteConnection(_connectionString)
+                con.Open()
+                Using cmd As New SQLiteCommand(create_table, con)
+                    Dim result = Await cmd.ExecuteNonQueryAsync()
+                    result.ToString()
+                End Using
+            End Using
+
+        Catch ex As Exception
+            _logger.Error(ex, "Table creation failed...")
+        End Try
+
+    End Sub
+
+    Private Async Sub CreateReportsTable()
+
+        Dim create_table = "CREATE TABLE IF NOT EXISTS Reports(ReportID UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, UserName VarChar(50), GivenName VarChar(50), PatientID VarChar(50), PatientName VarChar(100), PatientDOB DateTime2(2), ReportDetailsJson VarChar(5000), DateCreated DateTime2(3), DateModified DateTime2(3));"
 
         Try
             Using con As New SQLiteConnection(_connectionString)
@@ -222,7 +245,7 @@ Public Class SqlLiteManager : Implements IDataRepo
     End Function
 
 
-    Public Async Sub SaveReports(reportDetailsJson As String, progressBar As ProgressBar, saveCompleted As Label) Implements IDataRepo.SaveReports
+    Public Async Sub SaveReport(reportHeader As ReportHeader, reportDetailsJson As String, progressBar As ProgressBar, saveCompleted As Label) Implements IDataRepo.SaveReport
 
         Dim userSettings As New UserInfo()
         progressBar.Increment(15)
@@ -237,11 +260,7 @@ Public Class SqlLiteManager : Implements IDataRepo
                                progressBar.Invoke(Sub() progressBar.Value = 100)
                                saveCompleted.Invoke(Sub() saveCompleted.Visible = True)
 
-                               If (UserExist(userSettings)) Then
-                                   'UpdateExisitingReport(userSettings, reportDetailsJson)
-                               Else
-                                   ' InsertNewReport(userSettings, reportDetailsJson)
-                               End If
+                               InsertNewReport(userSettings, reportHeader, reportDetailsJson)
 
                            End Sub
             )
@@ -252,18 +271,101 @@ Public Class SqlLiteManager : Implements IDataRepo
             _logger.Error(ex)
         End Try
 
-
     End Sub
 
-    Private Sub InsertNewReport(userSettings As UserInfo, reportDetailsJson As String)
-        Throw New NotImplementedException()
+    Private Sub InsertNewReport(userInfo As UserInfo, reportHeader As ReportHeader, reportDetailsJson As String)
+
+        Try
+            Using con As New SQLiteConnection(_connectionString)
+                con.Open()
+                Dim transaction As SQLiteTransaction = con.BeginTransaction()
+                Using transaction
+                    Using cmd As New SQLiteCommand(con)
+                        cmd.Transaction = transaction
+                        Dim Sql As String = ""
+                        ' create the SQL statement
+
+                        Sql &= "INSERT INTO Reports (ReportID, UserName, GivenName, PatientID, PatientName, PatientDOB, ReportDetailsJson, DateCreated) VALUES "
+                        Sql &= $"('{Guid.NewGuid().ToString()}', '{userInfo.UserName}', '{userInfo.GivenName}', '{reportHeader.PatientID}', '{reportHeader.PatientName}',"
+                        Sql &= $" '{reportHeader.PatientDOB}', '{reportDetailsJson}', '{reportHeader.ReportDate}') "
+
+
+
+                        'ReportID UNIQUEIDENTIFIER Not NULL PRIMARY KEY, UserName VarChar(50), GivenName VarChar(50), PatientID VarChar(50), 
+                        'PatientName VarChar(100), PatientDOB DateTime2(2), ReportDetailsJson VarChar(5000), DateCreated DateTime2(3),
+                        'DateModified DateTime2(3)
+
+                        cmd.CommandText = Sql
+                        cmd.ExecuteNonQuery()
+
+                    End Using
+                    transaction.Commit()
+                End Using
+            End Using
+            Console.WriteLine("Insert User Success")
+
+        Catch ex As Exception
+            _logger.Error(ex)
+        End Try
     End Sub
 
     Private Sub UpdateExisitingReport(userSettings As UserInfo, reportDetailsJson As String)
         Throw New NotImplementedException()
     End Sub
 
+
+
+
     Public Function LoadReports() As String Implements IDataRepo.LoadReports
-        Throw New NotImplementedException()
+        ' create table sql statement
+        Dim queryStr = $"Select * from Reports"
+
+        Dim reportsJson As New List(Of String)
+
+        Try
+            Using con As New SQLiteConnection(_connectionString)
+                con.Open()
+                Dim transaction As SQLiteTransaction = con.BeginTransaction()
+                Using transaction
+                    Using cmd As New SQLiteCommand(con)
+                        cmd.Transaction = transaction
+                        cmd.CommandText = queryStr
+                        Dim reader = cmd.ExecuteReader()
+
+                        While reader.Read()
+
+                            If reader.HasRows Then
+                                Dim collection = reader.GetValues()
+
+                                Dim keys = collection.AllKeys
+
+                                Dim data As String = String.Empty
+                                For Each key In keys
+                                    data += collection.Get(key) + "/"
+                                Next
+
+                                reportsJson.Add(data)
+
+                            End If
+
+                        End While
+
+
+                        'ReportID UNIQUEIDENTIFIER Not NULL PRIMARY KEY, UserName VarChar(50), GivenName VarChar(50), PatientID VarChar(50), 
+                        'PatientName VarChar(100), PatientDOB DateTime2(2), ReportDetailsJson VarChar(5000), DateCreated DateTime2(3),
+                        'DateModified DateTime2(3)
+
+                        reader.Close() 'close the reader
+                    End Using
+                    transaction.Commit()
+                End Using
+            End Using
+
+        Catch ex As Exception
+            _logger.Error(ex)
+        End Try
+
+
+
     End Function
 End Class

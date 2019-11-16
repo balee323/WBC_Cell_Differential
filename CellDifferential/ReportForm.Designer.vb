@@ -34,13 +34,14 @@ Partial Class ReportForm
         Me.Label2 = New System.Windows.Forms.Label()
         Me.TxtRBCMorph = New System.Windows.Forms.TextBox()
         Me.TxtPatientId = New System.Windows.Forms.TextBox()
-        Me.TxtPatientDOB = New System.Windows.Forms.TextBox()
         Me.TxtFacilityName = New System.Windows.Forms.TextBox()
         Me.TxtPatientName = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.BtnSaveToDB = New System.Windows.Forms.Button()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.LblReportSaved = New System.Windows.Forms.Label()
+        Me.DateTimePatientDOB = New System.Windows.Forms.DateTimePicker()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.PatientInputPanel.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -100,13 +101,14 @@ Partial Class ReportForm
         'PatientInputPanel
         '
         Me.PatientInputPanel.BackColor = System.Drawing.Color.FromArgb(CType(CType(140, Byte), Integer), CType(CType(143, Byte), Integer), CType(CType(148, Byte), Integer))
+        Me.PatientInputPanel.Controls.Add(Me.Label4)
+        Me.PatientInputPanel.Controls.Add(Me.DateTimePatientDOB)
         Me.PatientInputPanel.Controls.Add(Me.Button1)
         Me.PatientInputPanel.Controls.Add(Me.TxtOtherFindings)
         Me.PatientInputPanel.Controls.Add(Me.Label3)
         Me.PatientInputPanel.Controls.Add(Me.Label2)
         Me.PatientInputPanel.Controls.Add(Me.TxtRBCMorph)
         Me.PatientInputPanel.Controls.Add(Me.TxtPatientId)
-        Me.PatientInputPanel.Controls.Add(Me.TxtPatientDOB)
         Me.PatientInputPanel.Controls.Add(Me.TxtFacilityName)
         Me.PatientInputPanel.Controls.Add(Me.TxtPatientName)
         Me.PatientInputPanel.Controls.Add(Me.Label1)
@@ -175,15 +177,6 @@ Partial Class ReportForm
         Me.TxtPatientId.TabIndex = 4
         Me.TxtPatientId.Text = "[Patient Id]"
         '
-        'TxtPatientDOB
-        '
-        Me.TxtPatientDOB.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtPatientDOB.Location = New System.Drawing.Point(46, 127)
-        Me.TxtPatientDOB.Name = "TxtPatientDOB"
-        Me.TxtPatientDOB.Size = New System.Drawing.Size(679, 28)
-        Me.TxtPatientDOB.TabIndex = 3
-        Me.TxtPatientDOB.Text = "[Patient DOB]"
-        '
         'TxtFacilityName
         '
         Me.TxtFacilityName.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -242,6 +235,26 @@ Partial Class ReportForm
         Me.LblReportSaved.Text = "Saved"
         Me.LblReportSaved.Visible = False
         '
+        'DateTimePatientDOB
+        '
+        Me.DateTimePatientDOB.CalendarFont = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DateTimePatientDOB.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DateTimePatientDOB.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.DateTimePatientDOB.Location = New System.Drawing.Point(215, 127)
+        Me.DateTimePatientDOB.Name = "DateTimePatientDOB"
+        Me.DateTimePatientDOB.Size = New System.Drawing.Size(165, 28)
+        Me.DateTimePatientDOB.TabIndex = 10
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(42, 131)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(116, 24)
+        Me.Label4.TabIndex = 11
+        Me.Label4.Text = "Patient DOB:"
+        '
         'ReportForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -272,7 +285,6 @@ Partial Class ReportForm
     Friend WithEvents PatientInputPanel As Panel
     Friend WithEvents Label1 As Label
     Friend WithEvents TxtPatientId As TextBox
-    Friend WithEvents TxtPatientDOB As TextBox
     Friend WithEvents TxtFacilityName As TextBox
     Friend WithEvents TxtPatientName As TextBox
     Friend WithEvents Label2 As Label
@@ -283,4 +295,6 @@ Partial Class ReportForm
     Friend WithEvents BtnSaveToDB As Button
     Friend WithEvents ProgressBar1 As ProgressBar
     Friend WithEvents LblReportSaved As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents DateTimePatientDOB As DateTimePicker
 End Class

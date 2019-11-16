@@ -124,13 +124,13 @@
         "Entry"
         {
         "MsmKey" = "8:_A8D4F72079D613CE37325B4BDC80D9EE"
-        "OwnerKey" = "8:_8AA82C4DFB1DA83929C921B1D839C326"
+        "OwnerKey" = "8:_DD7AA90A235E42C3B3FC445E94B8802A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_A8D4F72079D613CE37325B4BDC80D9EE"
-        "OwnerKey" = "8:_DD7AA90A235E42C3B3FC445E94B8802A"
+        "OwnerKey" = "8:_8AA82C4DFB1DA83929C921B1D839C326"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -178,7 +178,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1FB43C4A0EBA191108FB86BB51B3E077"
+        "OwnerKey" = "8:_A8D4F72079D613CE37325B4BDC80D9EE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -268,7 +268,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A8D4F72079D613CE37325B4BDC80D9EE"
+        "OwnerKey" = "8:_1FB43C4A0EBA191108FB86BB51B3E077"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -289,6 +289,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -305,6 +313,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -389,7 +413,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:WBCDifferential, Version=3.1.0.3, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:WBCDifferential, Version=4.0.0.0, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_1A8FEACAB720442D90600945D28C729D"
@@ -1028,15 +1052,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:WBC Differential Counter"
-        "ProductCode" = "8:{4152699F-37CB-42C9-9E0F-3AEED8976E25}"
-        "PackageCode" = "8:{C4C7967B-2273-4917-8B45-2690830C7880}"
+        "ProductCode" = "8:{12F2D269-20F4-4D10-8E62-65FE82976FBB}"
+        "PackageCode" = "8:{FCA28C0B-E131-49C1-8B34-74C1A3A0FC18}"
         "UpgradeCode" = "8:{AC1EF7CC-B9F6-44E6-9D52-2ABA3A527C45}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:4.0.0"
         "Manufacturer" = "8:BriansCodes"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1151,7 +1175,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_3B173FB63CF747FA8D04C2D0DA6A3B2A"
             {
-            "Name" = "8:Shortcut to WBCDifferential.exe"
+            "Name" = "8:WBC Differential Counter"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -1165,7 +1189,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_CC6A5978C42842968E5E12DD71A64B98"
             {
-            "Name" = "8:Shortcut to WBCDifferential.exe"
+            "Name" = "8:WBC Differential Counter"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
