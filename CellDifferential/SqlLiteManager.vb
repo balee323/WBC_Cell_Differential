@@ -271,6 +271,7 @@ Public Class SqlLiteManager : Implements IDataRepo
                            End Sub
             )
 
+            'theres a bug here somehow....
             _timer1 = New System.Threading.Timer(New Threading.TimerCallback(Sub() saveCompleted.Invoke(Sub() saveCompleted.Visible = False)), Nothing, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(0))
 
         Catch ex As Exception
