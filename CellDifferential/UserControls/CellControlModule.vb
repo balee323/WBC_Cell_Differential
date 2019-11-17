@@ -2,6 +2,7 @@
 
     Private _cell As Cell
     Public Property IncludeNRBC As Boolean = False
+
     Public Sub New(cell As Cell)
 
         Me._cell = cell
@@ -10,33 +11,34 @@
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        Me.LblBindingKey.Text = cell.getKeyMapChar()
-        Me.LblCellType.Text = cell.getCellType()
+        Me.LblBindingKey.Text = cell.GetKeyMapChar()
+        Me.LblCellType.Text = cell.GetCellType()
+
+        ToolTip1.ToolTipTitle = "Just so you know..."
+        ToolTip1.SetToolTip(Me, "Clicking on cell label text will allow you to change the cell type text.")
 
     End Sub
     Private Sub LblCellType_Click(sender As Object, e As EventArgs) Handles LblCellType.Click
         Dim Message As String = "Please enter cell type."
         Dim Title As String = "Change cell type"
-        Dim DefaultValue As String = "NRBC"
-
+        Dim DefaultValue As String = ""
 
         _cell.ChangeCellType(InputBox(Message, Title, DefaultValue))
-        LblCellType.Text = _cell.getCellType()
+        LblCellType.Text = _cell.GetCellType()
         LblCellType.Refresh()
-
-        'need to save the celltype to DB
 
     End Sub
 
     Public Sub ResetState()
-        TxtCellTotal.Text = _cell.getCount().ToString()
-        LblBindingKey.Text = _cell.getKeyMapChar()
-        LblCellType.Text = _cell.getCellType()
+        TxtCellTotal.Text = _cell.GetCount().ToString()
+        LblBindingKey.Text = _cell.GetKeyMapChar()
+        LblCellType.Text = _cell.GetCellType()
         LblCellType.Refresh()
         LblBindingKey.Refresh()
     End Sub
 
-    Private Sub CellControlModule_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub CellPicture_Click(sender As Object, e As EventArgs) Handles CellPicture.Click
 
     End Sub
+
 End Class

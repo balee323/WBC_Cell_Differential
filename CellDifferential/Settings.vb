@@ -1,8 +1,5 @@
-﻿Imports System.Security.Permissions
-Imports Microsoft.Win32
-Imports Newtonsoft.Json
-Imports WBCDifferential
-
+﻿Imports Newtonsoft.Json
+Imports NLog
 
 Public Enum CounterType
     Peripheral = 1
@@ -14,9 +11,7 @@ Public Class Settings : Implements ISettings
     Private _dataRepo As IDataRepo
     Private _counterType As CounterType
     Private _cells As List(Of Cell)
-
-
-
+    Private _logger As Logger = NLog.LogManager.GetCurrentClassLogger()
 
     Public Sub New(cells As List(Of Cell), counterType As CounterType)
         _counterType = counterType
@@ -30,13 +25,9 @@ Public Class Settings : Implements ISettings
         Dim cellSettings As List(Of CellSetting) = CreateCellSettings()
 
         Dim jsonStr = JsonConvert.SerializeObject(cellSettings, Formatting.Indented)
-
-        'Dim userControlSettings = JsonConvert.DeserializeObject(Of CellSetting)(jsonStr)
-
-        cellSettings = JsonConvert.DeserializeObject(Of List(Of CellSetting))(jsonStr)
+        ' cellSettings = JsonConvert.DeserializeObject(Of List(Of CellSetting))(jsonStr)
 
         _dataRepo.SaveUserData(jsonStr)
-
 
     End Sub
 
@@ -45,7 +36,7 @@ Public Class Settings : Implements ISettings
         Dim cellSettings As New List(Of CellSetting)
 
         For Each cell In _cells
-            cellSettings.Add(New CellSetting With {.CellType = cell.getCellType(), .KeyMap = cell.getKeyMap(), .File = "File", .Position = cell.getPosition()})
+            cellSettings.Add(New CellSetting With {.CellType = cell.GetCellType(), .KeyMap = cell.GetKeyMap(), .File = "File", .Position = cell.GetPosition(), .EnableInCounter = cell.EnableInCounter})
         Next
 
         Return cellSettings
@@ -57,26 +48,25 @@ Public Class Settings : Implements ISettings
         Try
 
             Dim jsonStr = _dataRepo.LoadUserSettings()
-
             Dim cellSettings As List(Of CellSetting) = JsonConvert.DeserializeObject(Of List(Of CellSetting))(jsonStr)
+
+            Globals.ProgressBar.Increment(5)
 
             For Each cell In _cells
                 For Each cellsetting In cellSettings
-                    If (cell.getPosition = cellsetting.Position) Then
+                    If (cell.GetPosition = cellsetting.Position) Then
                         cell.ChangeCellType(cellsetting.CellType)
-                        cell.changeKeyMap(cellsetting.KeyMap)
+                        cell.ChangeKeyMap(cellsetting.KeyMap)
+                        cell.EnableInCounter = cellsetting.EnableInCounter
                         Exit For 'found it
                     End If
                 Next
 
             Next
         Catch ex As Exception
-
+            _logger.Error(ex)
         End Try
 
-
-
     End Sub
-
 
 End Class

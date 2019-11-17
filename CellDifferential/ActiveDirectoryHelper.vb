@@ -1,8 +1,8 @@
 ﻿Imports System.DirectoryServices
-Imports System.Threading.Tasks
 
 Public Module ActiveDirectoryHelper
 
+    'I will be using this to populate the full user name once reports get stored in DB
     Public Function GetUserInfo() As UserInfo
 
         Dim entry As New DirectoryEntry()

@@ -118,52 +118,70 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="click3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\click3.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="linkedInLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\linkedInLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DiffCounter2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DiffCounter2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="click4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\click4.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Questionmark50by50" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Questionmark50by50.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Regular_Ding" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Regular_Ding.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="yer_Done_fool" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\yer_Done_fool.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="DiffCounter3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DiffCounter3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RightEnd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RightEnd.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DiffCounter4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DiffCounter4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="RedCell" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedCell.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DiffCounter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DiffCounter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="RightEndFlipped" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RightEndFlipped.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Bomb" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Bomb.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="robotic_voice" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\robotic_voice.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="DiffCounter2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DiffCounter2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RedButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RedButton.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="WhiteButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WhiteButton.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DiffCounter4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DiffCounter4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BoneMarrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BoneMarrow.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RedCell" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RedCell.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Regular_Ding" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Regular_Ding.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="robotic_voice" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\robotic_voice.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="click3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\click3.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="DiffCounter3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DiffCounter3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="linkedInLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\linkedInLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditIcon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditIcon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WhiteButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WhiteButton.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RedButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RedButton.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Questionmark50by50" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Questionmark50by50.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="click4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\click4.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="EditIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditIcon2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditIcon2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CellDiff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\CellDiff.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

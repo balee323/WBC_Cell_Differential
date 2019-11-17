@@ -1,4 +1,5 @@
-﻿Imports System
+﻿Imports System.Resources
+Imports System
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 
@@ -8,12 +9,12 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("WBC Differential")>
-<Assembly: AssemblyDescription("For Free Use")> 
-<Assembly: AssemblyCompany("Brian's Codes")> 
-<Assembly: AssemblyProduct("WBC_Differential3.0")>
-<Assembly: AssemblyCopyright("Copyright © Brian A Lee 2017")>
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyTitle("WBC Differential Counter")>
+<Assembly: AssemblyDescription("Free for use")>
+<Assembly: AssemblyCompany("Brian's Codes")>
+<Assembly: AssemblyProduct("WBC_Differential")>
+<Assembly: AssemblyCopyright("Copyright © Brian A Lee 2019")>
+<Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
 
@@ -31,5 +32,6 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("3.1.0.3")>
-<Assembly: AssemblyFileVersion("1.0.0.0")> 
+<Assembly: AssemblyVersion("4.0.0.0")>
+<Assembly: AssemblyFileVersion("1.0.0.0")>
+<Assembly: NeutralResourcesLanguage("en-US")>

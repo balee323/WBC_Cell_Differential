@@ -1,18 +1,20 @@
-﻿Public Class CountingControlModule
+﻿Imports NLog
 
+Public Class CountingControlModule
+
+    Private _logger As Logger = NLog.LogManager.GetCurrentClassLogger()
     Private _countingObject As CountingObject
-    Private _refreshCellCounts As Action
-    Private _resetCellModules As Action
+    Private _resetCellCounts As Action
+    Private _refreshCellModules As Action
     Private _cells As List(Of Cell)
     Private _settings As ISettings
     Public Sub New(countingObject As CountingObject, refreshCellModules As Action, resetCellCounts As Action, cells As List(Of Cell), settings As ISettings)
 
         Me._countingObject = countingObject
-        Me._resetCellModules = refreshCellModules
-        Me._refreshCellCounts = resetCellCounts
+        Me._refreshCellModules = refreshCellModules
+        Me._resetCellCounts = resetCellCounts
         Me._cells = cells
         Me._settings = settings
-
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -34,7 +36,7 @@
             Dim lastCountedCell = _countingObject.UndoList.Pop
             'find NRBC
             Dim NRBC As Cell = Nothing
-            If lastCountedCell.getCellType.Contains("NRBC") Then
+            If lastCountedCell.GetCellType.Contains("NRBC") Then
                 NRBC = lastCountedCell
             End If
 
@@ -46,7 +48,7 @@
             'need to lock out button
         End Try
 
-        _refreshCellCounts()
+        _refreshCellModules()
         Me.Refresh()
 
     End Sub
@@ -55,15 +57,15 @@
 
         'NRBC are part of count and will be removed
         If ChkBoxIncludeNRBC.Checked Then
-            _countingObject.Total = _countingObject.Total - 1
+            _countingObject.Total -= 1
             TxtTotal.Text = CStr(_countingObject.Total)
             cell.UndoCount()
         Else
-            If cell.getCellType() <> "NRBC" Then
-                _countingObject.Total = _countingObject.Total - 1
+            If cell.GetCellType() <> "NRBC" Then
+                _countingObject.Total -= 1
                 TxtTotal.Text = CStr(_countingObject.Total)
                 cell.UndoCount()
-            ElseIf cell.getCellType() = "NRBC" Then
+            ElseIf cell.GetCellType() = "NRBC" Then
                 cell.UndoCount() 'removes 1 from NRBC count
             End If
         End If
@@ -84,6 +86,8 @@
         TxtTotal.Text = _countingObject.Total.ToString()
     End Sub
 
+
+
     Private Sub BtnChangeCount_Click(sender As Object, e As EventArgs) Handles BtnChangeCount.Click
         TxtCountLimit.ReadOnly = False
 
@@ -92,7 +96,6 @@
         Dim Message As String = "Please enter a count between 20 and 500."
         Dim Title As String = "Change Cell Count"
         Dim DefaultValue As String = "100"
-
 
         'checks the value of the input
         CheckCountInput(InputBox(Message, Title, DefaultValue))
@@ -126,8 +129,12 @@
     End Sub
 
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
-        _resetCellModules()
-        _refreshCellCounts()
+        ClearCountingModule()
+    End Sub
+
+    Public Sub ClearCountingModule()
+        _resetCellCounts()
+        _refreshCellModules()
         _countingObject.Total = 0
         ChkBoxIncludeNRBC.Enabled = True
         BtnChangeCount.Enabled = True
@@ -135,7 +142,24 @@
     End Sub
 
     Private Sub BtnEditKeys_Click(sender As Object, e As EventArgs) Handles BtnEditKeys.Click
-        Dim keyBind As New KeyBind(_cells, _settings, _resetCellModules)
-        keyBind.Show()
+
+        Try
+            If _countingObject.CounterType = CounterType.Peripheral Then
+                Dim keybind As New KeyBind(_cells, _settings, _refreshCellModules)
+                keybind.Show()
+
+            ElseIf _countingObject.CounterType = CounterType.BoneMarrow Then
+                Dim keybind As New KeyBind2(_cells, _settings, _refreshCellModules)
+                keybind.Show()
+            End If
+        Catch ex As Exception
+            _logger.Error(ex, "Error displaying keybind window.  Keytype not property not set.")
+        End Try
+
+    End Sub
+
+    Private Sub BtnReport_Click(sender As Object, e As EventArgs) Handles BtnReport.Click
+        Dim report = New ReportForm(_cells, _settings, _countingObject)
+        report.Show()
     End Sub
 End Class

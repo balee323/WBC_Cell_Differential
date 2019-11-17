@@ -36,4 +36,8 @@ Public Class CellSetting
     <JsonProperty>
     Public Property File As String
 
+    <JsonProperty>
+    Public Property EnableInCounter As Boolean
+
+
 End Class

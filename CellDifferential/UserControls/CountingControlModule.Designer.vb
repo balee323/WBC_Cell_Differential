@@ -40,10 +40,10 @@ Partial Class CountingControlModule
         Me.BtnReport.BackColor = System.Drawing.Color.LightSteelBlue
         Me.BtnReport.Cursor = System.Windows.Forms.Cursors.Hand
         Me.BtnReport.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.150944!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnReport.Location = New System.Drawing.Point(115, 245)
+        Me.BtnReport.Location = New System.Drawing.Point(115, 221)
         Me.BtnReport.Margin = New System.Windows.Forms.Padding(6, 5, 6, 5)
         Me.BtnReport.Name = "BtnReport"
-        Me.BtnReport.Size = New System.Drawing.Size(70, 40)
+        Me.BtnReport.Size = New System.Drawing.Size(70, 75)
         Me.BtnReport.TabIndex = 40
         Me.BtnReport.TabStop = False
         Me.BtnReport.Text = "Create Report"
@@ -54,10 +54,10 @@ Partial Class CountingControlModule
         Me.BtnEditKeys.BackColor = System.Drawing.Color.LightSteelBlue
         Me.BtnEditKeys.Cursor = System.Windows.Forms.Cursors.Hand
         Me.BtnEditKeys.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.150944!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnEditKeys.Location = New System.Drawing.Point(11, 245)
+        Me.BtnEditKeys.Location = New System.Drawing.Point(11, 221)
         Me.BtnEditKeys.Margin = New System.Windows.Forms.Padding(6, 5, 6, 5)
         Me.BtnEditKeys.Name = "BtnEditKeys"
-        Me.BtnEditKeys.Size = New System.Drawing.Size(70, 40)
+        Me.BtnEditKeys.Size = New System.Drawing.Size(90, 75)
         Me.BtnEditKeys.TabIndex = 39
         Me.BtnEditKeys.TabStop = False
         Me.BtnEditKeys.Text = "See Key Bindings"
@@ -72,7 +72,7 @@ Partial Class CountingControlModule
         Me.GroupBox2.Controls.Add(Me.BtnChangeCount)
         Me.GroupBox2.Controls.Add(Me.TxtCountLimit)
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox2.Location = New System.Drawing.Point(11, 82)
+        Me.GroupBox2.Location = New System.Drawing.Point(11, 61)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(174, 155)
         Me.GroupBox2.TabIndex = 44
@@ -153,7 +153,7 @@ Partial Class CountingControlModule
         Me.TxtTotal.Cursor = System.Windows.Forms.Cursors.No
         Me.TxtTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtTotal.ForeColor = System.Drawing.Color.Black
-        Me.TxtTotal.Location = New System.Drawing.Point(97, 34)
+        Me.TxtTotal.Location = New System.Drawing.Point(97, 17)
         Me.TxtTotal.Margin = New System.Windows.Forms.Padding(6, 5, 6, 5)
         Me.TxtTotal.Name = "TxtTotal"
         Me.TxtTotal.ReadOnly = True
@@ -167,7 +167,7 @@ Partial Class CountingControlModule
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(12, 37)
+        Me.Label1.Location = New System.Drawing.Point(12, 21)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(69, 29)
         Me.Label1.TabIndex = 45
@@ -183,8 +183,9 @@ Partial Class CountingControlModule
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.BtnReport)
         Me.Controls.Add(Me.BtnEditKeys)
+        Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "CountingControlModule"
-        Me.Size = New System.Drawing.Size(200, 300)
+        Me.Size = New System.Drawing.Size(195, 300)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)

@@ -145,6 +145,12 @@
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.6.8\lib\net45\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="PdfSharp, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -185,12 +191,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveDirectoryHelper.vb" />
+    <Compile Include="CellViewOptions.Designer.vb">
+      <DependentUpon>CellViewOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CellViewOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GlobalSuppressions.vb" />
     <Compile Include="Interfaces\IDataRepo.vb" />
     <Compile Include="Models\Cell.vb" />
-    <Compile Include="BoneMarrowForm.Designer.vb">
-      <DependentUpon>BoneMarrowForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="BoneMarrowForm.vb" />
     <Compile Include="Interfaces\ISettings.vb" />
     <Compile Include="KeyBind2.Designer.vb">
       <DependentUpon>KeyBind2.vb</DependentUpon>
@@ -200,19 +209,13 @@
     </Compile>
     <Compile Include="Models\CountingObject.vb" />
     <Compile Include="Models\Globals.vb" />
+    <Compile Include="Models\SearchFilter.vb" />
     <Compile Include="Models\UserInfo.vb" />
     <Compile Include="ModularCounterForm.Designer.vb">
       <DependentUpon>ModularCounterForm.vb</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="ModularCounterForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PeripheralForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PeripheralForm.Designer.vb">
-      <DependentUpon>PeripheralForm.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Models\AllCells.vb" />
@@ -233,10 +236,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Report.Designer.vb">
-      <DependentUpon>Report.vb</DependentUpon>
+    <Compile Include="ReportForm.Designer.vb">
+      <DependentUpon>ReportForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Report.vb">
+    <Compile Include="ReportForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="KeyBind.Designer.vb">
@@ -254,6 +257,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ReportPickerForm.Designer.vb">
+      <DependentUpon>ReportPickerForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportPickerForm.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Settings.vb" />
     <Compile Include="SqlLiteManager.vb" />
@@ -283,8 +292,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BoneMarrowForm.resx">
-      <DependentUpon>BoneMarrowForm.vb</DependentUpon>
+    <EmbeddedResource Include="CellViewOptions.resx">
+      <DependentUpon>CellViewOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KeyBind2.resx">
       <DependentUpon>KeyBind2.vb</DependentUpon>
@@ -292,17 +301,14 @@
     <EmbeddedResource Include="ModularCounterForm.resx">
       <DependentUpon>ModularCounterForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PeripheralForm.resx">
-      <DependentUpon>PeripheralForm.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DeveloperInfo.resx">
       <DependentUpon>DeveloperInfo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report.resx">
-      <DependentUpon>Report.vb</DependentUpon>
+    <EmbeddedResource Include="ReportForm.resx">
+      <DependentUpon>ReportForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KeyBind.resx">
       <DependentUpon>KeyBind.vb</DependentUpon>
@@ -312,6 +318,9 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportPickerForm.resx">
+      <DependentUpon>ReportPickerForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\CountingControlModule.resx">
       <DependentUpon>CountingControlModule.vb</DependentUpon>
@@ -357,10 +366,15 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Report.vb" />
     <Content Include="Resources\Background.jpg" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\RightEndFlipped.jpg" />
+    <None Include="Resources\EditIcon.png" />
+    <None Include="Resources\EditIcon1.png" />
+    <None Include="Resources\EditIcon2.png" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
