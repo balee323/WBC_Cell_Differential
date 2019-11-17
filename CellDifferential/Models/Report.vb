@@ -1,7 +1,5 @@
 ﻿Imports Newtonsoft.Json
-
-
-
+Imports WBCDifferential
 
 Public Class Report
 
@@ -30,7 +28,7 @@ Public Class ReportDetails
     Public Property CountingObject As CountingObject
 
     <JsonProperty>
-    Public Property CellReportItems As List(Of CellReportItem)
+    Public Property CellReportItems As List(Of ReportCell)
 
     <JsonProperty>
     Public Property CellMorphology As String
@@ -41,12 +39,13 @@ Public Class ReportDetails
 End Class
 
 <JsonObject(MemberSerialization.OptIn)>
-Public Class CellReportItem
+Public Class ReportCell : Implements ICell
 
     <JsonProperty>
-    Public Property CellType As String
+    Public Property CellType As String Implements ICell.CellType
 
     <JsonProperty>
-    Public Property Count As Integer
+    Public Property Count As Integer Implements ICell.Count
+
 End Class
 

@@ -144,7 +144,7 @@ Public Class ReportForm
         Dim i As Integer = 0
         While i < _cells?.Count
             If Not _cells(i).GetCellType.Contains("User") And _cells(i).EnableInCounter Then
-                _reportBuilder.AppendFormat(ColumnSpacing2, _cells(i).GetCellType, _cells(i).GetCount, GetPercent(_cells(i).GetCount), " %")
+                _reportBuilder.AppendFormat(ColumnSpacing2, _cells(i).GetCellType, _cells(i).Count, GetPercent(_cells(i).Count), " %")
                 _reportBuilder.AppendLine()
             End If
             i += 1
@@ -317,10 +317,10 @@ Public Class ReportForm
         reportDetails.CellMorphology = TxtRBCMorph.Text
         reportDetails.OtherFindings = TxtOtherFindings.Text
         reportDetails.CountingObject = _countingObject
-        reportDetails.CellReportItems = New List(Of CellReportItem)
+        reportDetails.CellReportItems = New List(Of ReportCell)
 
         For Each cell In _cells
-            reportDetails.CellReportItems.Add(New CellReportItem With {.CellType = cell.GetCellType(), .Count = cell.GetCount()})
+            reportDetails.CellReportItems.Add(New ReportCell With {.CellType = cell.GetCellType(), .Count = cell.Count})
         Next
 
         Return reportDetails

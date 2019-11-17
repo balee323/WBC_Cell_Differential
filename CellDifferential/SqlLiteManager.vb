@@ -69,7 +69,7 @@ Public Class SqlLiteManager : Implements IDataRepo
 
     Private Async Sub CreateReportsTable()
 
-        Dim create_table = "CREATE TABLE IF NOT EXISTS Reports(ReportID UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, UserName VarChar(50), GivenName VarChar(50), PatientID VarChar(50), PatientName VarChar(100), PatientDOB DateTime2(2), ReportDetailsJson VarChar(5000), DateCreated DateTime2(3), DateModified DateTime2(3));"
+        Dim create_table = "CREATE TABLE IF NOT EXISTS Reports(ReportID UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, UserName VarChar(50), GivenName VarChar(50), PatientID VarChar(50), PatientName VarChar(100), PatientDOB DateTime2(2), FacilityName VarChar(50), ReportDetailsJson VarChar(5000), DateCreated DateTime2(3), DateModified DateTime2(3));"
 
         Try
             Using con As New SQLiteConnection(_connectionString)
@@ -114,6 +114,10 @@ Public Class SqlLiteManager : Implements IDataRepo
     Public Function LoadUserSettings() As String Implements IDataRepo.LoadUserSettings
 
         Dim userInfo = ActiveDirectoryHelper.GetUserInfo()
+
+        If UserExist(userInfo) = False Then
+            Exit Function
+        End If
 
         ' create table sql statement
         Dim queryStr As String = String.Empty
@@ -253,6 +257,9 @@ Public Class SqlLiteManager : Implements IDataRepo
 
     Public Async Sub SaveReport(report As Report, reportDetailsJson As String, progressBar As ProgressBar, saveCompleted As Label) Implements IDataRepo.SaveReport
 
+
+        saveCompleted.Visible = False
+
         Dim userSettings As New UserInfo()
         progressBar.Increment(15)
 
@@ -271,12 +278,18 @@ Public Class SqlLiteManager : Implements IDataRepo
                            End Sub
             )
 
-            'theres a bug here somehow....
-            _timer1 = New System.Threading.Timer(New Threading.TimerCallback(Sub() saveCompleted.Invoke(Sub() saveCompleted.Visible = False)), Nothing, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(0))
-
+            _timer1 = New System.Threading.Timer(New Threading.TimerCallback(Sub() VerifySafeAndUpdateControl(saveCompleted)), Nothing, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(0))
         Catch ex As Exception
             _logger.Error(ex)
         End Try
+
+    End Sub
+
+
+    Private Sub VerifySafeAndUpdateControl(saveCompleted As Label)
+        If (CType(saveCompleted, Control).Created) Then
+            saveCompleted.Invoke(Sub() saveCompleted.Visible = False)
+        End If
 
     End Sub
 
@@ -292,11 +305,9 @@ Public Class SqlLiteManager : Implements IDataRepo
                         Dim Sql As String = ""
                         ' create the SQL statement
 
-                        Sql &= "INSERT INTO Reports (ReportID, UserName, GivenName, PatientID, PatientName, PatientDOB, ReportDetailsJson, DateCreated) VALUES "
+                        Sql &= "INSERT INTO Reports (ReportID, UserName, GivenName, PatientID, PatientName, PatientDOB, FacilityName, ReportDetailsJson, DateCreated) VALUES "
                         Sql &= $"('{Guid.NewGuid().ToString()}', '{userInfo.UserName}', '{userInfo.GivenName}', '{report.PatientID}', '{report.PatientName}',"
-                        Sql &= $" '{report.PatientDOB}', '{reportDetailsJson}', '{report.ReportDate}') "
-
-
+                        Sql &= $" '{report.PatientDOB}', '{report.FacilityName}', '{reportDetailsJson}', '{report.ReportDate}') "
 
                         'ReportID UNIQUEIDENTIFIER Not NULL PRIMARY KEY, UserName VarChar(50), GivenName VarChar(50), PatientID VarChar(50), 
                         'PatientName VarChar(100), PatientDOB DateTime2(2), ReportDetailsJson VarChar(5000), DateCreated DateTime2(3),

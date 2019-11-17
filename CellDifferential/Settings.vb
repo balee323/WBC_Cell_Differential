@@ -48,6 +48,11 @@ Public Class Settings : Implements ISettings
         Try
 
             Dim jsonStr = _dataRepo.LoadUserSettings()
+
+            If (String.IsNullOrWhiteSpace(jsonStr)) Then
+                Exit Sub
+            End If
+
             Dim cellSettings As List(Of CellSetting) = JsonConvert.DeserializeObject(Of List(Of CellSetting))(jsonStr)
 
             Globals.ProgressBar.Increment(5)

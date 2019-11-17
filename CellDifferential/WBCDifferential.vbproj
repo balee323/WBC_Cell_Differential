@@ -209,6 +209,7 @@
     </Compile>
     <Compile Include="Models\CountingObject.vb" />
     <Compile Include="Models\Globals.vb" />
+    <Compile Include="Interfaces\ICell.vb" />
     <Compile Include="Models\SearchFilter.vb" />
     <Compile Include="Models\UserInfo.vb" />
     <Compile Include="ModularCounterForm.Designer.vb">

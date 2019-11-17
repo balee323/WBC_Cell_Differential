@@ -1,8 +1,10 @@
-﻿Imports Newtonsoft.Json
+﻿Imports System.ComponentModel
+Imports Newtonsoft.Json
 
 Public Class ReportPickerForm
 
     Private _reports As New List(Of Report)
+    Private _sortOrder As Integer = 0
 
     Private Sub LoadReports()
         Dim repo As IDataRepo = New SqlLiteManager()
@@ -20,9 +22,9 @@ Public Class ReportPickerForm
             report.PatientID = parts(3)
             report.PatientName = parts(4)
             report.PatientDOB = (CType(parts(5), Date)).Date
-            report.ReportDate = CType(parts(7), DateTime)
-
-            report.ReportDetails = JsonConvert.DeserializeObject(Of ReportDetails)(parts(6))
+            report.FacilityName = parts(6)
+            report.ReportDetails = JsonConvert.DeserializeObject(Of ReportDetails)(parts(7))
+            report.ReportDate = CType(parts(8), DateTime)
 
             '0 ReportID UNIQUEIDENTIFIER Not NULL PRIMARY KEY,
             '1 UserName VarChar(50), 
@@ -30,9 +32,11 @@ Public Class ReportPickerForm
             '3 PatientID VarChar(50), 
             '4 PatientName VarChar(100), 
             '5 PatientDOB DateTime2(2), 
-            '6 ReportDetailsJson VarChar(5000), 
-            '7 DateCreated DateTime2(3),
-            '8 DateModified DateTime2(3)
+            '6 FacilityName VarChar(50),
+            '7 ReportDetailsJson VarChar(5000), 
+            '8 DateCreated DateTime2(3),
+            '9 DateModified DateTime2(3)
+
 
             _reports.Add(report)
         Next
@@ -46,7 +50,9 @@ Public Class ReportPickerForm
         LoadReports()
 
         DataGridView1.MultiSelect = False
-        DataGridView1.DataSource = _reports
+        DataGridView1.DataSource = _reports.OrderByDescending(Function(s) s.ReportDate).ToList()
+
+
 
     End Sub
 
@@ -63,4 +69,53 @@ Public Class ReportPickerForm
         End If
 
     End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridView1.ColumnHeaderMouseClick
+
+        Dim gridView = CType(sender, System.Windows.Forms.DataGridView)
+
+        Dim column As DataGridViewColumn = DataGridView1.Columns(e.ColumnIndex)
+        ' Dim oldColumn As DataGridViewColumn = DataGridView1.SortedColumn
+
+        If (_sortOrder = 1) Then
+            If (column.DataPropertyName = "ReportDate") Then
+                DataGridView1.DataSource = _reports.OrderByDescending(Function(s) s.ReportDate).ToList()
+            ElseIf (column.DataPropertyName = "PatientName") Then
+                DataGridView1.DataSource = _reports.OrderByDescending(Function(s) s.PatientName).ToList()
+            ElseIf (column.DataPropertyName = "PatientDOB") Then
+                DataGridView1.DataSource = _reports.OrderByDescending(Function(s) s.PatientDOB).ToList()
+            ElseIf (column.DataPropertyName = "PatientID") Then
+                DataGridView1.DataSource = _reports.OrderByDescending(Function(s) s.PatientID).ToList()
+            ElseIf (column.DataPropertyName = "UserName") Then
+                DataGridView1.DataSource = _reports.OrderByDescending(Function(s) s.UserName).ToList()
+            ElseIf (column.DataPropertyName = "FacilityName") Then
+                DataGridView1.DataSource = _reports.OrderByDescending(Function(s) s.FacilityName).ToList()
+            ElseIf (column.DataPropertyName = "GivenName") Then
+                DataGridView1.DataSource = _reports.OrderByDescending(Function(s) s.GivenName).ToList()
+            End If
+
+            _sortOrder = 2
+        Else
+
+            If (column.DataPropertyName = "ReportDate") Then
+                DataGridView1.DataSource = _reports.OrderBy(Function(s) s.ReportDate).ToList()
+            ElseIf (column.DataPropertyName = "PatientName") Then
+                DataGridView1.DataSource = _reports.OrderBy(Function(s) s.PatientName).ToList()
+            ElseIf (column.DataPropertyName = "PatientDOB") Then
+                DataGridView1.DataSource = _reports.OrderBy(Function(s) s.PatientDOB).ToList()
+            ElseIf (column.DataPropertyName = "PatientID") Then
+                DataGridView1.DataSource = _reports.OrderBy(Function(s) s.PatientID).ToList()
+            ElseIf (column.DataPropertyName = "UserName") Then
+                DataGridView1.DataSource = _reports.OrderBy(Function(s) s.UserName).ToList()
+            ElseIf (column.DataPropertyName = "FacilityName") Then
+                DataGridView1.DataSource = _reports.OrderBy(Function(s) s.FacilityName).ToList()
+            ElseIf (column.DataPropertyName = "GivenName") Then
+                DataGridView1.DataSource = _reports.OrderBy(Function(s) s.GivenName).ToList()
+            End If
+
+            _sortOrder = 1
+        End If
+
+    End Sub
+
 End Class

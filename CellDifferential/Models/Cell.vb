@@ -1,13 +1,16 @@
 ﻿Imports System.Windows.Forms.Form
+Imports WBCDifferential
 
-Public Class Cell
+Public Class Cell : Implements ICell
     Private _KeyMap As Integer = 0
     Private _ImageFile As String = ""
-    Private _Count As Integer = 0
 
     Public Property EnableInCounter As Boolean = True
-    Public Property CellType As String = Me.CellType
+    Public Property CellType As String = Me.CellType Implements ICell.CellType
     Public Property Position As Integer = Me.Position
+
+    Public Property Count As Integer = _Count Implements ICell.Count
+
 
     Public Sub New(CellType As String, KeyMap As Integer, ImageFile As String, Position As Integer)
         Me.CellType = CellType 'Seg, Lym, etc..
@@ -29,9 +32,6 @@ Public Class Cell
         Return Me.CellType
     End Function
 
-    Public Function GetCount() As Integer
-        Return _Count
-    End Function
     Public Function GetPosition() As Integer
         Return _Position
     End Function
@@ -45,15 +45,15 @@ Public Class Cell
 
 
     Public Sub AddToCount()
-        _Count += 1
+        Count += 1
     End Sub
 
     Public Sub UndoCount()
-        _Count -= 1
+        Count -= 1
     End Sub
 
     Public Sub ResetCount()
-        _Count = 0
+        Count = 0
     End Sub
     Public Sub ChangeKeyMap(Key As String)
         _KeyMap = Asc(Key)
