@@ -1,14 +1,38 @@
 ﻿Imports System.ComponentModel
 Imports Newtonsoft.Json
+Imports NLog
 
 Public Class ReportPickerForm
 
     Private _reports As New List(Of Report)
     Private _sortOrder As Integer = 0
+    Private _logger As Logger = NLog.LogManager.GetCurrentClassLogger()
 
-    Private Sub LoadReports()
+    Private Sub ReportPickerForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Try
+            'testing
+            LoadInitialReports() 'Maybe Load last 15 reports?
+
+            DataGridView1.MultiSelect = False
+            DataGridView1.DataSource = _reports.OrderByDescending(Function(s) s.ReportDate).ToList()
+        Catch ex As Exception
+            _logger.Error(ex)
+        End Try
+
+
+    End Sub
+
+    Private Sub LoadInitialReports()
         Dim repo As IDataRepo = New SqlLiteManager()
         Dim reportsStr = repo.LoadReports(Nothing)
+
+        ParseAndLoadReports(reportsStr)
+
+    End Sub
+
+    Private Sub ParseAndLoadReports(reportsStr As List(Of String))
+
+        _reports.Clear()
 
         For Each reportStr In reportsStr
 
@@ -23,8 +47,9 @@ Public Class ReportPickerForm
             report.PatientName = parts(4)
             report.PatientDOB = (CType(parts(5), Date)).Date
             report.FacilityName = parts(6)
-            report.ReportDetails = JsonConvert.DeserializeObject(Of ReportDetails)(parts(7))
-            report.ReportDate = CType(parts(8), DateTime)
+            report.CounterType.TryParse(parts(7), ignoreCase:=True, report.CounterType)
+            report.ReportDetails = JsonConvert.DeserializeObject(Of ReportDetails)(parts(8))
+            report.ReportDate = CType(parts(9), DateTime)
 
             '0 ReportID UNIQUEIDENTIFIER Not NULL PRIMARY KEY,
             '1 UserName VarChar(50), 
@@ -33,28 +58,16 @@ Public Class ReportPickerForm
             '4 PatientName VarChar(100), 
             '5 PatientDOB DateTime2(2), 
             '6 FacilityName VarChar(50),
-            '7 ReportDetailsJson VarChar(5000), 
-            '8 DateCreated DateTime2(3),
-            '9 DateModified DateTime2(3)
+            '7 CounterType VarChar(50),
+            '8 ReportDetailsJson VarChar(5000), 
+            '9 DateCreated DateTime2(3),
+            '10 DateModified DateTime2(3)
 
 
             _reports.Add(report)
         Next
-
-
     End Sub
 
-    Private Sub ReportPickerForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        'testing
-        LoadReports()
-
-        DataGridView1.MultiSelect = False
-        DataGridView1.DataSource = _reports.OrderByDescending(Function(s) s.ReportDate).ToList()
-
-
-
-    End Sub
 
 
     Private Sub BtnOpen_Click(sender As Object, e As EventArgs) Handles BtnOpen.Click
@@ -62,9 +75,9 @@ Public Class ReportPickerForm
         If DataGridView1.SelectedRows.Count > 0 Then
             Dim report = CType(DataGridView1.CurrentRow.DataBoundItem, Report)
 
-            Dim reportForm As New ReportForm()
+            Dim reportForm As New ReportForm(report)
             reportForm.Show()
-            Me.Hide()
+            Me.Close()
 
         End If
 
@@ -118,4 +131,48 @@ Public Class ReportPickerForm
 
     End Sub
 
+    Private Sub BtnRefresh_Click(sender As Object, e As EventArgs) Handles BtnRefresh.Click
+        LoadInitialReports()
+    End Sub
+
+    Private Sub BtnOpenReport_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub ChkBoxIncludeDate_CheckedChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
+
+        'run search on Database, return results and set new datasource value
+
+        Dim searchFilter = New SearchFilter()
+
+        If RadioPatientID.Checked Then
+            searchFilter.SearchPatientID = True
+            searchFilter.Report.PatientID = TxtBoxSearch.Text
+        ElseIf RadioPatientName.Checked Then
+            searchFilter.SearchPatientName = True
+            searchFilter.Report.PatientName = TxtBoxSearch.Text
+        ElseIf RadioPatientDOB.Checked Then
+            searchFilter.SearchPatientDOB = True
+            searchFilter.Report.PatientDOB = DateTimePatientDOB.Value.Date
+        ElseIf RadioTechName.Checked Then
+            searchFilter.SearchUserName = True
+            searchFilter.UserInfo.UserName = TxtBoxSearch.Text
+        End If
+
+
+
+        Dim repo As IDataRepo = New SqlLiteManager()
+        Dim reportsStr = repo.LoadReports(searchFilter)
+        ParseAndLoadReports(reportsStr)
+
+        DataGridView1.MultiSelect = False
+        DataGridView1.DataSource = _reports.OrderByDescending(Function(s) s.ReportDate).ToList()
+
+
+
+    End Sub
 End Class

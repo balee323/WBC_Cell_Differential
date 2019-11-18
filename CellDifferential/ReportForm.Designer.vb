@@ -28,6 +28,8 @@ Partial Class ReportForm
         Me.BtnGenPDF = New System.Windows.Forms.Button()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.PatientInputPanel = New System.Windows.Forms.Panel()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.DateTimePatientDOB = New System.Windows.Forms.DateTimePicker()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TxtOtherFindings = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -40,8 +42,6 @@ Partial Class ReportForm
         Me.BtnSaveToDB = New System.Windows.Forms.Button()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.LblReportSaved = New System.Windows.Forms.Label()
-        Me.DateTimePatientDOB = New System.Windows.Forms.DateTimePicker()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.PatientInputPanel.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -116,6 +116,26 @@ Partial Class ReportForm
         Me.PatientInputPanel.Name = "PatientInputPanel"
         Me.PatientInputPanel.Size = New System.Drawing.Size(863, 454)
         Me.PatientInputPanel.TabIndex = 8
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(42, 131)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(116, 24)
+        Me.Label4.TabIndex = 11
+        Me.Label4.Text = "Patient DOB:"
+        '
+        'DateTimePatientDOB
+        '
+        Me.DateTimePatientDOB.CalendarFont = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DateTimePatientDOB.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DateTimePatientDOB.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.DateTimePatientDOB.Location = New System.Drawing.Point(215, 127)
+        Me.DateTimePatientDOB.Name = "DateTimePatientDOB"
+        Me.DateTimePatientDOB.Size = New System.Drawing.Size(165, 28)
+        Me.DateTimePatientDOB.TabIndex = 10
         '
         'Button1
         '
@@ -234,26 +254,6 @@ Partial Class ReportForm
         Me.LblReportSaved.TabIndex = 11
         Me.LblReportSaved.Text = "Saved"
         Me.LblReportSaved.Visible = False
-        '
-        'DateTimePatientDOB
-        '
-        Me.DateTimePatientDOB.CalendarFont = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateTimePatientDOB.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateTimePatientDOB.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DateTimePatientDOB.Location = New System.Drawing.Point(215, 127)
-        Me.DateTimePatientDOB.Name = "DateTimePatientDOB"
-        Me.DateTimePatientDOB.Size = New System.Drawing.Size(165, 28)
-        Me.DateTimePatientDOB.TabIndex = 10
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(42, 131)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(116, 24)
-        Me.Label4.TabIndex = 11
-        Me.Label4.Text = "Patient DOB:"
         '
         'ReportForm
         '

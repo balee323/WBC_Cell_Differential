@@ -69,7 +69,7 @@ Public Class SqlLiteManager : Implements IDataRepo
 
     Private Async Sub CreateReportsTable()
 
-        Dim create_table = "CREATE TABLE IF NOT EXISTS Reports(ReportID UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, UserName VarChar(50), GivenName VarChar(50), PatientID VarChar(50), PatientName VarChar(100), PatientDOB DateTime2(2), FacilityName VarChar(50), ReportDetailsJson VarChar(5000), DateCreated DateTime2(3), DateModified DateTime2(3));"
+        Dim create_table = "CREATE TABLE IF NOT EXISTS Reports(ReportID UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, UserName VarChar(50), GivenName VarChar(50), PatientID VarChar(50), PatientName VarChar(100), PatientDOB DateTime2(2), FacilityName VarChar(50), CounterType VarChar(50), ReportDetailsJson VarChar(5000), DateCreated DateTime2(3), DateModified DateTime2(3));"
 
         Try
             Using con As New SQLiteConnection(_connectionString)
@@ -116,7 +116,7 @@ Public Class SqlLiteManager : Implements IDataRepo
         Dim userInfo = ActiveDirectoryHelper.GetUserInfo()
 
         If UserExist(userInfo) = False Then
-            Exit Function
+            Return Nothing
         End If
 
         ' create table sql statement
@@ -146,6 +146,7 @@ Public Class SqlLiteManager : Implements IDataRepo
 
         Catch ex As Exception
             _logger.Error(ex, "error finding user...")
+            Return Nothing
         End Try
         Globals.ProgressBar.Increment(10)
 
@@ -305,9 +306,9 @@ Public Class SqlLiteManager : Implements IDataRepo
                         Dim Sql As String = ""
                         ' create the SQL statement
 
-                        Sql &= "INSERT INTO Reports (ReportID, UserName, GivenName, PatientID, PatientName, PatientDOB, FacilityName, ReportDetailsJson, DateCreated) VALUES "
+                        Sql &= "INSERT INTO Reports (ReportID, UserName, GivenName, PatientID, PatientName, PatientDOB, FacilityName, CounterType, ReportDetailsJson, DateCreated) VALUES "
                         Sql &= $"('{Guid.NewGuid().ToString()}', '{userInfo.UserName}', '{userInfo.GivenName}', '{report.PatientID}', '{report.PatientName}',"
-                        Sql &= $" '{report.PatientDOB}', '{report.FacilityName}', '{reportDetailsJson}', '{report.ReportDate}') "
+                        Sql &= $" '{report.PatientDOB}', '{report.FacilityName}', '{report.CounterType.ToString()}', '{reportDetailsJson}', '{report.ReportDate}') "
 
                         'ReportID UNIQUEIDENTIFIER Not NULL PRIMARY KEY, UserName VarChar(50), GivenName VarChar(50), PatientID VarChar(50), 
                         'PatientName VarChar(100), PatientDOB DateTime2(2), ReportDetailsJson VarChar(5000), DateCreated DateTime2(3),
@@ -334,7 +335,9 @@ Public Class SqlLiteManager : Implements IDataRepo
 
     Public Function LoadReports(searchFilter As SearchFilter) As List(Of String) Implements IDataRepo.LoadReports
         ' create table sql statement
-        Dim queryStr = $"Select * from Reports"
+
+
+        Dim queryStr = BuildSearchQueryString(searchFilter)
 
         Dim reportsStr As New List(Of String)
 
@@ -377,6 +380,27 @@ Public Class SqlLiteManager : Implements IDataRepo
         End Try
 
         Return reportsStr
+
+    End Function
+
+    Private Function BuildSearchQueryString(searchFilter As SearchFilter) As String
+        Dim queryStr = $"Select * from Reports"
+
+        If searchFilter Is Nothing Then
+            Return $"Select * from Reports"
+        Else
+            If searchFilter.SearchPatientID Then
+                Return $"Select * from Reports where PatientID like '%{searchFilter.Report.PatientID}%'"
+            ElseIf searchFilter.SearchPatientName Then
+                Return $"Select * from Reports where PatientName like '%{searchFilter.Report.PatientName.ToLower()}%'"
+            ElseIf searchFilter.SearchPatientDOB Then
+                Return $"Select * from Reports where PatientDOB like '%{searchFilter.Report.PatientDOB.ToShortDateString}%'"
+            ElseIf searchFilter.SearchUserName Then
+                Return $"Select * from Reports where UserName like '%{searchFilter.UserInfo.UserName.ToLower()}%'"
+            End If
+        End If
+
+        Return queryStr
 
     End Function
 End Class

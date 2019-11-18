@@ -10,12 +10,13 @@ Imports PdfSharp.Pdf
 
 Public Class ReportForm
 
-    Private _cells As New List(Of Cell)
+    Private _reportCells As List(Of IReportCell)
     Private _settings As ISettings
     Private _countingObject As CountingObject
     Private _excludeUserCell As Boolean = False
     Private _logger As Logger = NLog.LogManager.GetCurrentClassLogger()
     Private _reportBuilder As New StringBuilder()
+    Private _report As Report
 
     'need an event to handle print
 #Disable Warning IDE1006 ' Naming Styles
@@ -25,29 +26,43 @@ Public Class ReportForm
 
     Public Sub New(cells As List(Of Cell), settings As ISettings, counteringObject As CountingObject)
 
-        Me._cells = cells
+
+        Dim reportCells As IEnumerable(Of IReportCell)
+        reportCells = cells
+
+        Me._reportCells = reportCells.ToList
         Me._settings = settings
         Me._countingObject = counteringObject
         Me._reportBuilder = New StringBuilder()
+
+
         ' This call is required by the designer.
         InitializeComponent()
 
         RichTextBox1.ReadOnly = True
         DisableButtons()
+        PatientInputPanel.Show()
+
 
         ' Add any initialization after the InitializeComponent() call.
 
     End Sub
 
 
+    Public Sub New(report As Report)
 
-    Public Sub New()
+        Me._report = report
+        Dim tempIenum As IEnumerable(Of IReportCell) = report.ReportDetails.CellReportItems
+        _reportCells = tempIenum.ToList()
+        Me._countingObject = report.ReportDetails.CountingObject
 
 
         InitializeComponent()
+        PatientInputPanel.Hide()
 
         RichTextBox1.ReadOnly = True
         DisableButtons()
+        GenerateReport(True)
 
         ' Add any initialization after the InitializeComponent() call.
 
@@ -95,9 +110,7 @@ Public Class ReportForm
 
 
     Private Sub BtnCloseReport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnCloseReport.Click
-
         Me.Close()
-
     End Sub
 
     Private Sub BtnCreate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnNewReport.Click
@@ -106,7 +119,7 @@ Public Class ReportForm
 
     End Sub
 
-    Private Sub GenerateReport()
+    Private Sub GenerateReport(Optional loadedReport As Boolean = False)
 
         RichTextBox1.Clear()
         _reportBuilder.Clear()
@@ -114,16 +127,31 @@ Public Class ReportForm
         'Set current Date
         Dim Today As String = CStr(DateAndTime.Now)
 
-        Dim FacilityName = TxtFacilityName.Text
-        Dim PatientName = TxtPatientName.Text
-        Dim PatientID = TxtPatientId.Text
-        Dim PatientDOB = DateTimePatientDOB.Value.Date
+        Dim facilityName, patientName, patientID, otherfindings, rBCMorph As String
+        Dim patientDOB As Date
+
+
+        If (loadedReport) Then
+            facilityName = _report.FacilityName
+            patientName = _report.PatientName
+            patientID = _report.PatientID
+            patientDOB = _report.PatientDOB
+            otherfindings = _report.ReportDetails.OtherFindings
+            rBCMorph = _report.ReportDetails.CellMorphology
+        Else
+            facilityName = TxtFacilityName.Text
+            patientName = TxtPatientName.Text
+            patientID = TxtPatientId.Text
+            patientDOB = DateTimePatientDOB.Value.Date
+            otherfindings = TxtOtherFindings.Text
+            rBCMorph = TxtRBCMorph.Text
+        End If
 
         _reportBuilder.AppendLine("===================================================================")
         _reportBuilder.AppendLine("Hematology Report")
-        _reportBuilder.AppendLine("Patient Information - " + "Name: " + PatientName & " | ID: " & PatientID & " | DOB: " & PatientDOB)
+        _reportBuilder.AppendLine("Patient Information - " + "Name: " + patientName & " | ID: " & patientID & " | DOB: " & patientDOB)
         _reportBuilder.AppendLine("Date: " + Today)
-        _reportBuilder.AppendLine("Facility: " + FacilityName)
+        _reportBuilder.AppendLine("Facility: " + facilityName)
         _reportBuilder.AppendLine("===================================================================")
         _reportBuilder.AppendLine("Hematology Report")
         _reportBuilder.AppendLine("")
@@ -142,20 +170,21 @@ Public Class ReportForm
         Dim ColumnSpacing2 As String = "{0, -15}{1, -10}{2, -1}{3, -2}"
         'I guess I was excluding these for some reason?
         Dim i As Integer = 0
-        While i < _cells?.Count
-            If Not _cells(i).GetCellType.Contains("User") And _cells(i).EnableInCounter Then
-                _reportBuilder.AppendFormat(ColumnSpacing2, _cells(i).GetCellType, _cells(i).Count, GetPercent(_cells(i).Count), " %")
-                _reportBuilder.AppendLine()
-            End If
-            i += 1
-        End While
+
+        While i < _reportCells?.Count
+                If Not _reportCells(i).CellType.Contains("User") And _reportCells(i).EncludeInReport Then
+                    _reportBuilder.AppendFormat(ColumnSpacing2, _reportCells(i).CellType, _reportCells(i).Count, GetPercent(_reportCells(i).Count), " %")
+                    _reportBuilder.AppendLine()
+                End If
+                i += 1
+            End While
 
         _reportBuilder.AppendLine("")
         _reportBuilder.AppendLine("Red Cell morphology:")
-        _reportBuilder.AppendLine(TxtRBCMorph.Text)
+        _reportBuilder.AppendLine(rBCMorph)
         _reportBuilder.AppendLine("")
         _reportBuilder.AppendLine("Other Findings:")
-        _reportBuilder.AppendLine(TxtOtherFindings.Text)
+        _reportBuilder.AppendLine(otherfindings)
         _reportBuilder.AppendLine("===================================================================")
 
         RichTextBox1.Text = _reportBuilder.ToString()
@@ -215,21 +244,6 @@ Public Class ReportForm
 
     End Sub
 
-    'Private Function OpenDirectory() As String
-    '    'Dim fd As OpenFileDialog = New OpenFileDialog()
-    '    Dim fd = New FolderBrowserDialog()
-    '    fd.Description = "Choose or create folder."
-    '    fd.RootFolder = Environment.SpecialFolder.MyComputer
-
-    '    Dim path As String = ""
-
-    '    If fd.ShowDialog() = DialogResult.OK Then
-    '        path = fd.SelectedPath
-    '    End If
-
-    '    Return path
-
-    'End Function
 
     Private Function GetPDFSaveFileName(suggestedName As String) As String
         Dim fd As SaveFileDialog = New SaveFileDialog()
@@ -284,8 +298,8 @@ Public Class ReportForm
 
         ProgressBar1.Increment(10)
 
-        Dim reportHeader = CreateReportHeader()
-        Dim reportDetails = CreateReportDetails()
+        Dim reportHeader = CreateSaveReportHeader()
+        Dim reportDetails = CreateSaveReportDetails()
 
         Dim dataRepo As IDataRepo = New SqlLiteManager(_countingObject?.CounterType)
 
@@ -296,7 +310,7 @@ Public Class ReportForm
 
     End Sub
 
-    Private Function CreateReportHeader() As Report
+    Private Function CreateSaveReportHeader() As Report
 
         Dim report As New Report()
 
@@ -305,12 +319,13 @@ Public Class ReportForm
         report.PatientDOB = DateTimePatientDOB.Value
         report.FacilityName = TxtFacilityName.Text
         report.ReportDate = DateTime.Now()
+        report.CounterType = _countingObject.CounterType
 
         Return report
 
     End Function
 
-    Private Function CreateReportDetails() As ReportDetails
+    Private Function CreateSaveReportDetails() As ReportDetails
 
         Dim reportDetails As New ReportDetails()
 
@@ -319,8 +334,8 @@ Public Class ReportForm
         reportDetails.CountingObject = _countingObject
         reportDetails.CellReportItems = New List(Of ReportCell)
 
-        For Each cell In _cells
-            reportDetails.CellReportItems.Add(New ReportCell With {.CellType = cell.GetCellType(), .Count = cell.Count})
+        For Each reportcell In _reportCells
+            reportDetails.CellReportItems.Add(New ReportCell With {.CellType = reportcell.CellType, .Count = reportcell.Count, .EncludeInReport = reportcell.EncludeInReport})
         Next
 
         Return reportDetails

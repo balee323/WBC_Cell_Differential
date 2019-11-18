@@ -14,9 +14,12 @@ Public Class Report
     Public Property FacilityName As String
 
     Public Property UserName As String
+
     Public Property GivenName As String
 
     Public Property ReportDetails As ReportDetails
+
+    Public Property CounterType As CounterType
 
 End Class
 
@@ -39,13 +42,17 @@ Public Class ReportDetails
 End Class
 
 <JsonObject(MemberSerialization.OptIn)>
-Public Class ReportCell : Implements ICell
+Public Class ReportCell : Implements IReportCell
 
     <JsonProperty>
-    Public Property CellType As String Implements ICell.CellType
+    Public Property CellType As String Implements IReportCell.CellType
 
     <JsonProperty>
-    Public Property Count As Integer Implements ICell.Count
+    Public Property Count As Integer Implements IReportCell.Count
+
+    <JsonProperty>
+    Public Property EncludeInReport As Boolean Implements IReportCell.EncludeInReport
+
 
 End Class
 

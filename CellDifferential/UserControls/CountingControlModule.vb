@@ -159,6 +159,10 @@ Public Class CountingControlModule
     End Sub
 
     Private Sub BtnReport_Click(sender As Object, e As EventArgs) Handles BtnReport.Click
+
+        ' Dim _reportCells As IEnumerable(Of IReportCell)
+        '_reportCells = _cells
+
         Dim report = New ReportForm(_cells, _settings, _countingObject)
         report.Show()
     End Sub

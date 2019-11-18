@@ -1,15 +1,15 @@
 ﻿Imports System.Windows.Forms.Form
 Imports WBCDifferential
 
-Public Class Cell : Implements ICell
+Public Class Cell : Implements IReportCell
     Private _KeyMap As Integer = 0
     Private _ImageFile As String = ""
 
-    Public Property EnableInCounter As Boolean = True
-    Public Property CellType As String = Me.CellType Implements ICell.CellType
+    Public Property EnableInCounter As Boolean = True Implements IReportCell.EncludeInReport
+    Public Property CellType As String = Me.CellType Implements IReportCell.CellType
     Public Property Position As Integer = Me.Position
 
-    Public Property Count As Integer = _Count Implements ICell.Count
+    Public Property Count As Integer = _Count Implements IReportCell.Count
 
 
     Public Sub New(CellType As String, KeyMap As Integer, ImageFile As String, Position As Integer)
