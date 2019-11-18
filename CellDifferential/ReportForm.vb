@@ -2,7 +2,6 @@
 Imports System.Text
 Imports Newtonsoft.Json
 Imports NLog
-Imports PdfSharp
 Imports PdfSharp.Drawing
 Imports PdfSharp.Drawing.Layout
 Imports PdfSharp.Pdf
@@ -27,7 +26,6 @@ Public Class ReportForm
 
     Public Sub New(cells As List(Of Cell), settings As ISettings, counteringObject As CountingObject)
 
-
         Dim reportCells As IEnumerable(Of IReportCell)
         reportCells = cells
 
@@ -36,14 +34,12 @@ Public Class ReportForm
         Me._countingObject = counteringObject
         Me._reportBuilder = New StringBuilder()
 
-
         ' This call is required by the designer.
         InitializeComponent()
 
         RichTextBox1.ReadOnly = True
         DisableButtons()
         PatientInputPanel.Show()
-
 
         ' Add any initialization after the InitializeComponent() call.
 
@@ -58,7 +54,6 @@ Public Class ReportForm
         _reportCells = tempIenum.ToList()
         Me._countingObject = report.ReportDetails.CountingObject
 
-
         InitializeComponent()
 
         DisableButtons()
@@ -66,8 +61,6 @@ Public Class ReportForm
 
         RichTextBox1.ReadOnly = True
         GenerateReport(True)
-
-
 
         ' Add any initialization after the InitializeComponent() call.
 
@@ -252,7 +245,6 @@ Public Class ReportForm
                 MessageBox.Show("Couldn't save file, file in use.")
             End If
 
-
             EnableButtons()
         End Try
 
@@ -332,18 +324,15 @@ Public Class ReportForm
     Private Sub BtnSaveToDB_Click(sender As Object, e As EventArgs) Handles BtnSaveToDB.Click
 
         ProgressBar1.Value = 0
-
         ProgressBar1.Increment(10)
 
         Dim reportHeader = CreateSaveReportHeader()
         Dim reportDetails = CreateSaveReportDetails()
 
         Dim dataRepo As IDataRepo = New SqlLiteManager(_countingObject?.CounterType)
-
         Dim reportDetailsJson = JsonConvert.SerializeObject(reportDetails, Formatting.Indented)
 
         dataRepo.SaveReport(reportHeader, reportDetailsJson, ProgressBar1, LblReportSaved)
-
 
     End Sub
 

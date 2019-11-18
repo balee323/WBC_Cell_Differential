@@ -1,15 +1,13 @@
 ﻿
 Imports System.Data.SQLite
 Imports System.Threading.Tasks
-Imports Newtonsoft.Json
 Imports NLog
-Imports WBCDifferential
 
 Public Class SqlLiteManager : Implements IDataRepo
 
-    Private _logger As Logger = NLog.LogManager.GetCurrentClassLogger()
+    Private _logger As Logger = LogManager.GetCurrentClassLogger()
     Private _configDb As String = "WBCDiffSettings.db"
-    Private _connectionString As String = "Data Source={0};Version=3;"
+    Private Shared _connectionString As String = "Data Source={0};Version=3;"
     Private _counterType As CounterType = CounterType.Peripheral 'default
     Private WithEvents _timer1 As Threading.Timer
 
@@ -355,16 +353,15 @@ Public Class SqlLiteManager : Implements IDataRepo
 
                             If reader.HasRows Then
                                 Dim collection = reader.GetValues()
-
                                 Dim keys = collection.AllKeys
 
                                 Dim data As String = String.Empty
+
                                 For Each key In keys
                                     data += collection.Get(key) + "|"
                                 Next
 
                                 reportsStr.Add(data)
-
                             End If
 
                         End While
@@ -384,26 +381,25 @@ Public Class SqlLiteManager : Implements IDataRepo
     End Function
 
     Private Function BuildSearchQueryString(searchFilter As SearchFilter) As String
-        Dim queryStr = $"Select * from Reports"
+        Dim queryStr = $"Select * from Reports order by DateCreated desc Limit 15"
 
         If searchFilter Is Nothing Then
-            Return $"Select * from Reports"
+            Return queryStr
         Else
             If searchFilter.SearchPatientID Then
-                queryStr = $"Select * from Reports where PatientID like '%{searchFilter.Report.PatientID}%'"
+                queryStr = $"Select * from Reports where PatientID Like '%{searchFilter.Report.PatientID}%'"
             ElseIf searchFilter.SearchPatientName Then
                 queryStr = $"Select * from Reports where PatientName like '%{searchFilter.Report.PatientName.ToLower()}%'"
             ElseIf searchFilter.SearchPatientDOB Then
                 queryStr = $"Select * from Reports where PatientDOB like '%{searchFilter.Report.PatientDOB.ToShortDateString}%'"
             ElseIf searchFilter.SearchUserName Then
-                queryStr = $"Select * from Reports where UserName like '%{searchFilter.UserInfo.UserName.ToLower()}%' or GivenName like '%{searchFilter.UserInfo.GivenName.ToLower()}%' "            
+                queryStr = $"Select * from Reports where UserName like '%{searchFilter.UserInfo.UserName.ToLower()}%' or GivenName like '%{searchFilter.UserInfo.GivenName.ToLower()}%' "
             Else
-                queryStr = $"Select * from Reports where 1=1 "
+                queryStr = $"Select * from Reports where 1=1 " 'to use for dates only filter
             End If
         End If
 
-
-
+        'add dates
         If searchFilter.SearchBeginDate Then
             queryStr += $" and DateCreated >= '{searchFilter.BeginDate}'"
         ElseIf searchFilter.SearchEndDate Then
@@ -412,8 +408,54 @@ Public Class SqlLiteManager : Implements IDataRepo
             queryStr += $" and between '{searchFilter.BeginDate}' and '{searchFilter.EndDate}'"
         End If
 
-
         Return queryStr
 
     End Function
+
+
+    Public Shared Sub DeleteOldRecords()
+
+        Task.Run(Sub() DeleteRecords())
+
+    End Sub
+
+
+    Private Shared Sub DeleteRecords()
+
+        Dim logger As Logger = NLog.LogManager.GetCurrentClassLogger()
+
+        Try
+            While (True)
+
+                Using con As New SQLiteConnection(_connectionString)
+                    con.Open()
+                    Dim transaction As SQLiteTransaction = con.BeginTransaction()
+                    Using transaction
+                        Using cmd As New SQLiteCommand(con)
+                            cmd.Transaction = transaction
+                            Dim Sql As String = ""
+                            ' create the SQL statement
+                            Sql &= "Delete From Reports Where DateCreated >= Date('now', '-90 day')"
+
+                            cmd.CommandText = Sql
+                            cmd.ExecuteNonQuery()
+
+                        End Using
+                        transaction.Commit()
+                    End Using
+                End Using
+
+                Console.WriteLine("Delete Success")
+                Task.Delay(1000 * 60).Wait() 'one hour delay
+
+            End While
+
+        Catch ex As Exception
+            logger.Error(ex)
+        End Try
+
+    End Sub
+
+
+
 End Class

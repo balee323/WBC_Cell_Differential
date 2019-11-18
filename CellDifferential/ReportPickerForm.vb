@@ -13,8 +13,6 @@ Public Class ReportPickerForm
             'testing
             LoadInitialReports() 'Maybe Load last 15 reports?
 
-            DataGridView1.MultiSelect = False
-            DataGridView1.DataSource = _reports.OrderByDescending(Function(s) s.ReportDate).ToList()
         Catch ex As Exception
             _logger.Error(ex)
         End Try
@@ -27,6 +25,9 @@ Public Class ReportPickerForm
         Dim reportsStr = repo.LoadReports(Nothing)
 
         ParseAndLoadReports(reportsStr)
+
+        DataGridView1.MultiSelect = False
+        DataGridView1.DataSource = _reports.OrderByDescending(Function(s) s.ReportDate).ToList()
 
     End Sub
 

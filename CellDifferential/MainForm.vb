@@ -10,6 +10,9 @@ Public Class MainForm
         Globals.ProgressBar = ProgressBar1
         ToolStripMenuItem6.Text = My.Application.Info.Version.ToString
 
+        'run a loop that deletes 90 day old records once per hour (if people keep the counter open)
+        SqlLiteManager.DeleteOldRecords()
+
     End Sub
 
     Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click

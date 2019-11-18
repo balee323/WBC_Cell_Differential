@@ -89,9 +89,9 @@ Public Class CountingControlModule
 
 
     Private Sub BtnChangeCount_Click(sender As Object, e As EventArgs) Handles BtnChangeCount.Click
-        TxtCountLimit.ReadOnly = False
+        TxtCountLimit.ReadOnly = True
 
-        TxtCountLimit.Focus()
+        'TxtCountLimit.Focus()
 
         Dim Message As String = "Please enter a count between 20 and 500."
         Dim Title As String = "Change Cell Count"

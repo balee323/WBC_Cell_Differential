@@ -22,17 +22,21 @@ Partial Class ReportPickerForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TxtBoxSearch = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.DateTimeEnd = New System.Windows.Forms.DateTimePicker()
+        Me.ChkboxEnd = New System.Windows.Forms.CheckBox()
+        Me.DateTimeBegin = New System.Windows.Forms.DateTimePicker()
+        Me.ChkboxBegin = New System.Windows.Forms.CheckBox()
         Me.RadioPatientDOB = New System.Windows.Forms.RadioButton()
         Me.RadioPatientID = New System.Windows.Forms.RadioButton()
         Me.RadioPatientName = New System.Windows.Forms.RadioButton()
@@ -51,10 +55,6 @@ Partial Class ReportPickerForm
         Me.GivenName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FacilityName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ReportDetails = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ChkboxBegin = New System.Windows.Forms.CheckBox()
-        Me.DateTimeBegin = New System.Windows.Forms.DateTimePicker()
-        Me.DateTimeEnd = New System.Windows.Forms.DateTimePicker()
-        Me.ChkboxEnd = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -98,16 +98,65 @@ Partial Class ReportPickerForm
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Search"
         '
+        'DateTimeEnd
+        '
+        Me.DateTimeEnd.CustomFormat = "MM/DD/YYYY"
+        Me.DateTimeEnd.Enabled = False
+        Me.DateTimeEnd.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DateTimeEnd.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.DateTimeEnd.Location = New System.Drawing.Point(589, 71)
+        Me.DateTimeEnd.Name = "DateTimeEnd"
+        Me.DateTimeEnd.Size = New System.Drawing.Size(162, 25)
+        Me.DateTimeEnd.TabIndex = 14
+        Me.DateTimeEnd.TabStop = False
+        Me.DateTimeEnd.Value = New Date(2019, 11, 18, 0, 0, 0, 0)
+        '
+        'ChkboxEnd
+        '
+        Me.ChkboxEnd.AutoSize = True
+        Me.ChkboxEnd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.818182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkboxEnd.Location = New System.Drawing.Point(475, 71)
+        Me.ChkboxEnd.Name = "ChkboxEnd"
+        Me.ChkboxEnd.Size = New System.Drawing.Size(96, 24)
+        Me.ChkboxEnd.TabIndex = 13
+        Me.ChkboxEnd.TabStop = False
+        Me.ChkboxEnd.Text = "End Date"
+        Me.ChkboxEnd.UseVisualStyleBackColor = True
+        '
+        'DateTimeBegin
+        '
+        Me.DateTimeBegin.CustomFormat = "MM/DD/YYYY"
+        Me.DateTimeBegin.Enabled = False
+        Me.DateTimeBegin.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DateTimeBegin.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.DateTimeBegin.Location = New System.Drawing.Point(589, 25)
+        Me.DateTimeBegin.Name = "DateTimeBegin"
+        Me.DateTimeBegin.Size = New System.Drawing.Size(162, 25)
+        Me.DateTimeBegin.TabIndex = 12
+        Me.DateTimeBegin.TabStop = False
+        Me.DateTimeBegin.Value = New Date(2019, 11, 18, 0, 0, 0, 0)
+        '
+        'ChkboxBegin
+        '
+        Me.ChkboxBegin.AutoSize = True
+        Me.ChkboxBegin.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.818182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ChkboxBegin.Location = New System.Drawing.Point(475, 25)
+        Me.ChkboxBegin.Name = "ChkboxBegin"
+        Me.ChkboxBegin.Size = New System.Drawing.Size(108, 24)
+        Me.ChkboxBegin.TabIndex = 11
+        Me.ChkboxBegin.TabStop = False
+        Me.ChkboxBegin.Text = "Begin Date"
+        Me.ChkboxBegin.UseVisualStyleBackColor = True
+        '
         'RadioPatientDOB
         '
         Me.RadioPatientDOB.AutoSize = True
         Me.RadioPatientDOB.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RadioPatientDOB.Location = New System.Drawing.Point(131, 71)
-        Me.RadioPatientDOB.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.RadioPatientDOB.Margin = New System.Windows.Forms.Padding(2)
         Me.RadioPatientDOB.Name = "RadioPatientDOB"
         Me.RadioPatientDOB.Size = New System.Drawing.Size(116, 24)
         Me.RadioPatientDOB.TabIndex = 10
-        Me.RadioPatientDOB.TabStop = True
         Me.RadioPatientDOB.Text = "Patient DOB"
         Me.RadioPatientDOB.UseVisualStyleBackColor = True
         '
@@ -116,11 +165,10 @@ Partial Class ReportPickerForm
         Me.RadioPatientID.AutoSize = True
         Me.RadioPatientID.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RadioPatientID.Location = New System.Drawing.Point(10, 33)
-        Me.RadioPatientID.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.RadioPatientID.Margin = New System.Windows.Forms.Padding(2)
         Me.RadioPatientID.Name = "RadioPatientID"
         Me.RadioPatientID.Size = New System.Drawing.Size(98, 24)
         Me.RadioPatientID.TabIndex = 9
-        Me.RadioPatientID.TabStop = True
         Me.RadioPatientID.Text = "Patient ID"
         Me.RadioPatientID.UseVisualStyleBackColor = True
         '
@@ -129,11 +177,10 @@ Partial Class ReportPickerForm
         Me.RadioPatientName.AutoSize = True
         Me.RadioPatientName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RadioPatientName.Location = New System.Drawing.Point(131, 33)
-        Me.RadioPatientName.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.RadioPatientName.Margin = New System.Windows.Forms.Padding(2)
         Me.RadioPatientName.Name = "RadioPatientName"
         Me.RadioPatientName.Size = New System.Drawing.Size(123, 24)
         Me.RadioPatientName.TabIndex = 8
-        Me.RadioPatientName.TabStop = True
         Me.RadioPatientName.Text = "Patient Name"
         Me.RadioPatientName.UseVisualStyleBackColor = True
         '
@@ -142,11 +189,10 @@ Partial Class ReportPickerForm
         Me.RadioTechName.AutoSize = True
         Me.RadioTechName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RadioTechName.Location = New System.Drawing.Point(10, 71)
-        Me.RadioTechName.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.RadioTechName.Margin = New System.Windows.Forms.Padding(2)
         Me.RadioTechName.Name = "RadioTechName"
         Me.RadioTechName.Size = New System.Drawing.Size(108, 24)
         Me.RadioTechName.TabIndex = 7
-        Me.RadioTechName.TabStop = True
         Me.RadioTechName.Text = "Tech Name"
         Me.RadioTechName.UseVisualStyleBackColor = True
         '
@@ -169,13 +215,13 @@ Partial Class ReportPickerForm
         Me.DateTimePatientDOB.Location = New System.Drawing.Point(262, 71)
         Me.DateTimePatientDOB.Name = "DateTimePatientDOB"
         Me.DateTimePatientDOB.Size = New System.Drawing.Size(162, 25)
-        Me.DateTimePatientDOB.TabIndex = 5
+        Me.DateTimePatientDOB.TabIndex = 1
         Me.DateTimePatientDOB.Value = New Date(2019, 11, 18, 0, 0, 0, 0)
         '
         'BtnOpen
         '
         Me.BtnOpen.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.818182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnOpen.Location = New System.Drawing.Point(1011, 552)
+        Me.BtnOpen.Location = New System.Drawing.Point(1011, 561)
         Me.BtnOpen.Name = "BtnOpen"
         Me.BtnOpen.Size = New System.Drawing.Size(127, 116)
         Me.BtnOpen.TabIndex = 7
@@ -197,17 +243,17 @@ Partial Class ReportPickerForm
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.LightSteelBlue
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.818182!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.LightSteelBlue
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.818182!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle10
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ReportDate, Me.ReportType, Me.PatientName, Me.PatientID, Me.PatientDOB, Me.ReportCreatorUserName, Me.GivenName, Me.FacilityName, Me.ReportDetails})
         Me.DataGridView1.Location = New System.Drawing.Point(10, 11)
@@ -218,13 +264,14 @@ Partial Class ReportPickerForm
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DataGridView1.Size = New System.Drawing.Size(1128, 507)
         Me.DataGridView1.TabIndex = 2
+        Me.DataGridView1.TabStop = False
         '
         'ReportDate
         '
         Me.ReportDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.ReportDate.DataPropertyName = "ReportDate"
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ReportDate.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ReportDate.DefaultCellStyle = DataGridViewCellStyle11
         Me.ReportDate.HeaderText = "Report Date"
         Me.ReportDate.MinimumWidth = 6
         Me.ReportDate.Name = "ReportDate"
@@ -245,8 +292,8 @@ Partial Class ReportPickerForm
         '
         Me.PatientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.PatientName.DataPropertyName = "PatientName"
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PatientName.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PatientName.DefaultCellStyle = DataGridViewCellStyle12
         Me.PatientName.HeaderText = "Patient name"
         Me.PatientName.MinimumWidth = 6
         Me.PatientName.Name = "PatientName"
@@ -258,8 +305,8 @@ Partial Class ReportPickerForm
         '
         Me.PatientID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.PatientID.DataPropertyName = "PatientID"
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PatientID.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PatientID.DefaultCellStyle = DataGridViewCellStyle13
         Me.PatientID.HeaderText = "Patient ID"
         Me.PatientID.MinimumWidth = 6
         Me.PatientID.Name = "PatientID"
@@ -271,8 +318,8 @@ Partial Class ReportPickerForm
         '
         Me.PatientDOB.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.PatientDOB.DataPropertyName = "PatientDOB"
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PatientDOB.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PatientDOB.DefaultCellStyle = DataGridViewCellStyle14
         Me.PatientDOB.HeaderText = "Patient DOB"
         Me.PatientDOB.MinimumWidth = 6
         Me.PatientDOB.Name = "PatientDOB"
@@ -283,8 +330,8 @@ Partial Class ReportPickerForm
         'ReportCreatorUserName
         '
         Me.ReportCreatorUserName.DataPropertyName = "UserName"
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ReportCreatorUserName.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ReportCreatorUserName.DefaultCellStyle = DataGridViewCellStyle15
         Me.ReportCreatorUserName.HeaderText = "Report Creator UserName"
         Me.ReportCreatorUserName.MinimumWidth = 6
         Me.ReportCreatorUserName.Name = "ReportCreatorUserName"
@@ -295,8 +342,8 @@ Partial Class ReportPickerForm
         'GivenName
         '
         Me.GivenName.DataPropertyName = "GivenName"
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GivenName.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle16.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.78182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GivenName.DefaultCellStyle = DataGridViewCellStyle16
         Me.GivenName.HeaderText = "Report Creator Name"
         Me.GivenName.MinimumWidth = 6
         Me.GivenName.Name = "GivenName"
@@ -324,52 +371,6 @@ Partial Class ReportPickerForm
         Me.ReportDetails.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.ReportDetails.Visible = False
         Me.ReportDetails.Width = 20
-        '
-        'ChkboxBegin
-        '
-        Me.ChkboxBegin.AutoSize = True
-        Me.ChkboxBegin.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.818182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ChkboxBegin.Location = New System.Drawing.Point(475, 25)
-        Me.ChkboxBegin.Name = "ChkboxBegin"
-        Me.ChkboxBegin.Size = New System.Drawing.Size(108, 24)
-        Me.ChkboxBegin.TabIndex = 11
-        Me.ChkboxBegin.Text = "Begin Date"
-        Me.ChkboxBegin.UseVisualStyleBackColor = True
-        '
-        'DateTimeBegin
-        '
-        Me.DateTimeBegin.CustomFormat = "MM/DD/YYYY"
-        Me.DateTimeBegin.Enabled = False
-        Me.DateTimeBegin.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateTimeBegin.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DateTimeBegin.Location = New System.Drawing.Point(589, 25)
-        Me.DateTimeBegin.Name = "DateTimeBegin"
-        Me.DateTimeBegin.Size = New System.Drawing.Size(162, 25)
-        Me.DateTimeBegin.TabIndex = 12
-        Me.DateTimeBegin.Value = New Date(2019, 11, 18, 0, 0, 0, 0)
-        '
-        'DateTimeEnd
-        '
-        Me.DateTimeEnd.CustomFormat = "MM/DD/YYYY"
-        Me.DateTimeEnd.Enabled = False
-        Me.DateTimeEnd.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateTimeEnd.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DateTimeEnd.Location = New System.Drawing.Point(589, 71)
-        Me.DateTimeEnd.Name = "DateTimeEnd"
-        Me.DateTimeEnd.Size = New System.Drawing.Size(162, 25)
-        Me.DateTimeEnd.TabIndex = 14
-        Me.DateTimeEnd.Value = New Date(2019, 11, 18, 0, 0, 0, 0)
-        '
-        'ChkboxEnd
-        '
-        Me.ChkboxEnd.AutoSize = True
-        Me.ChkboxEnd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.818182!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ChkboxEnd.Location = New System.Drawing.Point(475, 71)
-        Me.ChkboxEnd.Name = "ChkboxEnd"
-        Me.ChkboxEnd.Size = New System.Drawing.Size(96, 24)
-        Me.ChkboxEnd.TabIndex = 13
-        Me.ChkboxEnd.Text = "End Date"
-        Me.ChkboxEnd.UseVisualStyleBackColor = True
         '
         'ReportPickerForm
         '

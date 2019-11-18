@@ -53,6 +53,7 @@ Partial Class ReportForm
         Me.BtnCloseReport.Name = "BtnCloseReport"
         Me.BtnCloseReport.Size = New System.Drawing.Size(92, 70)
         Me.BtnCloseReport.TabIndex = 2
+        Me.BtnCloseReport.TabStop = False
         Me.BtnCloseReport.Text = "Close Report"
         Me.BtnCloseReport.UseVisualStyleBackColor = False
         '
@@ -64,6 +65,7 @@ Partial Class ReportForm
         Me.BtnPrint.Name = "BtnPrint"
         Me.BtnPrint.Size = New System.Drawing.Size(92, 70)
         Me.BtnPrint.TabIndex = 3
+        Me.BtnPrint.TabStop = False
         Me.BtnPrint.Text = "Print "
         Me.BtnPrint.UseVisualStyleBackColor = False
         '
@@ -75,6 +77,7 @@ Partial Class ReportForm
         Me.BtnNewReport.Name = "BtnNewReport"
         Me.BtnNewReport.Size = New System.Drawing.Size(92, 70)
         Me.BtnNewReport.TabIndex = 5
+        Me.BtnNewReport.TabStop = False
         Me.BtnNewReport.Text = "New Report"
         Me.BtnNewReport.UseVisualStyleBackColor = False
         '
@@ -86,6 +89,7 @@ Partial Class ReportForm
         Me.BtnGenPDF.Name = "BtnGenPDF"
         Me.BtnGenPDF.Size = New System.Drawing.Size(148, 70)
         Me.BtnGenPDF.TabIndex = 6
+        Me.BtnGenPDF.TabStop = False
         Me.BtnGenPDF.Text = "Generate PDF"
         Me.BtnGenPDF.UseVisualStyleBackColor = False
         '
@@ -135,7 +139,7 @@ Partial Class ReportForm
         Me.DateTimePatientDOB.Location = New System.Drawing.Point(215, 127)
         Me.DateTimePatientDOB.Name = "DateTimePatientDOB"
         Me.DateTimePatientDOB.Size = New System.Drawing.Size(165, 28)
-        Me.DateTimePatientDOB.TabIndex = 10
+        Me.DateTimePatientDOB.TabIndex = 3
         '
         'Button1
         '
@@ -144,7 +148,7 @@ Partial Class ReportForm
         Me.Button1.Location = New System.Drawing.Point(749, 401)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(101, 38)
-        Me.Button1.TabIndex = 9
+        Me.Button1.TabIndex = 7
         Me.Button1.Text = "Done"
         Me.Button1.UseVisualStyleBackColor = False
         '
@@ -156,7 +160,7 @@ Partial Class ReportForm
         Me.TxtOtherFindings.Multiline = True
         Me.TxtOtherFindings.Name = "TxtOtherFindings"
         Me.TxtOtherFindings.Size = New System.Drawing.Size(679, 56)
-        Me.TxtOtherFindings.TabIndex = 8
+        Me.TxtOtherFindings.TabIndex = 6
         '
         'Label3
         '
@@ -194,7 +198,7 @@ Partial Class ReportForm
         Me.TxtPatientId.Location = New System.Drawing.Point(46, 93)
         Me.TxtPatientId.Name = "TxtPatientId"
         Me.TxtPatientId.Size = New System.Drawing.Size(679, 28)
-        Me.TxtPatientId.TabIndex = 4
+        Me.TxtPatientId.TabIndex = 2
         Me.TxtPatientId.Text = "[Patient Id]"
         '
         'TxtFacilityName
@@ -203,7 +207,7 @@ Partial Class ReportForm
         Me.TxtFacilityName.Location = New System.Drawing.Point(46, 161)
         Me.TxtFacilityName.Name = "TxtFacilityName"
         Me.TxtFacilityName.Size = New System.Drawing.Size(679, 28)
-        Me.TxtFacilityName.TabIndex = 2
+        Me.TxtFacilityName.TabIndex = 4
         Me.TxtFacilityName.Text = "[Faclility Name]"
         '
         'TxtPatientName
@@ -233,6 +237,7 @@ Partial Class ReportForm
         Me.BtnSaveToDB.Name = "BtnSaveToDB"
         Me.BtnSaveToDB.Size = New System.Drawing.Size(241, 46)
         Me.BtnSaveToDB.TabIndex = 9
+        Me.BtnSaveToDB.TabStop = False
         Me.BtnSaveToDB.Text = "Save To Database"
         Me.BtnSaveToDB.UseVisualStyleBackColor = False
         '
