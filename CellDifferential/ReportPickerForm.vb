@@ -161,7 +161,41 @@ Public Class ReportPickerForm
         ElseIf RadioTechName.Checked Then
             searchFilter.SearchUserName = True
             searchFilter.UserInfo.UserName = TxtBoxSearch.Text
+            searchFilter.UserInfo.GivenName = TxtBoxSearch.Text
+        ElseIf ChkboxBegin.Checked Then
+            searchFilter.SearchBeginDate = True
+            searchFilter.BeginDate = DateTimeBegin.Value.Date
+        ElseIf ChkboxEnd.Checked Then
+            searchFilter.SearchEndDate = True
+            searchFilter.EndDate = DateTimeEnd.Value.Date
         End If
+
+
+        'validations
+        If (searchFilter.BeginDate > DateTime.Today) Or (searchFilter.EndDate > DateTime.Today) Then
+            MessageBox.Show("Search Dates cannot be in the future.")
+            Return
+        End If
+
+        'validations
+        If (searchFilter.Report.PatientDOB > DateTime.Today) Then
+            MessageBox.Show("This person hasn't been born yet!.")
+            Return
+        End If
+
+
+
+        'Validations
+        If ChkboxBegin.Checked And ChkboxEnd.Checked Then
+            If searchFilter.EndDate < searchFilter.BeginDate Then
+                MessageBox.Show("End Date cannot be less than begin date.")
+                Return
+                'ElseIf searchFilter.BeginDate > searchFilter.EndDate Then
+                '    MessageBox.Show("Begin Date cannot be greater than end date.")
+                '    Return
+            End If
+        End If
+
 
 
 
@@ -172,7 +206,36 @@ Public Class ReportPickerForm
         DataGridView1.MultiSelect = False
         DataGridView1.DataSource = _reports.OrderByDescending(Function(s) s.ReportDate).ToList()
 
+    End Sub
 
+    Private Sub RadioPatientDOB_CheckedChanged(sender As Object, e As EventArgs) Handles RadioPatientDOB.CheckedChanged
+
+        If RadioPatientDOB.Checked Then
+            DateTimePatientDOB.Enabled = True
+        Else
+            DateTimePatientDOB.Enabled = False
+        End If
+
+
+    End Sub
+
+    Private Sub ChkboxBegin_CheckedChanged(sender As Object, e As EventArgs) Handles ChkboxBegin.CheckedChanged
+
+        If ChkboxBegin.Checked Then
+            DateTimeBegin.Enabled = True
+        Else
+            DateTimeBegin.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub ChkboxEnd_CheckedChanged(sender As Object, e As EventArgs) Handles ChkboxEnd.CheckedChanged
+
+        If ChkboxEnd.Checked Then
+            DateTimeEnd.Enabled = True
+        Else
+            DateTimeEnd.Enabled = False
+        End If
 
     End Sub
 End Class

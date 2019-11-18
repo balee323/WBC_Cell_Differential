@@ -19,7 +19,9 @@ Public Class SearchFilter
 
     Public Property SearchPatientDOB As Boolean = False
 
-    Public Property SearchDate As Boolean = False
+    Public Property SearchBeginDate As Boolean = False
+
+    Public Property SearchEndDate As Boolean = False
 
 
 End Class

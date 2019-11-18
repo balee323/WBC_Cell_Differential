@@ -390,15 +390,28 @@ Public Class SqlLiteManager : Implements IDataRepo
             Return $"Select * from Reports"
         Else
             If searchFilter.SearchPatientID Then
-                Return $"Select * from Reports where PatientID like '%{searchFilter.Report.PatientID}%'"
+                queryStr = $"Select * from Reports where PatientID like '%{searchFilter.Report.PatientID}%'"
             ElseIf searchFilter.SearchPatientName Then
-                Return $"Select * from Reports where PatientName like '%{searchFilter.Report.PatientName.ToLower()}%'"
+                queryStr = $"Select * from Reports where PatientName like '%{searchFilter.Report.PatientName.ToLower()}%'"
             ElseIf searchFilter.SearchPatientDOB Then
-                Return $"Select * from Reports where PatientDOB like '%{searchFilter.Report.PatientDOB.ToShortDateString}%'"
+                queryStr = $"Select * from Reports where PatientDOB like '%{searchFilter.Report.PatientDOB.ToShortDateString}%'"
             ElseIf searchFilter.SearchUserName Then
-                Return $"Select * from Reports where UserName like '%{searchFilter.UserInfo.UserName.ToLower()}%'"
+                queryStr = $"Select * from Reports where UserName like '%{searchFilter.UserInfo.UserName.ToLower()}%' or GivenName like '%{searchFilter.UserInfo.GivenName.ToLower()}%' "            
+            Else
+                queryStr = $"Select * from Reports where 1=1 "
             End If
         End If
+
+
+
+        If searchFilter.SearchBeginDate Then
+            queryStr += $" and DateCreated >= '{searchFilter.BeginDate}'"
+        ElseIf searchFilter.SearchEndDate Then
+            queryStr += $" and DateCreated <= '{searchFilter.EndDate}'"
+        ElseIf searchFilter.SearchEndDate And searchFilter.SearchBeginDate Then
+            queryStr += $" and between '{searchFilter.BeginDate}' and '{searchFilter.EndDate}'"
+        End If
+
 
         Return queryStr
 

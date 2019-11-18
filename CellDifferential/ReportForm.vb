@@ -17,6 +17,7 @@ Public Class ReportForm
     Private _logger As Logger = NLog.LogManager.GetCurrentClassLogger()
     Private _reportBuilder As New StringBuilder()
     Private _report As Report
+    Private _isLoadedReport As Boolean = False
 
     'need an event to handle print
 #Disable Warning IDE1006 ' Naming Styles
@@ -51,6 +52,7 @@ Public Class ReportForm
 
     Public Sub New(report As Report)
 
+        Me._isLoadedReport = True
         Me._report = report
         Dim tempIenum As IEnumerable(Of IReportCell) = report.ReportDetails.CellReportItems
         _reportCells = tempIenum.ToList()
@@ -58,11 +60,14 @@ Public Class ReportForm
 
 
         InitializeComponent()
+
+        DisableButtons()
         PatientInputPanel.Hide()
 
         RichTextBox1.ReadOnly = True
-        DisableButtons()
         GenerateReport(True)
+
+
 
         ' Add any initialization after the InitializeComponent() call.
 
@@ -232,13 +237,22 @@ Public Class ReportForm
             tf.DrawString(reportStr, font, XBrushes.Black, rect, XStringFormats.TopLeft)
 
             Dim fileName = GetPDFSaveFileName(document.Info.Title)
+
+            If (String.IsNullOrWhiteSpace(fileName)) Then
+                Return
+            End If
+
             document.Save(fileName)
 
             Process.Start(fileName)
 
         Catch ex As Exception
             _logger.Error(ex)
-            MessageBox.Show("Couldn't save file, file in use.")
+            If ex.Message.ToLower().Contains("open") Then
+                MessageBox.Show("Couldn't save file, file in use.")
+            End If
+
+
             EnableButtons()
         End Try
 
@@ -281,15 +295,38 @@ Public Class ReportForm
     End Sub
 
     Private Sub DisableButtons()
+
+        BtnSaveToDB.BackColor = SystemColors.GrayText
+        BtnPrint.BackColor = SystemColors.GrayText
+        BtnGenPDF.BackColor = SystemColors.GrayText
+        BtnNewReport.BackColor = SystemColors.GrayText
+
         BtnPrint.Enabled = False
         BtnGenPDF.Enabled = False
         BtnNewReport.Enabled = False
+        BtnSaveToDB.Enabled = False
+
+
     End Sub
 
     Private Sub EnableButtons()
-        BtnPrint.Enabled = True
-        BtnGenPDF.Enabled = True
-        BtnNewReport.Enabled = True
+
+        If _isLoadedReport Then
+            BtnPrint.BackColor = System.Drawing.Color.LightSteelBlue
+            BtnGenPDF.BackColor = System.Drawing.Color.LightSteelBlue
+            BtnPrint.Enabled = True
+            BtnGenPDF.Enabled = True
+        Else
+            BtnSaveToDB.BackColor = System.Drawing.Color.LightSteelBlue
+            BtnPrint.BackColor = System.Drawing.Color.LightSteelBlue
+            BtnGenPDF.BackColor = System.Drawing.Color.LightSteelBlue
+            BtnNewReport.BackColor = System.Drawing.Color.LightSteelBlue
+            BtnPrint.Enabled = True
+            BtnGenPDF.Enabled = True
+            BtnNewReport.Enabled = True
+            BtnSaveToDB.Enabled = True
+        End If
+
     End Sub
 
     Private Sub BtnSaveToDB_Click(sender As Object, e As EventArgs) Handles BtnSaveToDB.Click
