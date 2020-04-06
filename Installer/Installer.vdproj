@@ -421,7 +421,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:WBCDifferential, Version=4.0.0.0, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:WBCDifferential, Version=4.0.0.1, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_1A8FEACAB720442D90600945D28C729D"
@@ -1061,7 +1061,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:WBC Differential Counter"
         "ProductCode" = "8:{CBD174F7-3E6A-47D1-9F16-DD40B53E2E7B}"
-        "PackageCode" = "8:{F7653D0D-D14B-4975-AB84-46D0F28F172C}"
+        "PackageCode" = "8:{0B6DA606-AE4A-4BD0-B822-3F3F15BCF965}"
         "UpgradeCode" = "8:{AC1EF7CC-B9F6-44E6-9D52-2ABA3A527C45}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1528,8 +1528,8 @@
                             "Type" = "3:3"
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
-                            "Setting" = "3:1"
-                            "Value" = "8:#1203"
+                            "Setting" = "3:2"
+                            "Value" = "8:The installer will help you install [ProductName] on your computer. And please, any feedback of this application is greatly appreciated!"
                             "DefaultValue" = "8:#1203"
                             "UsePlugInResources" = "11:TRUE"
                             }
