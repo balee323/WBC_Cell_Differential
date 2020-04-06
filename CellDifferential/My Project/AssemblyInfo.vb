@@ -13,7 +13,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Free for use")>
 <Assembly: AssemblyCompany("Brian's Codes")>
 <Assembly: AssemblyProduct("WBC_Differential")>
-<Assembly: AssemblyCopyright("Copyright © Brian A Lee 2019")>
+<Assembly: AssemblyCopyright("Copyright © Brian A Lee 2020")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -32,6 +32,6 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("4.0.0.0")>
+<Assembly: AssemblyVersion("4.0.0.1")>
 <Assembly: AssemblyFileVersion("1.0.0.0")>
 <Assembly: NeutralResourcesLanguage("en-US")>

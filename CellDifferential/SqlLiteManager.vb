@@ -6,8 +6,8 @@ Imports NLog
 Public Class SqlLiteManager : Implements IDataRepo
 
     Private _logger As Logger = LogManager.GetCurrentClassLogger()
-    Private _configDb As String = "WBCDiffSettings.db"
-    Private Shared _connectionString As String = "Data Source={0};Version=3;"
+    Private _configDb As String = "WBCDiff.db"
+    Private Shared _connectionString As String = "Data Source=WBCDiff.db;"
     Private _counterType As CounterType = CounterType.Peripheral 'default
     Private WithEvents _timer1 As Threading.Timer
 
@@ -36,7 +36,6 @@ Public Class SqlLiteManager : Implements IDataRepo
                 SQLiteConnection.CreateFile(_configDb)
             Catch ex As Exception
                 _logger.Error(ex, "Database Created Failed...")
-                Return
             End Try
 
         End If
@@ -53,9 +52,13 @@ Public Class SqlLiteManager : Implements IDataRepo
         Try
             Using con As New SQLiteConnection(_connectionString)
                 con.Open()
-                Using cmd As New SQLiteCommand(create_table, con)
-                    Dim result = Await cmd.ExecuteNonQueryAsync()
-                    result.ToString()
+                Dim transaction As SQLiteTransaction = con.BeginTransaction()
+                Using transaction
+                    Using cmd As New SQLiteCommand(create_table, con)
+                        Dim result = Await cmd.ExecuteNonQueryAsync()
+                        result.ToString()
+                    End Using
+                    transaction.Commit()
                 End Using
             End Using
 
@@ -72,9 +75,13 @@ Public Class SqlLiteManager : Implements IDataRepo
         Try
             Using con As New SQLiteConnection(_connectionString)
                 con.Open()
-                Using cmd As New SQLiteCommand(create_table, con)
-                    Dim result = Await cmd.ExecuteNonQueryAsync()
-                    result.ToString()
+                Dim transaction As SQLiteTransaction = con.BeginTransaction()
+                Using transaction
+                    Using cmd As New SQLiteCommand(create_table, con)
+                        Dim result = Await cmd.ExecuteNonQueryAsync()
+                        result.ToString()
+                    End Using
+                    transaction.Commit()
                 End Using
             End Using
 
@@ -308,18 +315,15 @@ Public Class SqlLiteManager : Implements IDataRepo
                         Sql &= $"('{Guid.NewGuid().ToString()}', '{userInfo.UserName}', '{userInfo.GivenName}', '{report.PatientID}', '{report.PatientName}',"
                         Sql &= $" '{report.PatientDOB}', '{report.FacilityName}', '{report.CounterType.ToString()}', '{reportDetailsJson}', '{report.ReportDate}') "
 
-                        'ReportID UNIQUEIDENTIFIER Not NULL PRIMARY KEY, UserName VarChar(50), GivenName VarChar(50), PatientID VarChar(50), 
-                        'PatientName VarChar(100), PatientDOB DateTime2(2), ReportDetailsJson VarChar(5000), DateCreated DateTime2(3),
-                        'DateModified DateTime2(3)
-
                         cmd.CommandText = Sql
-                        cmd.ExecuteNonQuery()
+                        Dim result = cmd.ExecuteNonQuery()
+                        result.ToString()
 
                     End Using
                     transaction.Commit()
                 End Using
             End Using
-            Console.WriteLine("Insert User Success")
+            Console.WriteLine("Insert Report Success")
 
         Catch ex As Exception
             _logger.Error(ex)
@@ -435,7 +439,7 @@ Public Class SqlLiteManager : Implements IDataRepo
                             cmd.Transaction = transaction
                             Dim Sql As String = ""
                             ' create the SQL statement
-                            Sql &= "Delete From Reports Where DateCreated >= Date('now', '-90 day')"
+                            Sql &= "Delete From Reports Where DateCreated <= Date('now', '-90 day')"
 
                             cmd.CommandText = Sql
                             cmd.ExecuteNonQuery()

@@ -296,6 +296,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -1052,15 +1060,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:WBC Differential Counter"
-        "ProductCode" = "8:{12F2D269-20F4-4D10-8E62-65FE82976FBB}"
-        "PackageCode" = "8:{FCA28C0B-E131-49C1-8B34-74C1A3A0FC18}"
+        "ProductCode" = "8:{CBD174F7-3E6A-47D1-9F16-DD40B53E2E7B}"
+        "PackageCode" = "8:{F7653D0D-D14B-4975-AB84-46D0F28F172C}"
         "UpgradeCode" = "8:{AC1EF7CC-B9F6-44E6-9D52-2ABA3A527C45}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:4.0.0"
+        "ProductVersion" = "8:4.0.1"
         "Manufacturer" = "8:BriansCodes"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
